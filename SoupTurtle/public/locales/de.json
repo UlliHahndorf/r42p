@@ -1,0 +1,14 @@
+{
+    "recipes": {
+        "title": "Rezepte 📚",
+        "list": {
+            "title": "Titel",
+            "price": "Preis",
+            "filterResults_one": "{{count}} Rezept gefunden",
+            "filterResults_other": "{{count}} Rezepte gefunden"
+        },
+        "listItem": {
+            "price": "{{price, currency(EUR)}}"
+        }
+    }
+  }

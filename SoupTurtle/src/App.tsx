@@ -1,30 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import React, { Suspense } from 'react';
+import {
+  Navigate,
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ErrorBoundary } from 'react-error-boundary';
 
-function App() {
-  const [count, setCount] = useState(0)
+import LanguageSwitch from './shared/LanguageSwitch';
+import { RecipesProvider } from './recipes/Context';
 
+const List = React.lazy(() => import('./recipes/List'));
+// import { Form } from './form/Form';
+// import { Edit } from './edit/Edit';
+// import { NotFound } from './NotFound';
+
+import './shared/i18n';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to="/list" />,
+  },
+  // {
+  //   path: '/form',
+  //   element: <Form />,
+  // },
+  // {
+  //   path: '*',
+  //   element: <NotFound />,
+  // },
+  {
+    path: '/list',
+    element: (
+      <ErrorBoundary
+        FallbackComponent={({ error }) => <div>{error.message}</div>}
+      >
+        <Suspense fallback={<div>Lade Daten ...</div>}>
+          <List />
+        </Suspense>
+      </ErrorBoundary>
+    ),
+    // children: [{ path: 'edit/:id', element: <Edit /> }],
+  },
+]);
+
+const queryClient = new QueryClient();
+
+const App: React.FC = () => {
   return (
     <>
-      <div>
-       
-      </div>
-      <h1>SoupTurtle</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <h1>SoupTurtle</h1>
+    <QueryClientProvider client={queryClient}>
+      <RecipesProvider>
+        <LanguageSwitch />
+        <Suspense fallback={<div>Lade ...</div>}>
+          <RouterProvider router={router} />
+        </Suspense>
+      </RecipesProvider>
+    </QueryClientProvider>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

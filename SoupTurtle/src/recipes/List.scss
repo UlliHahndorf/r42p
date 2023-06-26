@@ -1,0 +1,21 @@
+.listContainer {
+    th {
+      border-bottom: 1px solid black;
+      background-color: #cccccc;
+    }
+  
+    tr:nth-child(2n) {
+      background-color: #eeeeee;
+    }
+  
+    .fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+    }
+  }
+  
+  .filterContainer {
+    margin-bottom: 10px;
+  }
+  
