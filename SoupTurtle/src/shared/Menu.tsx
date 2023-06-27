@@ -22,6 +22,7 @@ import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { ErrorBoundary } from 'react-error-boundary';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
@@ -111,60 +112,65 @@ export default function Menu() {
   const { t } = useTranslation();
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            SoupTurtle
-            {/* <FontAwesomeIcon icon={faChevronLeft} />             */}
-          </Typography>
-          <LanguageSwitch />        
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          <ListItem key='recipes' disablePadding sx={{ display: 'block' }} >
-            <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }}>
-              <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto', }}>
-                <MenuBookIcon />
-              </ListItemIcon>
-              <ListItemText primary={t('menu.recipes')} sx={{ opacity: open ? 1 : 0 }} />
-              
-            </ListItemButton>
-          </ListItem>
-          <ListItem key='week' disablePadding sx={{ display: 'block' }}>
-            <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }} >
-              <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto', }}>
-                <RestaurantMenuIcon />
-              </ListItemIcon>
-              <ListItemText primary={t('menu.week')} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />      
+    <ErrorBoundary
+      FallbackComponent={({ error }) => <div>{error.message}</div>}
+    >
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              SoupTurtle
+              {/* <FontAwesomeIcon icon={faChevronLeft} />             */}
+            </Typography>
+            <LanguageSwitch />
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          {/* <Link to={'/Recipes/List'}>foo bar</Link> */}
+          <List>
+            <ListItem key='recipes' disablePadding sx={{ display: 'block' }} >
+              <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }}>
+                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto', }}>
+                  <MenuBookIcon />
+                </ListItemIcon>
+                <ListItemText primary={t('menu.recipes')} sx={{ opacity: open ? 1 : 0 }} />
+
+              </ListItemButton>
+            </ListItem>
+            <ListItem key='week' disablePadding sx={{ display: 'block' }}>
+              <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }} >
+                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto', }}>
+                  <RestaurantMenuIcon />
+                </ListItemIcon>
+                <ListItemText primary={t('menu.week')} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          </List>
+          <Divider />
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+        </Box>
       </Box>
-    </Box>
+    </ErrorBoundary>
   );
 }

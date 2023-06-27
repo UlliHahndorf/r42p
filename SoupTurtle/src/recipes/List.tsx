@@ -1,7 +1,11 @@
 import React from 'react';
 import {
   Fab,
+  FormControl,
+  InputLabel,
+  MenuItem,
   Paper,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -22,7 +26,7 @@ import { getRecipes, removeRecipe } from '../api/recipe.api';
 import { useTranslation } from 'react-i18next';
 
 const List: React.FC = () => {
-  const [, filter, error, , handleFilterChange] = useList();
+  const [, filter, orderValue, error, , handleFilterChange, handleOrderChange] = useList();
 
   const { t } = useTranslation();
 
@@ -37,8 +41,21 @@ const List: React.FC = () => {
 
   let content = <div>Keine Bücher gefunden</div>;
   if (recipes && recipes.length > 0) {
+
+    // Order
+    var orderField = 'Name';
+    if (orderValue !== "") orderField = orderValue;
+    if (orderField === 'Name') {
+      recipes.sort((a, b) => (a.Title > b.Title) ? 1 : ((b.Title > a.Title) ? -1 : 0));
+    } else {
+      recipes.sort((a, b) => (a.Price > b.Price) ? 1 : ((b.Price > a.Price) ? -1 : 0));
+    }
+
     const filteredBooks = recipes
-      .filter((recipe) => recipe.Title.toLowerCase().includes(filter.toLowerCase()))
+      .filter((recipe) =>
+        recipe.Title.toLowerCase().includes(filter.toLowerCase()) ||
+        recipe.Ingredients.toLowerCase().includes(filter.toLowerCase())
+      )
       .map((recipe) => (
         <ListItem
           key={recipe.Id}
@@ -53,25 +70,44 @@ const List: React.FC = () => {
       <>
         <h2>{t('recipes.title')}</h2>
         <div className="filterContainer">
-          <TextField
-            label="Filter"
-            variant="standard"
-            value={filter}
-            onChange={handleFilterChange}
-          />
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <TextField
+              label="Filter"
+              variant="standard"
+              value={filter}
+              onChange={handleFilterChange}
+            />
+          </FormControl>
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="orderSelectLabel">{t('recipes.orderLabel')}</InputLabel>
+            <Select
+              labelId="orderSelectLabel"
+              value={orderField}
+              defaultValue={'Name'}
+              onChange={handleOrderChange}
+            >
+              <MenuItem value='Name'>{t('recipes.orderName')}</MenuItem>
+              <MenuItem value='Price'>{t('recipes.orderPrice')}</MenuItem>
+            </Select>
+          </FormControl>
         </div>
-        <div>{t('recipes.list.filterResults', { count: filteredBooks.length })}</div>
-        <TableContainer component={Paper}> 
+        <TableContainer component={Paper}>
           <Table
             sx={{ minWidth: 650 }}
             aria-label="simple books overview table"
             stickyHeader={true}
           >
             <TableHead>
+              <TableRow className='firstHeader'>
+                <TableCell colSpan={4}>{t('recipes.list.filterResults', { count: filteredBooks.length })}</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableHead>
               <TableRow>
                 <TableCell>{t('recipes.list.title')}</TableCell>
+                <TableCell>{t('recipes.list.ingredients')}</TableCell>
                 <TableCell>{t('recipes.list.price')}</TableCell>
-                {/* <TableCell colSpan={2}></TableCell> */}
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -79,7 +115,7 @@ const List: React.FC = () => {
                 filteredBooks
               ) : (
                 <TableRow>
-                  <TableCell colSpan={4}>keine Treffer</TableCell>
+                  <TableCell colSpan={4}>{t('recipes.nohits')}</TableCell>
                 </TableRow>
               )}
             </TableBody>

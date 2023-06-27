@@ -8,8 +8,15 @@
     },
     "recipes": {
         "title": "Recipes 📚",
-        "list": {
+        "nohits": "none found",
+        "change": "Edit",
+        "delete": "Delete",
+        "orderLabel": "Order by",
+        "orderName": "Name",
+        "orderPrice": "Price",
+         "list": {
             "title": "Titel",
+            "ingredients": "Ingredients",
             "price": "Price",
             "filterResults_one": "{{count}} Recipe found",
             "filterResults_other": "{{count}} Recipes found"

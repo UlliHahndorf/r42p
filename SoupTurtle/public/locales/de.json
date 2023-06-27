@@ -8,8 +8,15 @@
     },
     "recipes": {
         "title": "Rezepte 📚",
+        "nohits": "keine gefunden",
+        "change": "Ändern",
+        "delete": "Löschen",
+        "orderLabel": "Sortierung",
+        "orderName": "Name",
+        "orderPrice": "Preis",
         "list": {
             "title": "Titel",
+            "ingredients": "Zutaten",
             "price": "Preis",
             "filterResults_one": "{{count}} Rezept gefunden",
             "filterResults_other": "{{count}} Rezepte gefunden"

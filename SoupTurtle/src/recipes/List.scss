@@ -3,6 +3,12 @@
       border-bottom: 1px solid black;
       background-color: #cccccc;
     }
+
+    tr.firstHeader th {
+      border-bottom: 0;
+      background-color: #ffffff;
+    
+    }
   
     tr:nth-child(2n) {
       background-color: #eeeeee;

@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "backend": "json-server -p 3001 -w data/recipes5.json"
+    "backend": "json-server -p 3001 -w data/recipes.json"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
