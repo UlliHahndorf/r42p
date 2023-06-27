@@ -1,4 +1,11 @@
 {
+    "main": {
+        "title": "Welcome to SoupTurtle"
+    },
+    "menu": {
+        "recipes": "Recipes",
+        "week": "Current week"
+    },
     "recipes": {
         "title": "Recipes 📚",
         "list": {

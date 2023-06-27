@@ -1,5 +1,7 @@
 # ToDos
 
+- Liste sortiert
+- Menu mit Links
 - Mehr Spalten
 - CRUD
 - FontAwesome

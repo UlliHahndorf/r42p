@@ -1,16 +1,16 @@
 import './App.css';
 import React, { Suspense } from 'react';
 import {
-  Navigate,
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import LanguageSwitch from './shared/LanguageSwitch';
 import { RecipesProvider } from './recipes/Context';
+import Welcome from './Welcome';
 
+const Menu = React.lazy(() => import('./shared/Menu'));
 const List = React.lazy(() => import('./recipes/List'));
 // import { Form } from './form/Form';
 // import { Edit } from './edit/Edit';
@@ -21,7 +21,13 @@ import './shared/i18n';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/list" />,
+    element: (
+      <ErrorBoundary
+        FallbackComponent={({ error }) => <div>{error.message}</div>}
+      >
+        <Welcome/>
+      </ErrorBoundary>
+    ),
   },
   // {
   //   path: '/form',
@@ -32,7 +38,7 @@ const router = createBrowserRouter([
   //   element: <NotFound />,
   // },
   {
-    path: '/list',
+    path: '/Recipes/List',
     element: (
       <ErrorBoundary
         FallbackComponent={({ error }) => <div>{error.message}</div>}
@@ -51,10 +57,9 @@ const queryClient = new QueryClient();
 const App: React.FC = () => {
   return (
     <>
-    <h1>SoupTurtle</h1>
+    <Menu />
     <QueryClientProvider client={queryClient}>
       <RecipesProvider>
-        <LanguageSwitch />
         <Suspense fallback={<div>Lade ...</div>}>
           <RouterProvider router={router} />
         </Suspense>
