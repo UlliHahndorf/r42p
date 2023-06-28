@@ -1,8 +1,8 @@
 # ToDos SoupTurtle
 
-- Liste sortiert
-- Menu mit Links
-- Mehr Spalten
++ Liste sortiert
++ Menu mit Links
 - CRUD
+- Mehr Spalten
 - FontAwesome
 - DevExtreme

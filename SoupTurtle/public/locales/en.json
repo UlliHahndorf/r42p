@@ -1,9 +1,10 @@
 {
     "main": {
-        "title": "Welcome to SoupTurtle"
+        "title": "Welcome to SoupTurtle",
+        "loading": "Lade ..."
     },
     "menu": {
-        "Start": "Welcome",
+        "start": "Welcome",
         "recipes": "Recipes",
         "week": "Current week"
     },

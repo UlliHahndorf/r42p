@@ -26,20 +26,20 @@ import { getRecipes, removeRecipe } from '../api/recipe.api';
 import { useTranslation } from 'react-i18next';
 
 const List: React.FC = () => {
-  const [, filter, orderValue, error, , handleFilterChange, handleOrderChange] = useList();
+  const [, filter, orderValue, error, handleDelete, handleFilterChange, handleOrderChange] = useList();
 
   const { t } = useTranslation();
 
   const { data: recipes } = useQuery(['recipes'], getRecipes, { suspense: true });
 
   const queryClient = useQueryClient();
-  const mutation = useMutation(removeRecipe, {
-    onSuccess() {
-      queryClient.invalidateQueries(['recipes']);
-    },
-  });
+  // const mutation = useMutation(removeRecipe, {
+  //   onSuccess() {
+  //     queryClient.invalidateQueries(['recipes']);
+  //   },
+  // });
 
-  let content = <div>Keine Bücher gefunden</div>;
+  let content = <div>{t('recipes.nohits')}</div>;
   if (recipes && recipes.length > 0) {
 
     // Order
@@ -60,9 +60,7 @@ const List: React.FC = () => {
         <ListItem
           key={recipe.Id}
           recipe={recipe}
-          onDelete={async (id: number) => {
-            mutation.mutate(id);
-          }}
+          onDelete={handleDelete}          
         />
       ));
 
@@ -92,11 +90,7 @@ const List: React.FC = () => {
           </FormControl>
         </div>
         <TableContainer component={Paper}>
-          <Table
-            sx={{ minWidth: 650 }}
-            aria-label="simple books overview table"
-            stickyHeader={true}
-          >
+          <Table sx={{ minWidth: 650 }} aria-label="simple books overview table" stickyHeader={true} >
             <TableHead>
               <TableRow className='firstHeader'>
                 <TableCell colSpan={4}>{t('recipes.list.filterResults', { count: filteredBooks.length })}</TableCell>

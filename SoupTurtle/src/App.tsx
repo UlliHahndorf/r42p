@@ -7,59 +7,63 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { RecipesProvider } from './recipes/Context';
 import Welcome from './Welcome';
 import './shared/i18n';
+import NotFound from './shared/NotFound';
+import { useTranslation } from 'react-i18next';
 
 const Menu = React.lazy(() => import('./shared/Menu'));
-const List = React.lazy(() => import('./recipes/List'));
+const RecipesList = React.lazy(() => import('./recipes/List'));
 // import { Form } from './form/Form';
 // import { Edit } from './edit/Edit';
 // import { NotFound } from './NotFound';
 
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: (
-      <ErrorBoundary
-        FallbackComponent={({ error }) => <div>{error.message}</div>}
-      >
-        <Menu />
-        <Welcome />
-      </ErrorBoundary>
-    ),
-  },
-  // {
-  //   path: '/form',
-  //   element: <Form />,
-  // },
-  // {
-  //   path: '*',
-  //   element: <NotFound />,
-  // },
-  {
-    path: '/Recipes/List',
-    element: (
-      <ErrorBoundary
-        FallbackComponent={({ error }) => <div>{error.message}</div>}
-      >
-        <Suspense fallback={<div>Lade Daten ...</div>}>
-          <Menu />
-          <List />
-        </Suspense>
-      </ErrorBoundary>
-    ),
-    // children: [{ path: 'edit/:id', element: <Edit /> }],
-  },
-]);
-
-const queryClient = new QueryClient();
-
 const App: React.FC = () => {
+  
+  const queryClient = new QueryClient();
+  const { t } = useTranslation();
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: (
+        <ErrorBoundary FallbackComponent={({ error }) => <div>{error.message}</div>}>
+          <Menu />
+          <Welcome />
+        </ErrorBoundary>
+      ),
+    },
+    {
+      path: '*',
+      element: (
+        <>
+          <Menu />
+          <NotFound />
+        </>
+      ),
+    },
+    // {
+    //   path: '/Recipes/Form',
+    //   element: <Form />,
+    // },
+    {
+      path: '/Recipes/List',
+      element: (
+        <ErrorBoundary FallbackComponent={({ error }) => <div>{error.message}</div>} >
+          <Suspense fallback={<div>{t('main.loading')}</div>}>
+            <Menu />
+            <RecipesList />
+          </Suspense>
+        </ErrorBoundary>
+      ),
+      // children: [{ path: 'edit/:id', element: <Edit /> }],
+    },
+  ]);
 
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <RecipesProvider>
-          <Suspense fallback={<div>Lade ...</div>}>
+          <Suspense fallback={<div>{t('main.loading')}</div>}>
             <RouterProvider router={router} />
           </Suspense>
         </RecipesProvider>
