@@ -3,11 +3,12 @@
         "title": "Welcome to SoupTurtle"
     },
     "menu": {
+        "Start": "Welcome",
         "recipes": "Recipes",
         "week": "Current week"
     },
     "recipes": {
-        "title": "Recipes 📚",
+        "title": "Recipes",
         "nohits": "none found",
         "change": "Edit",
         "delete": "Delete",

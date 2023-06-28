@@ -3,8 +3,7 @@ import { Recipe } from '../shared/types/Recipe';
 import { Button, TableCell, TableRow, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import Icon from '../shared/Icon';
 
 type Props = {
   recipe: Recipe;
@@ -20,20 +19,13 @@ const ListItem: React.FC<Props> = ({ recipe, onDelete }) => {
       <TableCell>{t('recipes.listItem.price', { price: recipe.Price })}</TableCell>
       <TableCell>
         <Tooltip title={t('recipes.change')}>
-          <Button
-            variant="text"
-            component={Link}
-            to={`/list/edit/${recipe.Id}`}
-          >
-            <EditIcon />
+          <Button variant="text" component={Link} to={`/list/edit/${recipe.Id}`} >
+            <Icon iconName='Edit' />
           </Button>
         </Tooltip>
         <Tooltip title={t('recipes.delete')}>
-          <Button
-            variant="text"
-            onClick={() => onDelete(recipe.Id)}
-          >
-            <DeleteIcon />
+          <Button variant="text" onClick={() => onDelete(recipe.Id)} >
+            <Icon iconName='Delete' />
           </Button>
         </Tooltip>
       </TableCell>

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import LanguageSwitch from './LanguageSwitch';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+// import { useTranslation } from 'react-i18next';
 
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -14,15 +13,10 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { ErrorBoundary } from 'react-error-boundary';
+import MenuItem from './MenuItem';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
@@ -109,7 +103,7 @@ export default function Menu() {
     setOpen(false);
   };
 
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
 
   return (
     <ErrorBoundary
@@ -145,25 +139,10 @@ export default function Menu() {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          {/* <Link to={'/Recipes/List'}>foo bar</Link> */}
           <List>
-            <ListItem key='recipes' disablePadding sx={{ display: 'block' }} >
-              <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }}>
-                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto', }}>
-                  <MenuBookIcon />
-                </ListItemIcon>
-                <ListItemText primary={t('menu.recipes')} sx={{ opacity: open ? 1 : 0 }} />
-
-              </ListItemButton>
-            </ListItem>
-            <ListItem key='week' disablePadding sx={{ display: 'block' }}>
-              <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5, }} >
-                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto', }}>
-                  <RestaurantMenuIcon />
-                </ListItemIcon>
-                <ListItemText primary={t('menu.week')} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
+            <MenuItem isOpen={open} labelKey='menu.start' keyAttr='start' targetUrl='/' iconName='Home' />
+            <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/Recipes/List' iconName='MenuBook' />
+            <MenuItem isOpen={open} labelKey='menu.week' keyAttr='week' targetUrl='/Week/Overview' iconName='RestaurantMenu' />
           </List>
           <Divider />
         </Drawer>

@@ -22,8 +22,8 @@ const router = createBrowserRouter([
       <ErrorBoundary
         FallbackComponent={({ error }) => <div>{error.message}</div>}
       >
+        <Menu />
         <Welcome />
-
       </ErrorBoundary>
     ),
   },
@@ -42,6 +42,7 @@ const router = createBrowserRouter([
         FallbackComponent={({ error }) => <div>{error.message}</div>}
       >
         <Suspense fallback={<div>Lade Daten ...</div>}>
+          <Menu />
           <List />
         </Suspense>
       </ErrorBoundary>
@@ -56,10 +57,8 @@ const App: React.FC = () => {
 
   return (
     <>
-
       <QueryClientProvider client={queryClient}>
         <RecipesProvider>
-          <Menu />
           <Suspense fallback={<div>Lade ...</div>}>
             <RouterProvider router={router} />
           </Suspense>
