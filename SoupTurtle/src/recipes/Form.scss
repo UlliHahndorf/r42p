@@ -1,0 +1,18 @@
+.form {
+    input.error {
+        border: 1px solid red;
+    }
+
+    .errorMessage {
+        color: red;
+    }
+
+    div.btnRow {
+        margin-top: 1rem;
+
+        button {
+            margin-right: 1rem;
+        }
+
+    }
+}

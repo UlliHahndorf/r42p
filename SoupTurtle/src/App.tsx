@@ -3,19 +3,18 @@ import React, { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
-
-import { RecipesProvider } from './recipes/Context';
-import Welcome from './Welcome';
 import { useTranslation } from 'react-i18next';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { RecipesProvider } from './recipes/Context';
 import './shared/i18n';
+import Welcome from './Welcome';
 import NotFound from './shared/NotFound';
 import Menu from './shared/Menu';
+//import Form from './recipes/Form';
+import Edit from './recipes/Edit';
+
 const RecipesList = React.lazy(() => import('./recipes/List'));
-// import { Form } from './form/Form';
-// import { Edit } from './edit/Edit';
-// import { NotFound } from './NotFound';
 
 const App: React.FC = () => {
   
@@ -53,11 +52,11 @@ const App: React.FC = () => {
       ),
     },
     // {
-    //   path: '/Recipes/Form',
+    //   path: '/recipes/form',
     //   element: <Form />,
     // },
     {
-      path: '/Recipes/List',
+      path: '/recipes/list',
       element: (
         <ErrorBoundary FallbackComponent={({ error }) => <div>{error.message}</div>} >
           <Suspense fallback={<div>{t('main.loading')}</div>}>
@@ -66,7 +65,7 @@ const App: React.FC = () => {
           </Suspense>
         </ErrorBoundary>
       ),
-      // children: [{ path: 'edit/:id', element: <Edit /> }],
+      children: [{ path: 'edit/:id', element: <Edit /> }],
     },
   ]);
 

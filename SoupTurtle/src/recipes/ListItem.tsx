@@ -13,14 +13,18 @@ type Props = {
 
 const ListItem: React.FC<Props> = ({ recipe, onDelete }) => {
   const { t } = useTranslation();
+  
+  const renderHTML = (rawHTML: string) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
+
   return (
-    <TableRow>
-      <TableCell>{recipe.title}</TableCell>
+    <TableRow style={{ verticalAlign: 'top' }}>
+      <TableCell><b>{recipe.title}</b></TableCell>
       <TableCell>{recipe.ingredients}</TableCell>
+      <TableCell>{renderHTML(recipe.instructions.replace(/\n/g,"<br />"))}</TableCell>
       <TableCell>{t('recipes.listItem.price', { price: recipe.price })}</TableCell>
       <TableCell>
         <Tooltip title={t('recipes.change')}>
-          <Button variant="text" component={Link} to={`/list/edit/${recipe.id}`} >
+          <Button variant="text" component={Link} to={`edit/${recipe.id}`} >
             <Icon iconName='Edit' />
           </Button>
         </Tooltip>

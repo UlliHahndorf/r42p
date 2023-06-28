@@ -80,6 +80,7 @@ const List: React.FC = () => {
               <TableRow>
                 <TableCell>{t('recipes.list.title')}</TableCell>
                 <TableCell>{t('recipes.list.ingredients')}</TableCell>
+                <TableCell>{t('recipes.list.instructions')}</TableCell>
                 <TableCell>{t('recipes.list.price')}</TableCell>
                 <TableCell></TableCell>
               </TableRow>
@@ -108,7 +109,7 @@ const List: React.FC = () => {
         aria-label={t('recipes.new')}
         className="fab"
         component={Link}
-        to="/Recipies/Form"
+        to="/recipies/edit"
       >
         <Icon iconName='New' />
       </Fab>

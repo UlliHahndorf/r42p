@@ -137,8 +137,8 @@ export default function Menu() {
           <Divider />
           <List>
             <MenuItem isOpen={open} labelKey='menu.start' keyAttr='start' targetUrl='/' iconName='Home' />
-            <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/Recipes/List' iconName='MenuBook' />
-            <MenuItem isOpen={open} labelKey='menu.week' keyAttr='week' targetUrl='/Week/Overview' iconName='RestaurantMenu' />
+            <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/recipes/list' iconName='MenuBook' />
+            <MenuItem isOpen={open} labelKey='menu.week' keyAttr='week' targetUrl='/week/overview' iconName='RestaurantMenu' />
           </List>
           <Divider />
         </Drawer>
