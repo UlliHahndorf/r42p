@@ -16,8 +16,8 @@ type Props = {
 const MenuItem: React.FC<Props> = ({ isOpen, keyAttr, labelKey, targetUrl, iconName }) => {
     const { t } = useTranslation();
     return (
-        <ListItem key={keyAttr} component={Link} to={targetUrl} disablePadding sx={{ display: 'block' }} >
-            <ListItemButton sx={{ minHeight: 48, justifyContent: isOpen ? 'initial' : 'center', px: 2.5, }}>
+        <ListItem key={keyAttr} component={Link} to={targetUrl} disablePadding sx={{ display: 'block' }}  >
+            <ListItemButton sx={{ minHeight: 48, justifyContent: isOpen ? 'initial' : 'center', px: 2.5, }} selected={iconName === "start" ? true : false}>
                 <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: isOpen ? 3 : 'auto', }}>
                     <Icon iconName={iconName} />
                 </ListItemIcon>

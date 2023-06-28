@@ -1,7 +1,7 @@
 {
     "main": {
         "title": "Welcome to SoupTurtle",
-        "loading": "Lade ..."
+        "loading": "Loading ..."
     },
     "menu": {
         "start": "Welcome",
@@ -9,6 +9,7 @@
         "week": "Current week"
     },
     "recipes": {
+        "new": "New",
         "title": "Recipes",
         "nohits": "none found",
         "change": "Edit",
@@ -17,7 +18,7 @@
         "orderName": "Name",
         "orderPrice": "Price",
          "list": {
-            "title": "Titel",
+            "title": "Title",
             "ingredients": "Ingredients",
             "price": "Price",
             "filterResults_one": "{{count}} Recipe found",

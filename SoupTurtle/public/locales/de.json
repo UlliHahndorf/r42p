@@ -9,6 +9,7 @@
         "week": "Aktuelle Woche"
     },
     "recipes": {
+        "new": "Neu",
         "title": "Rezepte",
         "nohits": "keine gefunden",
         "change": "Ändern",

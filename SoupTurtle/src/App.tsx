@@ -6,22 +6,33 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import { RecipesProvider } from './recipes/Context';
 import Welcome from './Welcome';
+import { useTranslation } from 'react-i18next';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 import './shared/i18n';
 import NotFound from './shared/NotFound';
-import { useTranslation } from 'react-i18next';
-
-const Menu = React.lazy(() => import('./shared/Menu'));
+import Menu from './shared/Menu';
 const RecipesList = React.lazy(() => import('./recipes/List'));
 // import { Form } from './form/Form';
 // import { Edit } from './edit/Edit';
 // import { NotFound } from './NotFound';
-
 
 const App: React.FC = () => {
   
   const queryClient = new QueryClient();
   const { t } = useTranslation();
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#1976d2',
+      },
+      secondary: {
+        main: '#42a5f5',
+      },
+    },
+  });
+  
   const router = createBrowserRouter([
     {
       path: '/',
@@ -61,6 +72,7 @@ const App: React.FC = () => {
 
   return (
     <>
+    <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <RecipesProvider>
           <Suspense fallback={<div>{t('main.loading')}</div>}>
@@ -68,6 +80,7 @@ const App: React.FC = () => {
           </Suspense>
         </RecipesProvider>
       </QueryClientProvider>
+    </ThemeProvider>
     </>
   );
 };

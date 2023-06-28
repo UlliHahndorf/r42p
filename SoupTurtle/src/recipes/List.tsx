@@ -1,29 +1,16 @@
 import React from 'react';
-import {
-  Fab,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TextField,
-} from '@mui/material';
-
-import ListItem from './ListItem';
-
-import useList from './useList';
-
-import './List.scss';
 import { Link, Outlet } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getRecipes, removeRecipe } from '../api/recipe.api';
+import { Fab, FormControl, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
+
+import { getRecipes } from '../api/recipe.api';
+import ListItem from './ListItem';
+import useList from './useList';
+import Icon from '../shared/Icon';
+import './List.scss';
+
+//import ConfirmDialog from '../shared/components/ConfirmDialog';
 
 const List: React.FC = () => {
   const [, filter, orderValue, error, handleDelete, handleFilterChange, handleOrderChange] = useList();
@@ -32,13 +19,6 @@ const List: React.FC = () => {
 
   const { data: recipes } = useQuery(['recipes'], getRecipes, { suspense: true });
 
-  const queryClient = useQueryClient();
-  // const mutation = useMutation(removeRecipe, {
-  //   onSuccess() {
-  //     queryClient.invalidateQueries(['recipes']);
-  //   },
-  // });
-
   let content = <div>{t('recipes.nohits')}</div>;
   if (recipes && recipes.length > 0) {
 
@@ -46,19 +26,19 @@ const List: React.FC = () => {
     var orderField = 'Name';
     if (orderValue !== "") orderField = orderValue;
     if (orderField === 'Name') {
-      recipes.sort((a, b) => (a.Title > b.Title) ? 1 : ((b.Title > a.Title) ? -1 : 0));
+      recipes.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
     } else {
-      recipes.sort((a, b) => (a.Price > b.Price) ? 1 : ((b.Price > a.Price) ? -1 : 0));
+      recipes.sort((a, b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
     }
 
     const filteredBooks = recipes
       .filter((recipe) =>
-        recipe.Title.toLowerCase().includes(filter.toLowerCase()) ||
-        recipe.Ingredients.toLowerCase().includes(filter.toLowerCase())
+        recipe.title.toLowerCase().includes(filter.toLowerCase()) ||
+        recipe.ingredients.toLowerCase().includes(filter.toLowerCase())
       )
       .map((recipe) => (
         <ListItem
-          key={recipe.Id}
+          key={recipe.id}
           recipe={recipe}
           onDelete={handleDelete}          
         />
@@ -66,8 +46,8 @@ const List: React.FC = () => {
 
     content = (
       <>
-        <h2>{t('recipes.title')}</h2>
         <div className="filterContainer">
+        <span className='title'>{t('recipes.title')}</span>
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
             <TextField
               label="Filter"
@@ -89,7 +69,7 @@ const List: React.FC = () => {
             </Select>
           </FormControl>
         </div>
-        <TableContainer component={Paper}>
+        <TableContainer>
           <Table sx={{ minWidth: 650 }} aria-label="simple books overview table" stickyHeader={true} >
             <TableHead>
               <TableRow className='firstHeader'>
@@ -122,15 +102,17 @@ const List: React.FC = () => {
     <div className="listContainer">
       {error != '' && <div>{error}</div>}
       {content}
+      <Tooltip title={t('recipes.new')}>
       <Fab
         color="primary"
-        aria-label="Add new recipe"
+        aria-label={t('recipes.new')}
         className="fab"
         component={Link}
-        to="/form"
+        to="/Recipies/Form"
       >
-        Neu
+        <Icon iconName='New' />
       </Fab>
+      </Tooltip>
       <Outlet></Outlet>
     </div>
   );

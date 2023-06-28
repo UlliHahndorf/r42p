@@ -1,6 +1,5 @@
 import * as React from 'react';
-import LanguageSwitch from './LanguageSwitch';
-// import { useTranslation } from 'react-i18next';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -12,11 +11,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { ErrorBoundary } from 'react-error-boundary';
 import MenuItem from './MenuItem';
+
+import LanguageSwitch from './LanguageSwitch';
+import Icon from './Icon';
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
@@ -103,15 +101,13 @@ export default function Menu() {
     setOpen(false);
   };
 
-  //const { t } = useTranslation();
-
   return (
     <ErrorBoundary
       FallbackComponent={({ error }) => <div>{error.message}</div>}
     >
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="fixed" open={open}>
+        <AppBar position="fixed" open={open} color="secondary">
           <Toolbar>
             <IconButton
               color="inherit"
@@ -123,10 +119,10 @@ export default function Menu() {
                 ...(open && { display: 'none' }),
               }}
             >
-              <MenuIcon />
+               <Icon iconName='Menu' />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              SoupTurtle
+              <img src='/soup.png' width='20' height='20' /> SoupTurtle
               {/* <FontAwesomeIcon icon={faChevronLeft} />             */}
             </Typography>
             <LanguageSwitch />
@@ -135,7 +131,7 @@ export default function Menu() {
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+              {theme.direction === 'rtl' ? <Icon iconName='ChevronRight' /> : <Icon iconName='ChevronLeft' />}
             </IconButton>
           </DrawerHeader>
           <Divider />
@@ -146,8 +142,7 @@ export default function Menu() {
           </List>
           <Divider />
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <DrawerHeader />
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>        
         </Box>
       </Box>
     </ErrorBoundary>

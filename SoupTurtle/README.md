@@ -6,3 +6,4 @@
 - Mehr Spalten
 - FontAwesome
 - DevExtreme
+- Menü nur 1x laden

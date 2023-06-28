@@ -1,21 +1,21 @@
 export type Recipe = {
-    Id: number;
-    Title: string;
-    Ingredients: string;
-    NumberServings: string;
-    Quantities: string;
-    Instructions: string;
-    DateCreated: Date;
-    DateModified: Date;
-    Category: string;
-    Notes: string;
-    Description: string;
-    Price: number;
-    PricePerLiter: number;
-    Factor: number;
-    Source: string;
-    SourcePage: string;
+    id: number;
+    title: string;
+    ingredients: string;
+    numberServings: string;
+    quantities: string;
+    instructions: string;
+    dateCreated: Date;
+    dateModified: Date;
+    category: string;
+    notes: string;
+    description: string;
+    price: number;
+    pricePerLiter: number;
+    factor: number;
+    source: string;
+    sourcePage: string;
   };
   
-  export type CreateRecipe = Omit<Recipe, 'Id'> & { Id?: number };
+  export type CreateRecipe = Omit<Recipe, 'id'> & { id?: number };
   

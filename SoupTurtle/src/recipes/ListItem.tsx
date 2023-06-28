@@ -1,8 +1,9 @@
 import React from 'react';
-import { Recipe } from '../shared/types/Recipe';
 import { Button, TableCell, TableRow, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
+import { Recipe } from '../shared/types/Recipe';
 import Icon from '../shared/Icon';
 
 type Props = {
@@ -14,17 +15,17 @@ const ListItem: React.FC<Props> = ({ recipe, onDelete }) => {
   const { t } = useTranslation();
   return (
     <TableRow>
-      <TableCell>{recipe.Title}</TableCell>
-      <TableCell>{recipe.Ingredients}</TableCell>
-      <TableCell>{t('recipes.listItem.price', { price: recipe.Price })}</TableCell>
+      <TableCell>{recipe.title}</TableCell>
+      <TableCell>{recipe.ingredients}</TableCell>
+      <TableCell>{t('recipes.listItem.price', { price: recipe.price })}</TableCell>
       <TableCell>
         <Tooltip title={t('recipes.change')}>
-          <Button variant="text" component={Link} to={`/list/edit/${recipe.Id}`} >
+          <Button variant="text" component={Link} to={`/list/edit/${recipe.id}`} >
             <Icon iconName='Edit' />
           </Button>
         </Tooltip>
         <Tooltip title={t('recipes.delete')}>
-          <Button variant="text" onClick={() => onDelete(recipe.Id)} >
+          <Button variant="text" onClick={() => onDelete(recipe.id)} >
             <Icon iconName='Delete' />
           </Button>
         </Tooltip>

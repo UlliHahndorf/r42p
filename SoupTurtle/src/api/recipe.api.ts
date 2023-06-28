@@ -10,7 +10,7 @@ export async function getRecipes(): Promise<Recipe[]> {
 
 export async function removeRecipe(id: number): Promise<void> {
   const response = await fetch(
-    import.meta.env.VITE_BACKEND_URL + '/Recipe/' + id,
+    import.meta.env.VITE_BACKEND_URL + '/Recipes/' + id,
     { method: 'DELETE' }
   );
 
