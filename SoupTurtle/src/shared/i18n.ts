@@ -8,7 +8,8 @@ i18n
   .use(HttpApi)
   .use(LanguageDetector)
   .init({
-    debug: true,
+    debug: false,
+    lng: 'en',
     fallbackLng: 'de',
     interpolation: {
       escapeValue: false,

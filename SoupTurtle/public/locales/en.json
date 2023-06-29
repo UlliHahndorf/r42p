@@ -1,22 +1,28 @@
 {
     "main": {
-        "title": "Welcome to SoupTurtle"
+        "title": "Welcome to SoupTurtle",
+        "loading": "Loading ..."
     },
     "menu": {
+        "start": "Welcome",
         "recipes": "Recipes",
         "week": "Current week"
     },
     "recipes": {
-        "title": "Recipes 📚",
+        "new": "New",
+        "title": "Recipes",
         "nohits": "none found",
-        "change": "Edit",
+        "change": "Update",
+        "create": "Create",
+        "cancel": "Cancel",
         "delete": "Delete",
         "orderLabel": "Order by",
         "orderName": "Name",
         "orderPrice": "Price",
          "list": {
-            "title": "Titel",
+            "title": "Title",
             "ingredients": "Ingredients",
+            "instructions": "Instructions",
             "price": "Price",
             "filterResults_one": "{{count}} Recipe found",
             "filterResults_other": "{{count}} Recipes found"

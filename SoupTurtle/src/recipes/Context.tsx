@@ -32,8 +32,8 @@ import {
           let url = import.meta.env.VITE_BACKEND_URL + '/recipes';
           let method = 'POST';
   
-          if ((action.payload as Recipe).Id) {
-            url += '/' + (action.payload as Recipe).Id;
+          if ((action.payload as Recipe).id) {
+            url += '/' + (action.payload as Recipe).id;
             method = 'PUT';
           }
           const createResponse = await fetch(url, {
@@ -66,14 +66,14 @@ import {
     switch (action.type) {
       case 'DELETE_SUCCESS':
         return produce(state, (draftState) => {
-          return draftState.filter((recipe) => recipe.Id !== action.payload);
+          return draftState.filter((recipe) => recipe.id !== action.payload);
         });
       case 'FETCH_SUCCESS':
         return action.payload as Recipe[];
       case 'SAVE_SUCCESS':
         return produce(state, (draftState) => {
           const index = draftState.findIndex(
-            (recipe) => recipe.Id === (action.payload as Recipe).Id
+            (recipe) => recipe.id === (action.payload as Recipe).id
           );
   
           if (index !== -1) {
