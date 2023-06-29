@@ -1,85 +1,47 @@
-import './App.css';
 import React, { Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
-import { useTranslation } from 'react-i18next';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { RecipesProvider } from './recipes/Context';
 import './shared/i18n';
 import Welcome from './Welcome';
-import NotFound from './shared/NotFound';
-import Menu from './shared/Menu';
-//import Form from './recipes/Form';
-import Edit from './recipes/Edit';
+import NotFound from './shared/components/NotFound';
+import Menu from './shared/components/Menu';
+import Progress from './shared/components/Progress';
+import Feedback from './shared/components/Feedback';
 
-const RecipesList = React.lazy(() => import('./recipes/List'));
+import RecipeForm from './features/recipes/form/Form';
+import RecipeEdit from './features/recipes/edit/Edit';
+import RecipesList from './features/recipes/list/List';
+import './App.css';
 
 const App: React.FC = () => {
-  
-  const queryClient = new QueryClient();
-  const { t } = useTranslation();
 
   const theme = createTheme({
     palette: {
-      primary: {
-        main: '#1976d2',
-      },
-      secondary: {
-        main: '#42a5f5',
-      },
+      primary: { main: '#1976d2' },
+      secondary: { main: '#42a5f5' },
     },
   });
-  
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: (
-        <ErrorBoundary FallbackComponent={({ error }) => <div>{error.message}</div>}>
-          <Menu />
-          <Welcome />
-        </ErrorBoundary>
-      ),
-    },
-    {
-      path: '*',
-      element: (
-        <>
-          <Menu />
-          <NotFound />
-        </>
-      ),
-    },
-    // {
-    //   path: '/recipes/form',
-    //   element: <Form />,
-    // },
-    {
-      path: '/recipes/list',
-      element: (
-        <ErrorBoundary FallbackComponent={({ error }) => <div>{error.message}</div>} >
-          <Suspense fallback={<div>{t('main.loading')}</div>}>
-            <Menu />
-            <RecipesList />
-          </Suspense>
-        </ErrorBoundary>
-      ),
-      children: [{ path: 'edit/:id', element: <Edit /> }],
-    },
-  ]);
 
   return (
     <>
-    <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <RecipesProvider>
-          <Suspense fallback={<div>{t('main.loading')}</div>}>
-            <RouterProvider router={router} />
-          </Suspense>
-        </RecipesProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <Suspense fallback={<Progress />}>
+          <ErrorBoundary FallbackComponent={({ error }) => <Feedback text={error.message} level='error' />}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<><Menu /><Welcome /></>} />
+                <Route path="/recipes/list" element={<><Menu /><RecipesList /></>}>
+                  <Route path="edit/:id" element={<RecipeEdit />} />
+                </Route>
+                <Route path="/recipes/form" element={<><Menu /><RecipeForm recipe={null} /></>} />
+                <Route path="*" element={<><Menu /><NotFound /></>} />
+              </Routes>
+            </BrowserRouter>
+          </ErrorBoundary>
+        </Suspense>
+      </ThemeProvider>
     </>
   );
 };

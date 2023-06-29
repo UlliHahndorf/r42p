@@ -2,9 +2,9 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
 import { useTranslation } from 'react-i18next';
 
-import { Recipe } from '../shared/types/Recipe';
-import { useRecipesContext } from '../recipes/Context';
-import { removeRecipe } from '../api/recipe.api';
+import { Recipe } from '../../../shared/types/Recipe';
+import { useRecipesContext } from '../_Context';
+import { removeRecipe } from '../../../api/recipe.api';
 
 type UseListReturnType = [
   recipes: Recipe[],

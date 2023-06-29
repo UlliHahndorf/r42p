@@ -3,32 +3,18 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, InputAdornment, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
-import { useRecipesContext } from './Context';
-import { Recipe, CreateRecipe } from '../shared/types/Recipe';
+import { Recipe, CreateRecipe, DefaultRecipe } from '../../../shared/types/Recipe';
+import { saveAction } from '../recipes.actions';
 
 import './Form.scss';
 
-const defaultValues: CreateRecipe = {
-    title: '',
-    ingredients: '',
-    numberServings: '',
-    quantities: '',
-    instructions: '',
-    dateCreated: new Date(),
-    dateModified: new Date(),
-    category: '',
-    notes: '',
-    description: '',
-    price: 0,
-    pricePerLiter: 0,
-    factor: 0,
-    source: '',
-    sourcePage: '',
-};
+const defaultValues: CreateRecipe = DefaultRecipe();
 
+// TODO Resources
 const schema = yup.object({
     id: yup.number().optional(),
     title: yup.string().required('Title ist ein Pflichtfeld'),
@@ -42,8 +28,8 @@ type Props = {
 };
 
 const Form: React.FC<Props> = ({ recipe }) => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [, dispatch] = useRecipesContext();
     const {
         register,
         handleSubmit,
@@ -62,8 +48,8 @@ const Form: React.FC<Props> = ({ recipe }) => {
         }
     }, [recipe]);
 
-    function onSubmit(recipe: CreateRecipe): void {
-        dispatch({ type: 'SAVE', payload: recipe });
+    async function onSubmit(recipe: CreateRecipe): Promise<void> {
+        dispatch(saveAction.request(recipe));
         reset(defaultValues);
         navigate('/recipes/list');
     }

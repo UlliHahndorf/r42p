@@ -3,8 +3,8 @@ import { Button, TableCell, TableRow, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { Recipe } from '../shared/types/Recipe';
-import Icon from '../shared/Icon';
+import { Recipe } from '../../../shared/types/Recipe';
+import Icon from '../../../shared/components/Icon';
 
 type Props = {
   recipe: Recipe;

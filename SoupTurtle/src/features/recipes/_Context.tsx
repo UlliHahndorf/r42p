@@ -7,7 +7,7 @@ import {
     useMemo,
     useReducer,
   } from 'react';
-  import { Recipe, CreateRecipe } from '../shared/types/Recipe';
+  import { Recipe, CreateRecipe } from '../../shared/types/Recipe';
   import { produce } from 'immer';
   
   type RecipesContextType = [Recipe[], Dispatch<Action>];

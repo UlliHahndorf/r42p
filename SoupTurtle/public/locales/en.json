@@ -1,7 +1,8 @@
 {
     "main": {
         "title": "Welcome to SoupTurtle",
-        "loading": "Loading ..."
+        "loading": "Loading",
+        "any_error": "An error occured"
     },
     "menu": {
         "start": "Welcome",
@@ -11,6 +12,7 @@
     "recipes": {
         "new": "New",
         "title": "Recipes",
+        "dialog_title": "Edit recipe",
         "nohits": "none found",
         "change": "Update",
         "create": "Create",
