@@ -1,0 +1,10 @@
+- Entscheidung für ReAct: Wieder so machen?
+- Welches UI Framework on top on ReAct:
+  - Element-UI?
+  - react-virtualized?
+  - PrimeReact - was ist das?
+  - Auch Kombi React + Bootstrap möglich?
+- ReAct Controlnutzung: alles build-in oder auch 3rd-Party?
+- Zufrieden mit WebStorm IDE?
+- Web-Tests?
+- Schon berührung mit neueren Frameworks wie Solid und Svelte?

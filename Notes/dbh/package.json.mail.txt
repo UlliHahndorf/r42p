@@ -1,0 +1,38 @@
+Im Anhang findet ihr unsere aktuelle package.json (Stand 08.03.2023)
+
+Einige Anmerkungen / Empfehlungen / Hinweise zu anderen Libraries die wir im Laufe der Entwicklung ebenfalls prototypisch evaluiert hatten oder aus persönlichem Umfeld kommen:
+
+UI Komponentenbibliotheken:
+                - Material UI (wird im Moment intern benutzt)
+                - Chakra UI (benutzte ich im persönlichem Umfeld)
+                - AntD (wurde beim Umstieg auf Material UI prototypisch evaluiert aber verworfen)
+                - PrimeReact (hatten wir am Anfang, wurde jedoch durch Material UI ersetzt)
+
+State-Verwaltung in React:
+                - Redux (Enorm weit verbreitet)
+                - Zustand (benutze ich im persönlichem Umfeld)
+                - MobX (ebenfalls hohe Verbreitung)
+                - Jotai
+                - Eigene State-Verwaltung mit React Context API (useContext)
+
+Build-Tools:
+                - WebPack (wird im Moment intern benutzt)
+                - RollUp (hatten wir am Anfang, wurde jedoch durch WebPack ersetzt)
+                - Vite (Extrem performantes Front-End Tooling, unterstützt RollUp Plugins)
+                - ESBuild (neues Tool, sieht sehr vielversprechend aus)
+                - SWC (neues Tool, sieht ebenfalls sehr vielversprechend aus)
+
+Testing Frameworks:
+                - Jest
+                - React Testing Library (sehr gute Library um wirklich das zu testen, was der User am Ende sieht)
+                - Enzyme (hatten wir vor React Testing Library)
+
+Einige Stichwörter:
+                - Next.JS als Meta Framework (in Kombination mit React)
+                - React Server Components
+                - React Serverside Rendering (SSR)
+
+Falls ihr Fragen zu den Libraries habt die wir in unseren Komponenten benutzen (z.B wofür wird framebus verwendet oder jspdf) könnt ihr mir gerne eine Mail schreiben.
+
+Viele Grüße,
+Ali (A3WEB)
