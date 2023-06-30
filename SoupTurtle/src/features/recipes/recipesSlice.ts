@@ -1,8 +1,9 @@
 import { ActionReducerMapBuilder, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { ActionType, getType } from 'typesafe-actions';
+
 import { RootState } from '../../app/store';
 import { Recipe, CreateRecipe, DefaultRecipe } from '../../shared/types/Recipe';
 import { loadRecipes, removeRecipe, saveRecipe } from '../../api/recipe.api';
-import { ActionType, getType } from 'typesafe-actions';
 import { loadAction, removeAction, saveAction } from './recipes.actions';
 
 type State = null | 'pending' | 'completed' | 'error';
@@ -23,6 +24,7 @@ const initialState: RecipesState = {
 
 export const load = createAsyncThunk('recipes/load',
     async (_obj, { rejectWithValue }) => {
+        console.log("createAsyncThunk load");
         try {
             const recipes = await loadRecipes();
             return recipes;
@@ -59,7 +61,6 @@ export const recipesSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-
         addLoadCase(builder);
         addRemoveCase(builder);
         addSaveCase(builder);
@@ -67,12 +68,12 @@ export const recipesSlice = createSlice({
 });
 
 function addLoadCase(builder: ActionReducerMapBuilder<RecipesState>) {
-    console.log("builderLoad");
     builder
-        .addCase(getType(loadAction.request), (state) => {
-            state.loadState = 'pending';
-        })
-        .addCase(getType(loadAction.success), (state, action: ActionType<typeof loadAction.success>) => {
+    .addCase(getType(loadAction.request), (state) => {
+        state.loadState = 'pending';
+    })
+    .addCase(getType(loadAction.success), (state, action: ActionType<typeof loadAction.success>) => {
+            console.log("case builderLoad success");
             if (action.payload) {
                 state.recipes = action.payload;
             }

@@ -1,7 +1,7 @@
 import { Recipe, CreateRecipe } from '../shared/types/Recipe';
 
 export async function loadRecipes(): Promise<Recipe[]> {
-  console.log("loading");
+  console.log("loading fetch");
   const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/recipes');
   if (!response.ok) {
     throw new Error('Response not OK');

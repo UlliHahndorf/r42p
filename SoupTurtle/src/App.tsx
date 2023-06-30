@@ -4,15 +4,16 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import './shared/i18n';
-import Welcome from './Welcome';
 import NotFound from './shared/components/NotFound';
 import Menu from './shared/components/Menu';
 import Progress from './shared/components/Progress';
 import Feedback from './shared/components/Feedback';
 
+import Welcome from './features/welcome/Welcome';
 import RecipeForm from './features/recipes/form/Form';
 import RecipeEdit from './features/recipes/edit/Edit';
 import RecipesList from './features/recipes/list/List';
+import WeekPlan from './features/weekplan/WeekPlan';
 import './App.css';
 
 const App: React.FC = () => {
@@ -36,6 +37,7 @@ const App: React.FC = () => {
                   <Route path="edit/:id" element={<RecipeEdit />} />
                 </Route>
                 <Route path="/recipes/form" element={<><Menu /><RecipeForm recipe={null} /></>} />
+                <Route path="/weekplan" element={<><Menu /><WeekPlan /></>} />
                 <Route path="*" element={<><Menu /><NotFound /></>} />
               </Routes>
             </BrowserRouter>

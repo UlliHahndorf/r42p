@@ -16,8 +16,6 @@ import MenuItem from './MenuItem';
 import LanguageSwitch from './LanguageSwitch';
 import Icon from './Icon';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -123,7 +121,6 @@ export default function Menu() {
             </IconButton>
             <Typography variant="h6" noWrap component="div">
               <img src='/soup.png' width='20' height='20' /> SoupTurtle
-              {/* <FontAwesomeIcon icon={faChevronLeft} />             */}
             </Typography>
             <LanguageSwitch />
           </Toolbar>
@@ -138,7 +135,7 @@ export default function Menu() {
           <List>
             <MenuItem isOpen={open} labelKey='menu.start' keyAttr='start' targetUrl='/' iconName='Home' />
             <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/recipes/list' iconName='MenuBook' />
-            <MenuItem isOpen={open} labelKey='menu.week' keyAttr='week' targetUrl='/week/overview' iconName='RestaurantMenu' />
+            <MenuItem isOpen={open} labelKey='menu.week' keyAttr='week' targetUrl='/weekplan' iconName='RestaurantMenu' />
           </List>
           <Divider />
         </Drawer>

@@ -31,8 +31,8 @@ const List: React.FC = () => {
   const recipes = useSelector(selectRecipes);
 
   useEffect(() => {
+    console.log("dispatch loadAction request");
     dispatch(loadAction.request());
-    console.log("foo");
   }, []);
 
   async function handleDelete(id: number): Promise<void> {
@@ -41,7 +41,7 @@ const List: React.FC = () => {
 
   let content = <Feedback text={t('recipes.nohits')} level='info' />;
   
-  console.log(loadState);
+  console.log("loadstate is", loadState);
 
   switch (loadState) {
     case 'pending':
@@ -50,7 +50,7 @@ const List: React.FC = () => {
       return <Feedback text={t('main.any_error')} level='error' />
     case 'completed':
 
-      console.log(recipes.length);
+      console.log("RecipesLength:", recipes.length);
       if (!recipes || recipes.length === 0) {
         return <Feedback text={t('recipes.nohits')} level='warning' />
       }
@@ -120,7 +120,7 @@ const List: React.FC = () => {
           </TableContainer>
         </>
       );       
-    } // switch
+  } // switch
 
     return (
       <div className="listContainer">
