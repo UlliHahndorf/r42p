@@ -1,3 +1,0 @@
-https://2022.stateofjs.com/de-DE/libraries/front-end-frameworks/
-https://xperti.io/blogs/best-react-ui-framework/
-https://dev.to/plazarev/overview-of-commercial-and-open-source-ui-components-for-react-381f
