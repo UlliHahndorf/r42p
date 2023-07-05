@@ -1,10 +1,8 @@
 import { ActionReducerMapBuilder, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ActionType, getType } from 'typesafe-actions';
 
 import { RootState } from '../../app/store';
 import { Recipe, CreateRecipe, DefaultRecipe } from '../../shared/types/Recipe';
 import { loadRecipes, removeRecipe, saveRecipe } from '../../api/recipe.api';
-import { loadAction, removeAction, saveAction } from './recipes.actions';
 
 type State = null | 'pending' | 'completed' | 'error';
 
@@ -24,7 +22,6 @@ const initialState: RecipesState = {
 
 export const load = createAsyncThunk('recipes/load',
     async (_obj, { rejectWithValue }) => {
-        console.log("createAsyncThunk load");
         try {
             const recipes = await loadRecipes();
             return recipes;
@@ -61,65 +58,62 @@ export const recipesSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        addLoadCase(builder);
-        addRemoveCase(builder);
-        addSaveCase(builder);
+        addLoadCases(builder);
+        addRemoveCases(builder);
+        addSaveCases(builder);
     },
 });
 
-function addLoadCase(builder: ActionReducerMapBuilder<RecipesState>) {
+function addLoadCases(builder: ActionReducerMapBuilder<RecipesState>) {
     builder
-    .addCase(getType(loadAction.request), (state) => {
-        state.loadState = 'pending';
-    })
-    .addCase(getType(loadAction.success), (state, action: ActionType<typeof loadAction.success>) => {
-            console.log("case builderLoad success");
+        .addCase(load.pending, (state) => {
+            state.loadState = 'pending';
+        })
+        .addCase(load.fulfilled, (state, action) => {
             if (action.payload) {
                 state.recipes = action.payload;
             }
             state.loadState = 'completed';
-        }
-        )
-        .addCase(getType(loadAction.failure), (state) => {
+        })
+        .addCase(load.rejected, (state) => {
             state.loadState = 'error';
         });
 }
-function addSaveCase(builder: ActionReducerMapBuilder<RecipesState>) {
+
+function addSaveCases(builder: ActionReducerMapBuilder<RecipesState>) {
     builder
-        .addCase(getType(saveAction.request), (state) => {
+        .addCase(save.pending, (state) => {
             state.saveState = 'pending';
         })
-        .addCase(
-            getType(saveAction.success), (state, action: ActionType<typeof saveAction.success>) => {
-                if (action.payload.id) {
-                    const index = state.recipes.findIndex(
-                        (recipe) => recipe.id === action.payload.id
-                    );
-                    state.recipes[index] = action.payload as Recipe;
-                } else {
-                    state.recipes.push(action.payload);
-                }
-                state.saveState = 'completed';
+        .addCase(save.fulfilled, (state, action) => {
+            if (action.payload.id) {
+                const index = state.recipes.findIndex(
+                    (recipe) => recipe.id === action.payload.id
+                );
+                state.recipes[index] = action.payload as Recipe;
+            } else {
+                state.recipes.push(action.payload);
             }
-        )
-        .addCase(getType(saveAction.failure), (state) => {
+            state.saveState = 'completed';
+        })
+        .addCase(save.rejected, (state) => {
             state.saveState = 'error';
         });
 }
 
-function addRemoveCase(builder: ActionReducerMapBuilder<RecipesState>) {
+function addRemoveCases(builder: ActionReducerMapBuilder<RecipesState>) {
     builder
-        .addCase(getType(removeAction.request), (state) => {
+        .addCase(remove.pending, (state) => {
             state.removeState = 'pending';
         })
-        .addCase(getType(removeAction.success), (state, action: ActionType<typeof removeAction.success>) => {
+        .addCase(remove.fulfilled, (state, action) => {
             const index = state.recipes.findIndex(
                 (recipe) => recipe.id === action.payload
             );
             state.recipes.splice(index, 1);
             state.removeState = 'completed';
         })
-        .addCase(getType(removeAction.failure), (state) => {
+        .addCase(remove.rejected, (state) => {
             state.removeState = 'error';
         });
 }

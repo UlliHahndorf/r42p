@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, InputAdornment, TextField } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
+import { useAppDispatch } from '../../../app/hooks';
 import { Recipe, CreateRecipe, DefaultRecipe } from '../../../shared/types/Recipe';
-import { saveAction } from '../recipes.actions';
+import { save } from '../recipesSlice';
 
 import './Form.scss';
 
@@ -28,7 +28,7 @@ type Props = {
 };
 
 const Form: React.FC<Props> = ({ recipe }) => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const {
         register,
@@ -49,7 +49,7 @@ const Form: React.FC<Props> = ({ recipe }) => {
     }, [recipe]);
 
     async function onSubmit(recipe: CreateRecipe): Promise<void> {
-        dispatch(saveAction.request(recipe));
+        dispatch(save(recipe));
         reset(defaultValues);
         navigate('/recipes/list');
     }

@@ -2,7 +2,8 @@
     "main": {
         "title": "Willkommen bei SoupTurtle",
         "loading": "Lade",
-        "any_error": "Es ist ein Fehler aufgetreten"
+        "any_error": "Es ist ein Fehler aufgetreten",
+        "success": "Erfolgreich"
     },
     "menu": {
         "start": "Willkommen",
@@ -19,7 +20,7 @@
         "cancel": "Abbruch",
         "delete": "Löschen",
         "orderLabel": "Sortierung",
-        "orderName": "Name",
+        "orderTitle": "Titel",
         "orderPrice": "Preis",
         "list": {
             "title": "Titel",

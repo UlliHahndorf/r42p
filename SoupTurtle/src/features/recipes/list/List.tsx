@@ -4,9 +4,10 @@ import { Fab, FormControl, InputLabel, MenuItem, Select, Table, TableBody, Table
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { selectRecipes, selectLoadState, selectRemoveState} from '../recipesSlice';
+import { load, remove, selectRecipes, selectLoadState, selectRemoveState } from '../recipesSlice';
 import { useAppDispatch } from '../../../app/hooks';
-import { loadAction, removeAction } from '../recipes.actions';
+// import cl from '../../../shared/funcs'
+//import { Recipe } from '../../../shared/types/Recipe';
 
 import Icon from '../../../shared/components/Icon';
 import Progress from '../../../shared/components/Progress';
@@ -17,7 +18,7 @@ import useFilter from './useFilter';
 import useOrder from './useOrder';
 import './List.scss';
 
-//import ConfirmDialog from '../shared/components/ConfirmDialog';
+// import ConfirmDialog from '../../../shared/components/ConfirmDialog';
 
 const List: React.FC = () => {
   const { filter, handleFilterChange} = useFilter();
@@ -31,18 +32,25 @@ const List: React.FC = () => {
   const recipes = useSelector(selectRecipes);
 
   useEffect(() => {
-    console.log("dispatch loadAction request");
-    dispatch(loadAction.request());
+    console.log("dispatch load request");
+    dispatch(load());
   }, []);
 
   async function handleDelete(id: number): Promise<void> {
-    dispatch(removeAction.request(id));
+    if (confirm(t('recipes.delete') + '?')) {
+      dispatch(remove(id));
+    }
+    //<ConfirmDialog title='foo' open={true} children='bar' setOpen='' onConfirm={doDelete(id)} />
+    {/* Are you sure?
+    <button onClick={closeConfirmationModal}>No</button>
+    <button onClick={handleSubmit}>Yes</button> */}
+    // </ConfirmDialog>
+    
   }
+
 
   let content = <Feedback text={t('recipes.nohits')} level='info' />;
   
-  console.log("loadstate is", loadState);
-
   switch (loadState) {
     case 'pending':
       return <Progress />;
@@ -50,18 +58,21 @@ const List: React.FC = () => {
       return <Feedback text={t('main.any_error')} level='error' />
     case 'completed':
 
-      console.log("RecipesLength:", recipes.length);
       if (!recipes || recipes.length === 0) {
         return <Feedback text={t('recipes.nohits')} level='warning' />
       }
+      console.log("RecipesLength:", recipes.length);
+
       // Order
-      var orderField = 'Name';
+      var orderField = 'Title';
       if (orderValue !== "") orderField = orderValue;
-      if (orderField === 'Name') {
-        recipes.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
-      } else {
-        recipes.sort((a, b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
-      }
+      // ToDo fix order
+      // if (orderField === 'Title') {
+      //   recipes.sort((a: Recipe, b: Recipe) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+      //   recipes.sort(compare);
+      // } else {
+      //   recipes.sort((a: Recipe, b: Recipe) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
+      // }
 
       // Filter
       const filteredBooks = recipes
@@ -72,11 +83,13 @@ const List: React.FC = () => {
         .map((recipe) => (
           <ListItem key={recipe.id} recipe={recipe} onDelete={handleDelete} />
         ));
-
+      
       content = (
         <>
+          {/* TODO Resources */}
           {removeState === 'pending' && <Progress text='Datensatz wird gelöscht' />}
           {removeState === 'error' && <Feedback text={t('main.any_error')} level='error' />}
+          {removeState === 'completed' && <Feedback text={t('main.success')} level='success' />}
 
           <div className="filterContainer">
             <span className='title'>{t('recipes.title')}</span>
@@ -85,8 +98,8 @@ const List: React.FC = () => {
             </FormControl>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="orderSelectLabel">{t('recipes.orderLabel')}</InputLabel>
-              <Select labelId="orderSelectLabel" value={orderField} defaultValue={'Name'} onChange={handleOrderChange} >
-                <MenuItem value='Name'>{t('recipes.orderName')}</MenuItem>
+              <Select labelId="orderSelectLabel" value={orderField} defaultValue={'Title'} onChange={handleOrderChange} >
+                <MenuItem value='Title'>{t('recipes.orderTitle')}</MenuItem>
                 <MenuItem value='Price'>{t('recipes.orderPrice')}</MenuItem>
               </Select>
             </FormControl>

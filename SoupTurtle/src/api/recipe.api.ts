@@ -2,7 +2,7 @@ import { Recipe, CreateRecipe } from '../shared/types/Recipe';
 
 export async function loadRecipes(): Promise<Recipe[]> {
   console.log("loading fetch");
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/recipes');
+  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/recipes/');
   if (!response.ok) {
     throw new Error('Response not OK');
   }
@@ -19,6 +19,7 @@ export async function removeRecipe(id: number): Promise<void> {
     throw new Error('Response not OK');
   }
 }
+
 export async function saveRecipe(recipe: CreateRecipe): Promise<Recipe> {
   let url = `${import.meta.env.VITE_BACKEND_URL}/recipes`;
   let method = 'POST';

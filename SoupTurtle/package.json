@@ -40,7 +40,6 @@
     "react-router-dom": "^6.14.0",
     "redux-thunk": "^2.4.2",
     "sass": "^1.63.6",
-    "typesafe-actions": "^5.1.0",
     "yup": "^1.2.0"
   },
   "devDependencies": {
