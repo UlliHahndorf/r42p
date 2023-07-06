@@ -13,5 +13,20 @@
 + Feedback-Panel
 - ConfirmDialog
 - Feedback automatisch verschwinden lassen
+- VS statt VS-Code, alles erstmal unter win
 
 
+Patterns verinnerlichen:
+
+- Await/Async
+- Promise
+- ...
+
+Typescript
+
+VS-Code
+- Gitlens
+
+Fragen:
+
+- Icons: Refactoring
