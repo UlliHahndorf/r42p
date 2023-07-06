@@ -24,9 +24,11 @@ const Edit: React.FC = () => {
     }
   }, [id]);
 
+  var title = (recipe === null ? t('recipes.dialog_title_create') : t('recipes.dialog_title_change'));
+
   return (
     <Dialog open={true} onClose={() => navigate('/recipes/list')} fullWidth maxWidth="sm">
-      <DialogTitle>{t('recipes.dialog_title')}</DialogTitle>
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <Form recipe={recipe} />
       </DialogContent>

@@ -3,7 +3,8 @@
         "title": "Willkommen bei SoupTurtle",
         "loading": "Lade",
         "any_error": "Es ist ein Fehler aufgetreten",
-        "success": "Erfolgreich"
+        "success": "Erfolgreich",
+        "processing": "Wird ausgeführt"
     },
     "menu": {
         "start": "Willkommen",
@@ -13,10 +14,11 @@
     "recipes": {
         "new": "Neu",
         "title": "Rezepte",
-        "dialog_title": "Rezept bearbeiten",
+        "dialog_title_create": "Rezept anlegen",
+        "dialog_title_change": "Rezept ändern",
         "nohits": "keine gefunden",
-        "change": "Ändern",
         "create": "Anlegen",
+        "change": "Ändern",
         "cancel": "Abbruch",
         "delete": "Löschen",
         "orderLabel": "Sortierung",

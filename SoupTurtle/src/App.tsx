@@ -10,7 +10,7 @@ import Progress from './shared/components/Progress';
 import Feedback from './shared/components/Feedback';
 
 import Welcome from './features/welcome/Welcome';
-import RecipeForm from './features/recipes/form/Form';
+//import RecipeForm from './features/recipes/form/Form';
 import RecipeEdit from './features/recipes/edit/Edit';
 import RecipesList from './features/recipes/list/List';
 import WeekPlan from './features/weekplan/WeekPlan';
@@ -31,14 +31,15 @@ const App: React.FC = () => {
         <Suspense fallback={<Progress />}>
           <ErrorBoundary FallbackComponent={({ error }) => <Feedback text={error.message} level='error' />}>
             <BrowserRouter>
+            <Menu />
               <Routes>
-                <Route path="/" element={<><Menu /><Welcome /></>} />
-                <Route path="/recipes/list" element={<><Menu /><RecipesList /></>}>
+                <Route path="/" element={<Welcome />} />
+                <Route path="/recipes/list" element={<RecipesList />}>
                   <Route path="edit/:id" element={<RecipeEdit />} />
+                  <Route path="new" element={<RecipeEdit />} />
                 </Route>
-                <Route path="/recipes/form" element={<><Menu /><RecipeForm recipe={null} /></>} />
-                <Route path="/weekplan" element={<><Menu /><WeekPlan /></>} />
-                <Route path="*" element={<><Menu /><NotFound /></>} />
+                <Route path="/weekplan" element={<WeekPlan />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
           </ErrorBoundary>

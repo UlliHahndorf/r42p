@@ -4,10 +4,10 @@ import { Fab, FormControl, InputLabel, MenuItem, Select, Table, TableBody, Table
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { load, remove, selectRecipes, selectLoadState, selectRemoveState } from '../recipesSlice';
+import { load, remove, selectRecipes, selectLoadState, selectSaveState, selectRemoveState } from '../recipesSlice';
 import { useAppDispatch } from '../../../app/hooks';
-// import cl from '../../../shared/funcs'
-//import { Recipe } from '../../../shared/types/Recipe';
+//import cl from '../../../shared/funcs'
+import { Recipe } from '../../../shared/types/Recipe';
 
 import Icon from '../../../shared/components/Icon';
 import Progress from '../../../shared/components/Progress';
@@ -21,10 +21,11 @@ import './List.scss';
 // import ConfirmDialog from '../../../shared/components/ConfirmDialog';
 
 const List: React.FC = () => {
-  const { filter, handleFilterChange} = useFilter();
-  const { orderValue, handleOrderChange} = useOrder();
+  const { filter, handleFilterChange } = useFilter();
+  const { orderValue, handleOrderChange } = useOrder();
   const dispatch = useAppDispatch();
   const loadState = useSelector(selectLoadState);
+  const saveState = useSelector(selectSaveState);
   const removeState = useSelector(selectRemoveState);
 
   const { t } = useTranslation();
@@ -32,7 +33,6 @@ const List: React.FC = () => {
   const recipes = useSelector(selectRecipes);
 
   useEffect(() => {
-    console.log("dispatch load request");
     dispatch(load());
   }, []);
 
@@ -45,12 +45,11 @@ const List: React.FC = () => {
     <button onClick={closeConfirmationModal}>No</button>
     <button onClick={handleSubmit}>Yes</button> */}
     // </ConfirmDialog>
-    
+
   }
 
-
   let content = <Feedback text={t('recipes.nohits')} level='info' />;
-  
+
   switch (loadState) {
     case 'pending':
       return <Progress />;
@@ -61,21 +60,19 @@ const List: React.FC = () => {
       if (!recipes || recipes.length === 0) {
         return <Feedback text={t('recipes.nohits')} level='warning' />
       }
-      console.log("RecipesLength:", recipes.length);
 
       // Order
       var orderField = 'Title';
       if (orderValue !== "") orderField = orderValue;
-      // ToDo fix order
-      // if (orderField === 'Title') {
-      //   recipes.sort((a: Recipe, b: Recipe) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
-      //   recipes.sort(compare);
-      // } else {
-      //   recipes.sort((a: Recipe, b: Recipe) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
-      // }
+      var sortedRecipes = [...recipes];
+      if (orderField === 'Title') {
+        sortedRecipes.sort((a: Recipe, b: Recipe) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+      } else {
+        sortedRecipes.sort((a: Recipe, b: Recipe) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
+      }
 
       // Filter
-      const filteredBooks = recipes
+      const filteredRecipes = sortedRecipes
         .filter((recipe) =>
           recipe.title.toLowerCase().includes(filter.toLowerCase()) ||
           recipe.ingredients.toLowerCase().includes(filter.toLowerCase())
@@ -83,20 +80,19 @@ const List: React.FC = () => {
         .map((recipe) => (
           <ListItem key={recipe.id} recipe={recipe} onDelete={handleDelete} />
         ));
-      
+
       content = (
         <>
-          {/* TODO Resources */}
-          {removeState === 'pending' && <Progress text='Datensatz wird gelöscht' />}
-          {removeState === 'error' && <Feedback text={t('main.any_error')} level='error' />}
-          {removeState === 'completed' && <Feedback text={t('main.success')} level='success' />}
+          {(removeState === 'pending' || saveState === 'pending') && <Progress text={t('main.processing')} />}
+          {(removeState === 'error' || saveState === 'error') && <Feedback text={t('main.any_error')} level='error' />}
+          {(removeState === 'completed' || saveState === 'completed') && <Feedback text={t('main.success')} level='success' />}
 
           <div className="filterContainer">
             <span className='title'>{t('recipes.title')}</span>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <TextField  label="Filter" variant="standard" value={filter} onChange={handleFilterChange} />
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+              <TextField label="Filter" value={filter} onChange={handleFilterChange} />
             </FormControl>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="orderSelectLabel">{t('recipes.orderLabel')}</InputLabel>
               <Select labelId="orderSelectLabel" value={orderField} defaultValue={'Title'} onChange={handleOrderChange} >
                 <MenuItem value='Title'>{t('recipes.orderTitle')}</MenuItem>
@@ -108,7 +104,7 @@ const List: React.FC = () => {
             <Table sx={{ minWidth: 650 }} aria-label="simple recipes overview table" stickyHeader={true} >
               <TableHead>
                 <TableRow className='firstHeader'>
-                  <TableCell colSpan={4}>{t('recipes.list.filterResults', { count: filteredBooks.length })}</TableCell>
+                  <TableCell colSpan={4}>{t('recipes.list.filterResults', { count: filteredRecipes.length })}</TableCell>
                 </TableRow>
               </TableHead>
               <TableHead>
@@ -121,8 +117,8 @@ const List: React.FC = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filteredBooks.length > 0 ? (
-                  filteredBooks
+                {filteredRecipes.length > 0 ? (
+                  filteredRecipes
                 ) : (
                   <TableRow>
                     <TableCell colSpan={4}>{t('recipes.nohits')}</TableCell>
@@ -132,20 +128,20 @@ const List: React.FC = () => {
             </Table>
           </TableContainer>
         </>
-      );       
+      );
   } // switch
 
-    return (
-      <div className="listContainer">
-        {content}
-        <Tooltip title={t('recipes.new')}>
-        <Fab color="primary" aria-label={t('recipes.new')} className="fab" component={Link} to="/recipies/edit">
+  return (
+    <div className="listContainer">
+      {content}
+      <Tooltip title={t('recipes.new')}>
+        <Fab color="primary" aria-label={t('recipes.new')} className="fab" component={Link} to="/recipes/list/new">
           <Icon iconName='New' />
         </Fab>
-        </Tooltip>
-        <Outlet></Outlet>
-      </div>
-    );
+      </Tooltip>
+      <Outlet></Outlet>
+    </div>
+  );
 };
 
 export default List;
