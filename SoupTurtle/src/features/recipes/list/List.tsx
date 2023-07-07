@@ -66,10 +66,16 @@ const List: React.FC = () => {
       var orderField = 'Title';
       if (orderValue !== "") orderField = orderValue;
       var sortedRecipes = [...recipes];
-      if (orderField === 'Title') {
-        sortedRecipes.sort((a: Recipe, b: Recipe) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
-      } else {
-        sortedRecipes.sort((a: Recipe, b: Recipe) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
+      switch (orderField) {
+        case 'Title':
+          sortedRecipes.sort((a: Recipe, b: Recipe) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+          break;
+        case 'Price':
+          sortedRecipes.sort((a: Recipe, b: Recipe) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
+          break;   
+        case 'LastMod':
+          sortedRecipes.sort((a: Recipe, b: Recipe) => (a.dateModified > b.dateModified) ? 1 : ((b.dateModified > a.dateModified) ? -1 : 0));
+          break;   
       }
 
       // Filter
@@ -96,8 +102,9 @@ const List: React.FC = () => {
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="orderSelectLabel" sx={{ bgcolor: "#fff" }}>{t('recipes.orderLabel')}</InputLabel>
               <Select labelId="orderSelectLabel" value={orderField} defaultValue={'Title'} onChange={handleOrderChange} >
-                <MenuItem value='Title'>{t('recipes.orderTitle')}</MenuItem>
-                <MenuItem value='Price'>{t('recipes.orderPrice')}</MenuItem>
+                <MenuItem value='Title'>{t('recipes.list.title')}</MenuItem>
+                <MenuItem value='Price'>{t('recipes.list.price')}</MenuItem>
+                <MenuItem value='LastMod'>{t('recipes.list.dateModified')}</MenuItem>
               </Select>
             </FormControl>
           </div>

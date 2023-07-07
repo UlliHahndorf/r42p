@@ -21,7 +21,15 @@ const ListItem: React.FC<Props> = ({ recipe, onDelete }) => {
       <TableCell><b>{recipe.title}</b></TableCell>
       <TableCell>{recipe.ingredients}</TableCell>
       <TableCell>{renderHTML(recipe.instructions.replace(/\n/g,"<br />"))}</TableCell>
+      <TableCell>{recipe.numberServings}</TableCell>
+      <TableCell>{recipe.quantities}</TableCell>
+      <TableCell>{new Date(recipe.dateCreated).toLocaleDateString("de-DE")}</TableCell>
+      <TableCell>{new Date(recipe.dateModified).toLocaleDateString("de-DE")}</TableCell>
+      <TableCell>{recipe.category}</TableCell>
+      <TableCell>{recipe.notes}</TableCell>
+      <TableCell>{recipe.description}</TableCell>
       <TableCell>{t('recipes.listItem.price', { price: recipe.price })}</TableCell>
+      <TableCell>{recipe.source + (recipe.sourcePage !== "" ? " / " + recipe.sourcePage : "")}</TableCell>
       <TableCell>
         <Tooltip title={t('recipes.change')}>
           <Button variant="text" component={Link} to={`edit/${recipe.id}`} >
