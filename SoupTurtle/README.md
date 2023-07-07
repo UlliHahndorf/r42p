@@ -4,7 +4,6 @@
 + Menu mit Links
 + QueryClient und ungenutzte Files raus?
 - CRUD
-  - Refresh list after update
   + Add auch in Form-Layer
   - Reload Liste nach Create funktioniert nicht
 - Mehr Spalten
@@ -18,17 +17,17 @@
 
 
 - VS statt VS-Code, alles erstmal unter win
+
 Patterns verinnerlichen:
 
 - Await/Async
 - Promise
-- ...
 
 Typescript
++ ...
 
 VS-Code
 - Gitlens
 
 Fragen:
-
-- Icons: Refactoring
+- Icons: Reflection

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { Fab, FormControl, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip } from '@mui/material';
+import { Fab, FormControl, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -13,6 +13,7 @@ import Icon from '../../../shared/components/Icon';
 import Progress from '../../../shared/components/Progress';
 import Feedback from '../../../shared/components/Feedback';
 
+import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import useFilter from './useFilter';
 import useOrder from './useOrder';
@@ -61,7 +62,7 @@ const List: React.FC = () => {
         return <Feedback text={t('recipes.nohits')} level='warning' />
       }
 
-      // Order
+      // Sort
       var orderField = 'Title';
       if (orderValue !== "") orderField = orderValue;
       var sortedRecipes = [...recipes];
@@ -93,7 +94,7 @@ const List: React.FC = () => {
               <TextField label="Filter" value={filter} onChange={handleFilterChange} />
             </FormControl>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="orderSelectLabel">{t('recipes.orderLabel')}</InputLabel>
+              <InputLabel id="orderSelectLabel" sx={{ bgcolor: "#fff" }}>{t('recipes.orderLabel')}</InputLabel>
               <Select labelId="orderSelectLabel" value={orderField} defaultValue={'Title'} onChange={handleOrderChange} >
                 <MenuItem value='Title'>{t('recipes.orderTitle')}</MenuItem>
                 <MenuItem value='Price'>{t('recipes.orderPrice')}</MenuItem>
@@ -102,20 +103,7 @@ const List: React.FC = () => {
           </div>
           <TableContainer>
             <Table sx={{ minWidth: 650 }} aria-label="simple recipes overview table" stickyHeader={true} >
-              <TableHead>
-                <TableRow className='firstHeader'>
-                  <TableCell colSpan={4}>{t('recipes.list.filterResults', { count: filteredRecipes.length })}</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableHead>
-                <TableRow>
-                  <TableCell>{t('recipes.list.title')}</TableCell>
-                  <TableCell>{t('recipes.list.ingredients')}</TableCell>
-                  <TableCell>{t('recipes.list.instructions')}</TableCell>
-                  <TableCell>{t('recipes.list.price')}</TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableHead>
+              <ListHeader recipesCount={filteredRecipes.length} />
               <TableBody>
                 {filteredRecipes.length > 0 ? (
                   filteredRecipes
