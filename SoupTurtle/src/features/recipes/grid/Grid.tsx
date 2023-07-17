@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DataGrid, { Column, ColumnChooser, ColumnFixing, FilterRow, Paging, RemoteOperations, Scrolling } from 'devextreme-react/data-grid';
+import DataGrid, { Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Paging, RemoteOperations, Scrolling } from 'devextreme-react/data-grid';
 import { useTranslation } from 'react-i18next';
 // import { createStore } from 'devextreme-aspnet-data-nojquery';
 
@@ -33,7 +33,7 @@ const Grid: React.FC = () => {
 
     const { t } = useTranslation();
     
-    function ColumnDateCreated(rowData) {
+    function ColumnDateCreated(rowData: { dateCreated: { toLocaleString: () => string; }; }) {
         return rowData.dateCreated.toLocaleString() + "foo";
         //return new Date(cellInfo).toLocaleString();
     }
@@ -46,17 +46,19 @@ const Grid: React.FC = () => {
             <DataGrid id="dataGrid"
                 dataSource={serviceUrl + "/recipes"}
                 allowColumnResizing={true}
-                columnResizingMode="widget"
                 allowColumnReordering={true}
+                columnResizingMode="widget"
                 columnAutoWidth={true}
                 wordWrapEnabled={true}
+                showBorders={true}
+		        showColumnLines={true}
+		        showRowLines={true}
             >
                 <FilterRow visible={true} />
                 <ColumnFixing enabled={true} />
-                <ColumnChooser
-                    enabled={true}
-                    mode="dragAndDrop"
-                />
+                <ColumnChooser enabled={true} mode="dragAndDrop" />
+                <GroupPanel visible={true} />
+                <HeaderFilter visible={true} />
                 <Paging enabled={false} />
                 <Scrolling mode="standard" />
                 <Column dataField="title" fixed={true} fixedPosition="left" caption={t('recipes.list.title')} />

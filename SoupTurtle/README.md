@@ -8,7 +8,11 @@
   - Reload Liste nach Create funktioniert nicht
 + Mehr Spalten
 - FontAwesome
-- DevExtreme
++ DevExtreme
+  - localization übergeben
+  - Höhe/Scrollbar
+  - fixed columns
+  - Dateformats
 + Menü nur 1x laden
 + Feedback-Panel
 + ConfirmDialog
