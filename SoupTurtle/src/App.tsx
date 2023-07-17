@@ -10,11 +10,13 @@ import Progress from './shared/components/Progress';
 import Feedback from './shared/components/Feedback';
 
 import Welcome from './features/welcome/Welcome';
-//import RecipeForm from './features/recipes/form/Form';
 import RecipeEdit from './features/recipes/edit/Edit';
 import RecipesList from './features/recipes/list/List';
+import RecipesGrid from './features/recipes/grid/Grid';
 import WeekPlan from './features/weekplan/WeekPlan';
 import './App.css';
+
+import 'devextreme/dist/css/dx.light.css';
 
 const App: React.FC = () => {
 
@@ -34,6 +36,7 @@ const App: React.FC = () => {
             <Menu />
               <Routes>
                 <Route path="/" element={<Welcome />} />
+                <Route path="/recipes/grid" element={<RecipesGrid />} />
                 <Route path="/recipes/list" element={<RecipesList />}>
                   <Route path="edit/:id" element={<RecipeEdit />} />
                   <Route path="new" element={<RecipeEdit />} />
