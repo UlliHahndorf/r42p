@@ -4,7 +4,9 @@
         "loading": "Lade",
         "any_error": "Es ist ein Fehler aufgetreten",
         "success": "Erfolgreich",
-        "processing": "Wird ausgeführt"
+        "processing": "Wird ausgeführt",
+        "confirmOk": "Ok",
+        "confirmCancel": "Abbruch"
     },
     "menu": {
         "start": "Willkommen",
@@ -21,6 +23,7 @@
         "change": "Ändern",
         "cancel": "Abbruch",
         "delete": "Löschen",
+        "deleteQuery": "Wirklich löschen?",
         "orderLabel": "Sortierung",
         "list": {
             "title": "Titel",

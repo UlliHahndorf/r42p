@@ -6,12 +6,13 @@
 - CRUD
   + Add auch in Form-Layer
   - Reload Liste nach Create funktioniert nicht
-- Mehr Spalten
++ Mehr Spalten
 - FontAwesome
 - DevExtreme
 + Menü nur 1x laden
 + Feedback-Panel
-- ConfirmDialog
++ ConfirmDialog
+  - Slow
 - Feedback automatisch verschwinden lassen
 - Menu aufgeklappt und link sollte wieder zuklappen
 

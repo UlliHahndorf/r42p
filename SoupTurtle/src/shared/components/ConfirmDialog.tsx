@@ -4,16 +4,21 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 
+import { useTranslation } from "react-i18next";
+
 type Props = {
     title: string;
-    children: any;
+    message: any;
     open: boolean;
     setOpen: any;
     onConfirm: any;
 };
 
 const ConfirmDialog = (props: Props) => {
-  const { title, children, open, setOpen, onConfirm } = props;
+  const { title, message, open, setOpen, onConfirm } = props;
+
+  const { t } = useTranslation();
+
   return (
     <Dialog
       open={open}
@@ -21,15 +26,8 @@ const ConfirmDialog = (props: Props) => {
       aria-labelledby="confirm-dialog"
     >
       <DialogTitle id="confirm-dialog">{title}</DialogTitle>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent>{message}</DialogContent>
       <DialogActions>
-        <Button
-          variant="contained"
-          onClick={() => setOpen(false)}
-          color="secondary"
-        >
-          No
-        </Button>
         <Button
           variant="contained"
           onClick={() => {
@@ -37,10 +35,13 @@ const ConfirmDialog = (props: Props) => {
             onConfirm();
           }}
           color="primary"
-        >
-          Yes
-        </Button>
-      </DialogActions>
+        >{t('main.confirmOk')}</Button>
+        <Button
+          variant="contained"
+          onClick={() => setOpen(false)}
+          color="secondary"
+          >{t('main.confirmCancel')}</Button>
+          </DialogActions>
     </Dialog>
   );
 };

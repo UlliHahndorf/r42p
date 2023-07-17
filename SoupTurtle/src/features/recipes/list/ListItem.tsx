@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Recipe } from '../../../shared/types/Recipe';
 import Icon from '../../../shared/components/Icon';
+//import ConfirmDialog from '../../../shared/components/ConfirmDialog';
+
 
 type Props = {
   recipe: Recipe;
@@ -13,14 +15,16 @@ type Props = {
 
 const ListItem: React.FC<Props> = ({ recipe, onDelete }) => {
   const { t } = useTranslation();
-  
+
   const renderHTML = (rawHTML: string) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
+
+//  const [confirmOpen, setConfirmOpen] = React.useState(false);
 
   return (
     <TableRow style={{ verticalAlign: 'top' }}>
       <TableCell><b>{recipe.title}</b></TableCell>
       <TableCell>{recipe.ingredients}</TableCell>
-      <TableCell>{renderHTML(recipe.instructions.replace(/\n/g,"<br />"))}</TableCell>
+      <TableCell>{renderHTML(recipe.instructions.replace(/\n/g, "<br />"))}</TableCell>
       <TableCell>{recipe.numberServings}</TableCell>
       <TableCell>{recipe.quantities}</TableCell>
       <TableCell>{new Date(recipe.dateCreated).toLocaleDateString("de-DE")}</TableCell>

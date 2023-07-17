@@ -4,7 +4,9 @@
         "loading": "Loading",
         "any_error": "An error occured",
         "success": "Erfolgreich",
-        "processing": "Processing"
+        "processing": "Processing",
+        "confirmOk": "Ok",
+        "confirmCancel": "Cancel"
     },
     "menu": {
         "start": "Welcome",
@@ -21,6 +23,7 @@
         "change": "Update",
         "cancel": "Cancel",
         "delete": "Delete",
+        "deleteQuery": "Really delete?",
         "orderLabel": "Order by",
          "list": {
             "title": "Title",

@@ -18,8 +18,9 @@ import ListItem from './ListItem';
 import useFilter from './useFilter';
 import useOrder from './useOrder';
 import './List.scss';
+//import useConfirm from '../../../shared/components/ConfirmDialog';
 
-// import ConfirmDialog from '../../../shared/components/ConfirmDialog';
+import ConfirmDialog from '../../../shared/components/ConfirmDialog';
 
 const List: React.FC = () => {
   const { filter, handleFilterChange } = useFilter();
@@ -28,6 +29,9 @@ const List: React.FC = () => {
   const loadState = useSelector(selectLoadState);
   const saveState = useSelector(selectSaveState);
   const removeState = useSelector(selectRemoveState);
+  
+  const [confirmOpen, setConfirmOpen] = React.useState(false);
+  const [deleteId, setDeleteId] = React.useState(0);
 
   const { t } = useTranslation();
 
@@ -37,16 +41,13 @@ const List: React.FC = () => {
     dispatch(load());
   }, []);
 
-  async function handleDelete(id: number): Promise<void> {
-    if (confirm(t('recipes.delete') + '?')) {
-      dispatch(remove(id));
-    }
-    //<ConfirmDialog title='foo' open={true} children='bar' setOpen='' onConfirm={doDelete(id)} />
-    {/* Are you sure?
-    <button onClick={closeConfirmationModal}>No</button>
-    <button onClick={handleSubmit}>Yes</button> */}
-    // </ConfirmDialog>
+  async function handleDelete(): Promise<void> {
+    dispatch(remove(deleteId));
+  }
 
+  async function confirmDelete(id: number): Promise<void> {
+    setConfirmOpen(true);
+    setDeleteId(id);
   }
 
   let content = <Feedback text={t('recipes.nohits')} level='info' />;
@@ -72,10 +73,10 @@ const List: React.FC = () => {
           break;
         case 'Price':
           sortedRecipes.sort((a: Recipe, b: Recipe) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
-          break;   
+          break;
         case 'LastMod':
           sortedRecipes.sort((a: Recipe, b: Recipe) => (a.dateModified > b.dateModified) ? 1 : ((b.dateModified > a.dateModified) ? -1 : 0));
-          break;   
+          break;
       }
 
       // Filter
@@ -85,7 +86,7 @@ const List: React.FC = () => {
           recipe.ingredients.toLowerCase().includes(filter.toLowerCase())
         )
         .map((recipe) => (
-          <ListItem key={recipe.id} recipe={recipe} onDelete={handleDelete} />
+          <ListItem key={recipe.id} recipe={recipe} onDelete={confirmDelete} />
         ));
 
       content = (
@@ -135,6 +136,14 @@ const List: React.FC = () => {
         </Fab>
       </Tooltip>
       <Outlet></Outlet>
+      <ConfirmDialog 
+        title={t('recipes.delete')}
+        message={t('recipes.deleteQuery')}
+        open={confirmOpen}
+        setOpen={setConfirmOpen}
+        onConfirm={handleDelete}
+      ></ConfirmDialog>
+
     </div>
   );
 };
