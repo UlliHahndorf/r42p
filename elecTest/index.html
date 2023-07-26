@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="index.css" />
+    <title>Siedler-Würfler</title>
+</head>
+
+<body>
+
+    <div id="startArea">
+        <h1>Siedler-Würfler</h1>
+        <div id="info"></div>
+        <button id="btnDigital" class="btn btn-pri">Digital würfeln</button>
+        <button id="btnAnalog" class="btn btn-pri">Analog würfeln</button>
+    </div>
+    <div id="digitalArea">
+        <img src="images/wuerfel.png" id="diceImage1" class="diceImage" alt="Würfel 1">
+        <img src="images/wuerfel.png" id="diceImage2" class="diceImage" alt="Würfel 2">
+    </div>
+    <div id="analogArea">
+        <button id="btnNum2" class="btn btn-num">2</button>
+        <button id="btnNum3" class="btn btn-num">3</button>
+        <button id="btnNum4" class="btn btn-num">4</button>
+        <button id="btnNum5" class="btn btn-num">5</button>
+        <button id="btnNum6" class="btn btn-num">6</button>
+        <button id="btnNum7" class="btn btn-num">7</button>
+        <button id="btnNum8" class="btn btn-num">8</button>
+        <button id="btnNum9" class="btn btn-num">9</button>
+        <button id="btnNum10" class="btn btn-num">10</button>
+        <button id="btnNum11" class="btn btn-num">11</button>
+        <button id="btnNum12" class="btn btn-num">12</button>
+    </div>
+    <div id="statsArea">
+        <h4 id="counter"></h4>
+        <canvas id="historyChart" width="400" height="200"></canvas>
+        <button id="btnReset" class="btn btn-sec">Neu starten</button>
+    </div>
+
+</body>
+<script src="./chart.js"></script>
+<script src="./renderer.js"></script>
+
+</html>

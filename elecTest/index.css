@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+
+}
+
+#digitalArea,
+#analogArea,
+#statsArea {
+    display: none;
+}
+
+img.diceImage {
+    width: 65%;
+}
+
+#diceImage2 {
+    margin-left: 5rem;
+}
+
+button.btn {
+    display: inline-block;
+    font-weight: 400;
+    width: 75%;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: rgba(31, 102, 216, 1);
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+button.btn-pri {
+    font-size: 1.5rem;
+    height: 5rem;
+}
+
+button.btn-sec {
+    font-size: 1rem;
+    height: 3rem;
+}
+
+button.btn-num {
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: hsl(50, 71%, 80%);
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    line-height: 1;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 3rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin: 1rem;
+    cursor: pointer;
+
+}
+
+#btnNum2,
+#btnNum12 {
+    font-size: 1.5rem;
+}
+
+#btnNum3,
+#btnNum11 {
+    font-size: 2rem;
+}
+
+#btnNum4,
+#btnNum10 {
+    font-size: 2.5rem;
+}
+
+#btnNum5,
+#btnNum9 {
+    font-size: 3rem;
+}
+
+#btnNum6,
+#btnNum8 {
+    color: red;
+    font-size: 3.5rem;
+}
+
+#btnNum7 {
+    color: green;
+    font-size: 3.5rem;
+}
+
+.shake {
+    animation: tilt-shaking 0.25s linear infinite;
+}
+
+.shakeNum {
+    animation: horizontal-shaking 0.25s linear infinite;
+}
+
+@keyframes tilt-shaking {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(5deg);
+    }
+
+    50% {
+        transform: rotate(0eg);
+    }
+
+    75% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes horizontal-shaking {
+    0% {
+        transform: translateX(0)
+    }
+
+    25% {
+        transform: translateX(5px)
+    }
+
+    50% {
+        transform: translateX(-5px)
+    }
+
+    75% {
+        transform: translateX(5px)
+    }
+
+    100% {
+        transform: translateX(0)
+    }
+}
