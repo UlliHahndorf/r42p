@@ -12,6 +12,7 @@
   - localization übergeben
   - Höhe/Scrollbar
   - fixed columns
+  + fixed header
   - Dateformats
 + Menü nur 1x laden
 + Feedback-Panel

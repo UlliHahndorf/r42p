@@ -42,7 +42,6 @@ const Grid: React.FC = () => {
         <div id="gridOut" className="dx-viewport borderlessGrid">
             <span className='title'>{t('recipes.title')}</span>
 
-
             <DataGrid id="dataGrid"
                 dataSource={serviceUrl + "/recipes"}
                 allowColumnResizing={true}
@@ -57,6 +56,7 @@ const Grid: React.FC = () => {
                 <FilterRow visible={true} />
                 <ColumnFixing enabled={true} />
                 <ColumnChooser enabled={true} mode="dragAndDrop" />
+                <Scrolling mode="virtual" />
                 <GroupPanel visible={true} />
                 <HeaderFilter visible={true} />
                 <Paging enabled={false} />
