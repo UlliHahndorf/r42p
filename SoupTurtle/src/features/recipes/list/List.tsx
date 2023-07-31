@@ -132,7 +132,7 @@ const List: React.FC = () => {
       {content}
       <Tooltip title={t('recipes.new')}>
         <Fab color="primary" aria-label={t('recipes.new')} className="fab" component={Link} to="/recipes/list/new">
-          <Icon iconName='New' />
+          <Icon iconName='Add' />
         </Fab>
       </Tooltip>
       <Outlet></Outlet>

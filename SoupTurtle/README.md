@@ -10,10 +10,11 @@
 - FontAwesome
 + DevExtreme
   - localization übergeben
-  - Höhe/Scrollbar
+  + Höhe/Scrollbar
   - fixed columns
   + fixed header
   - Dateformats
+  - Api-Calls
 + Menü nur 1x laden
 + Feedback-Panel
 + ConfirmDialog
@@ -41,7 +42,7 @@ VS-Code
 - Gitlens
 
 Fragen:
-- Icons: Reflection
++ Icons: Reflection
 - Frage aus Test-Session-Chat
 
 - 
