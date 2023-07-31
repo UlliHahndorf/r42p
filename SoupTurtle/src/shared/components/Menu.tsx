@@ -117,7 +117,7 @@ export default function Menu() {
                 ...(open && { display: 'none' }),
               }}
             >
-               <Icon iconName='Menu' />
+               <Icon iconName='Bars' />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
               <img src='/soup.png' width='20' height='20' /> SoupTurtle
@@ -133,7 +133,7 @@ export default function Menu() {
           </DrawerHeader>
           <Divider />
           <List>
-            <MenuItem isOpen={open} labelKey='menu.start' keyAttr='start' targetUrl='/' iconName='Home' />
+            <MenuItem isOpen={open} labelKey='menu.start' keyAttr='start' targetUrl='/' iconName='House' />
             <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/recipes/list' iconName='MenuBook' />
             <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/recipes/grid' iconName='MenuBook' />
             <MenuItem isOpen={open} labelKey='menu.week' keyAttr='week' targetUrl='/weekplan' iconName='RestaurantMenu' />
