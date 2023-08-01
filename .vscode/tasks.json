@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "backend",
+			"path": "SoupTurtle",
+			"problemMatcher": [],
+			"label": "npm: backend - SoupTurtle",
+			"detail": "json-server -p 3001 -w data/recipes.json"
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"path": "SoupTurtle",
+			"problemMatcher": [],
+			"label": "npm: dev - SoupTurtle",
+			"detail": "vite"
+		}
+	]
+}

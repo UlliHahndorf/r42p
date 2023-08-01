@@ -37,12 +37,12 @@ const ListItem: React.FC<Props> = ({ recipe, onDelete }) => {
       <TableCell>
         <Tooltip title={t('recipes.change')}>
           <Button variant="text" component={Link} to={`edit/${recipe.id}`} >
-            <Icon iconName='Edit' />
+            <Icon iconName='edit' />
           </Button>
         </Tooltip>
         <Tooltip title={t('recipes.delete')}>
           <Button variant="text" onClick={() => onDelete(recipe.id)} >
-            <Icon iconName='Delete' />
+            <Icon iconName='trash-can' />
           </Button>
         </Tooltip>
       </TableCell>

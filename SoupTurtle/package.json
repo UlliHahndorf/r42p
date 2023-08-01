@@ -20,7 +20,6 @@
     "@fortawesome/pro-light-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@hookform/resolvers": "^3.1.1",
-    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.6",
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.29.17",

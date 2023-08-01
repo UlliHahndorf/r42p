@@ -20,7 +20,6 @@ const MenuItem: React.FC<Props> = ({ isOpen, keyAttr, labelKey, targetUrl, iconN
             <ListItemButton sx={{ minHeight: 48, justifyContent: isOpen ? 'initial' : 'center', px: 2.5, }} selected={iconName === "start" ? true : false}>
                 <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: isOpen ? 3 : 'auto', }}>
                     <Icon iconName={iconName} />
-                    {/* <FontAwesomeIcon icon={icon({name: 'coffee', style: 'light'})} /> */}
                 </ListItemIcon>
                 <ListItemText primary={t(labelKey)} sx={{ opacity: isOpen ? 1 : 0 }} />
             </ListItemButton>

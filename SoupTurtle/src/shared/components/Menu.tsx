@@ -117,10 +117,12 @@ export default function Menu() {
                 ...(open && { display: 'none' }),
               }}
             >
-               <Icon iconName='Bars' />
+              <Icon iconName='bars' />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              <img src='/soup.png' width='20' height='20' /> SoupTurtle
+              <Icon iconName='bowl-hot' />
+              &nbsp;
+              SoupTurtle
             </Typography>
             <LanguageSwitch />
           </Toolbar>
@@ -128,19 +130,19 @@ export default function Menu() {
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <Icon iconName='ChevronRight' /> : <Icon iconName='ChevronLeft' />}
+              {theme.direction === 'rtl' ? <Icon iconName='chevron-right' /> : <Icon iconName='chevron-left' />}
             </IconButton>
           </DrawerHeader>
           <Divider />
           <List>
-            <MenuItem isOpen={open} labelKey='menu.start' keyAttr='start' targetUrl='/' iconName='House' />
-            <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/recipes/list' iconName='MenuBook' />
-            <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/recipes/grid' iconName='MenuBook' />
-            <MenuItem isOpen={open} labelKey='menu.week' keyAttr='week' targetUrl='/weekplan' iconName='RestaurantMenu' />
+            <MenuItem isOpen={open} labelKey='menu.start' keyAttr='start' targetUrl='/' iconName='house' />
+            <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/recipes/list' iconName='book' />
+            <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/recipes/grid' iconName='books' />
+            <MenuItem isOpen={open} labelKey='menu.week' keyAttr='week' targetUrl='/weekplan' iconName='plate-utensils' />
           </List>
           <Divider />
         </Drawer>
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>        
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         </Box>
       </Box>
     </ErrorBoundary>
