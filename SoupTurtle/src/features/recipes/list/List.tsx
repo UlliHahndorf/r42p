@@ -18,7 +18,6 @@ import ListItem from './ListItem';
 import useFilter from './useFilter';
 import useOrder from './useOrder';
 import './List.scss';
-//import useConfirm from '../../../shared/components/ConfirmDialog';
 
 import ConfirmDialog from '../../../shared/components/ConfirmDialog';
 
@@ -96,7 +95,7 @@ const List: React.FC = () => {
           {(removeState === 'completed' || saveState === 'completed') && <Feedback text={t('main.success')} level='success' />}
 
           <div className="filterContainer">
-            <span className='title'>{t('recipes.title')}</span>
+          <Icon iconName='book' size='2x' /> <span className='title'>{t('recipes.title')}</span>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <TextField label="Filter" value={filter} onChange={handleFilterChange} />
             </FormControl>
@@ -132,7 +131,7 @@ const List: React.FC = () => {
       {content}
       <Tooltip title={t('recipes.new')}>
         <Fab color="primary" aria-label={t('recipes.new')} className="fab" component={Link} to="/recipes/list/new">
-          <Icon iconName='plus' />
+          <Icon iconName='plus' size='lg' />
         </Fab>
       </Tooltip>
       <Outlet></Outlet>

@@ -23,6 +23,7 @@ import deMessages from 'devextreme/localization/messages/de.json';
 import enMessages from 'devextreme/localization/messages/en.json';
 import { locale, loadMessages } from "devextreme/localization";
 import i18n from '../../../shared/i18n';
+import Icon from '../../../shared/components/Icon';
 import './Grid.scss'
 
 const Grid: React.FC = () => {
@@ -40,7 +41,7 @@ const Grid: React.FC = () => {
 
     let content = (
         <div id="gridOut" className="dx-viewport borderlessGrid">
-            <span className='title'>{t('recipes.title')}</span>
+            <Icon iconName='books' size='2x' /> <span className='title'>{t('recipes.title')}</span>
 
             <DataGrid id="dataGrid"
                 dataSource={serviceUrl + "/recipes"}
@@ -61,18 +62,20 @@ const Grid: React.FC = () => {
                 <HeaderFilter visible={true} />
                 <Paging enabled={false} />
                 <Scrolling mode="standard" />
-                <Column dataField="title" fixed={true} fixedPosition="left" caption={t('recipes.list.title')} />
-                <Column dataField="ingredients" caption={t('recipes.list.ingredients')} />
-                <Column dataField="instructions" caption={t('recipes.list.instructions')} />
-                <Column dataField="numberServings" caption={t('recipes.list.numberServings')} />
-                <Column dataField="quantities" caption={t('recipes.list.quantities')} />
-                <Column dataField="category" caption={t('recipes.list.category')} />
-                <Column dataField="dateCreated" caption={t('recipes.list.dateCreated')} calculateCellValue={ColumnDateCreated} />
-                <Column dataField="dateModified" caption={t('recipes.list.dateModified')} />
-                <Column dataField="source" caption={t('recipes.list.source')} />
-                <Column dataField="notes" caption={t('recipes.list.notes')} />
-                <Column dataField="description" caption={t('recipes.list.description')} />
-                <Column dataField="price" caption={t('recipes.list.price')} />
+
+                <Column dataField="title"           caption={t('recipes.list.title')} fixed={true} fixedPosition="left" />
+                <Column dataField="ingredients"     caption={t('recipes.list.ingredients')} />
+                <Column dataField="instructions"    caption={t('recipes.list.instructions')} />
+                <Column dataField="numberServings"  caption={t('recipes.list.numberServings')} />
+                <Column dataField="quantities"      caption={t('recipes.list.quantities')} />
+                <Column dataField="category"        caption={t('recipes.list.category')} />
+                <Column dataField="dateCreated"     caption={t('recipes.list.dateCreated')} calculateCellValue={ColumnDateCreated} />
+                <Column dataField="dateModified"    caption={t('recipes.list.dateModified')} />
+                <Column dataField="source"          caption={t('recipes.list.source')} />
+                <Column dataField="notes"           caption={t('recipes.list.notes')} />
+                <Column dataField="description"     caption={t('recipes.list.description')} />
+                <Column dataField="price"           caption={t('recipes.list.price')} />
+                
                 {/* <RemoteOperations groupPaging={true} /> */}
             </DataGrid>
         </div>

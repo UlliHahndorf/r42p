@@ -91,6 +91,21 @@ export default function Menu() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const menuItems = [
+    { labelKey: 'menu.start'   , keyAttr: 'start'       , targetUrl: '/'             , iconName: 'house'          },
+    { labelKey: 'menu.recipes' , keyAttr: 'recipesList' , targetUrl: '/recipes/list' , iconName: 'book'           },
+    { labelKey: 'menu.recipes' , keyAttr: 'recipesGrid' , targetUrl: '/recipes/grid' , iconName: 'books'          },
+    { labelKey: 'menu.week'    , keyAttr: 'week'        , targetUrl: '/weekplan'     , iconName: 'plate-utensils' }
+
+  ];
+
+  const [selectedItem, setSelectedItem] = React.useState('');
+
+  // Callback function to handle the selection
+  const handleMenuItemClick = (keyAttr: React.SetStateAction<string>) => {
+    setSelectedItem(keyAttr);
+  };
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -135,10 +150,15 @@ export default function Menu() {
           </DrawerHeader>
           <Divider />
           <List>
-            <MenuItem isOpen={open} labelKey='menu.start' keyAttr='start' targetUrl='/' iconName='house' />
-            <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/recipes/list' iconName='book' />
-            <MenuItem isOpen={open} labelKey='menu.recipes' keyAttr='recipes' targetUrl='/recipes/grid' iconName='books' />
-            <MenuItem isOpen={open} labelKey='menu.week' keyAttr='week' targetUrl='/weekplan' iconName='plate-utensils' />
+            { menuItems.map((menuItem) => (
+              <MenuItem
+                key={menuItem.keyAttr}
+                isSelected={selectedItem === menuItem.keyAttr}
+                onSelect={() => handleMenuItemClick(menuItem.keyAttr)}
+                isOpen={open}
+                {...menuItem}
+              />
+            ))}
           </List>
           <Divider />
         </Drawer>

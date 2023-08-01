@@ -3,13 +3,14 @@
   /* margin: 0 auto; */
   margin-left: 5rem;
   padding: 2rem; 
-  text-align: center;
+  /* text-align: center; */
 }
 
 .title {
-  font-size:2rem;
+  font-size:1.8rem;
   font-weight:bold;
   margin-right:1rem;
+  margin-left:0.5rem;
 }
 
 .logo {
@@ -48,4 +49,6 @@
   color: #888;
 }
 
-
+.jumbo {
+  margin:2rem;
+}
