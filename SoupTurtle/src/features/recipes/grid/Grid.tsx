@@ -1,8 +1,7 @@
 import React from 'react';
 
-import DataGrid, { Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Paging, RemoteOperations, Scrolling } from 'devextreme-react/data-grid';
+import DataGrid, { Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Paging, Scrolling, Button, Editing } from 'devextreme-react/data-grid';
 import { useTranslation } from 'react-i18next';
-// import { createStore } from 'devextreme-aspnet-data-nojquery';
 
 const serviceUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -41,7 +40,7 @@ const Grid: React.FC = () => {
 
     let content = (
         <div id="gridOut" className="dx-viewport borderlessGrid">
-            <Icon iconName='books' size='2x' /> <span className='title'>{t('recipes.title')}</span>
+            <Icon name='books' size='2x' /> <span className='title'>{t('recipes.title')}</span>
 
             <DataGrid id="dataGrid"
                 dataSource={serviceUrl + "/recipes"}
@@ -55,15 +54,24 @@ const Grid: React.FC = () => {
 		        showRowLines={true}
             >
                 <FilterRow visible={true} />
-                <ColumnFixing enabled={true} />
+                <ColumnFixing enabled={false} />
                 <ColumnChooser enabled={true} mode="dragAndDrop" />
                 <Scrolling mode="virtual" />
                 <GroupPanel visible={true} />
                 <HeaderFilter visible={true} />
                 <Paging enabled={false} />
                 <Scrolling mode="standard" />
+                <Editing 
+                    mode='popup'
+                    allowAdding={true}
+                    allowUpdating={true} 
+                    allowDeleting={true}
+                    confirmDelete={true}
+                    useIcons={false}
+                />
 
-                <Column dataField="title"           caption={t('recipes.list.title')} fixed={true} fixedPosition="left" />
+                <Column dataField="title"           caption={t('recipes.list.title')} />
+                {/* fixed={true} fixedPosition="left" /> */}
                 <Column dataField="ingredients"     caption={t('recipes.list.ingredients')} />
                 <Column dataField="instructions"    caption={t('recipes.list.instructions')} />
                 <Column dataField="numberServings"  caption={t('recipes.list.numberServings')} />
@@ -75,7 +83,10 @@ const Grid: React.FC = () => {
                 <Column dataField="notes"           caption={t('recipes.list.notes')} />
                 <Column dataField="description"     caption={t('recipes.list.description')} />
                 <Column dataField="price"           caption={t('recipes.list.price')} />
-                
+                <Column type="buttons" width={110}>
+                    <Button name="edit" cssClass="click-pri"><Icon name='pen-to-square' size='lg' /></Button>
+                    <Button name="delete" cssClass="click-pri"><Icon name='trash-can' size='lg' /></Button>
+                </Column>
                 {/* <RemoteOperations groupPaging={true} /> */}
             </DataGrid>
         </div>

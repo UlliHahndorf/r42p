@@ -7,9 +7,9 @@ const WeekPlan: React.FC = () => {
 
   let content = (
     <>
-      <Icon iconName='plate-utensils' size='2x' /> <span className='title'>{t('menu.week')}</span>
+      <Icon name='plate-utensils' size='2x' /> <span className='title'>{t('menu.week')}</span>
       <div className='jumbo'>
-          <Icon iconName='gear-complex' size='6x' isAnimSpin={true} />
+          <Icon name='gear-complex' size='6x' isAnimSpin={true} />
       </div>
     </>
   );

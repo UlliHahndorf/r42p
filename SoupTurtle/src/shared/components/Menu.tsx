@@ -132,10 +132,10 @@ export default function Menu() {
                 ...(open && { display: 'none' }),
               }}
             >
-              <Icon iconName='bars' />
+              <Icon name='bars' />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              <Icon iconName='bowl-hot' />
+              <Icon name='bowl-hot' />
               &nbsp;
               SoupTurtle
             </Typography>
@@ -145,7 +145,7 @@ export default function Menu() {
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <Icon iconName='chevron-right' /> : <Icon iconName='chevron-left' />}
+              {theme.direction === 'rtl' ? <Icon name='chevron-right' /> : <Icon name='chevron-left' />}
             </IconButton>
           </DrawerHeader>
           <Divider />

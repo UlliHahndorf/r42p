@@ -1,0 +1,57 @@
+/* Overwrite with FA Icons */
+.dx-header-filter:before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f0b0" !important; /* filter */
+	font-weight: 900; /* solid */
+}
+.dx-header-filter-empty:before, .dx-icon-filter::before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f0b0" !important; /* filter */
+	font-weight: 300; /* light */
+}
+i.dx-icon-filter-operation-default:before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f002" !important; /* magnifying-glass */
+	font-weight: 300; /* light */
+}
+i.dx-icon-export:before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f56e" !important; /* file-export */
+	font-weight: 300; /* light */
+}
+i.dx-icon-xlsxfile:before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f1c3" !important; /* file-excel */
+	font-weight: 300; /* light */
+}
+i.dx-icon-pdffile:before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f1c1" !important; /* file-pdf */
+	font-weight: 300; /* light */
+}
+i.dx-icon-column-chooser:before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f0db" !important; /* table-columns */
+	font-weight: 300; /* light */
+}
+.dx-datagrid-group-opened:before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f107" !important; /* angle-down */
+	font-weight: 300; /* light */
+}
+.dx-datagrid-group-closed:before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f105" !important; /* angle-right */
+	font-weight: 300; /* light */
+}
+.dx-icon-edit-button-save:before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f0c7" !important; /* floppy-disk */
+	font-weight: 300; /* light */
+}
+.dx-datebox-date .dx-dropdowneditor-icon::before,
+.dx-datebox-datetime .dx-dropdowneditor-icon::before {
+	font-family: "Font Awesome 6 Pro" !important;
+	content: "\f783" !important; /* calendar-day */
+	font-weight: 300; /* light */
+}

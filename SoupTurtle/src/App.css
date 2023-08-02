@@ -52,3 +52,8 @@
 .jumbo {
   margin:2rem;
 }
+
+.click-pri {
+  color: #1976d2;
+  cursor:pointer;
+}

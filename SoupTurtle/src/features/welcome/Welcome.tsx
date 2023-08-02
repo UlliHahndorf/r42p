@@ -7,7 +7,7 @@ const Welcome: React.FC = () => {
 
   let content = (
     <>
-      <Icon iconName='house' size='2x' /> <span className='title'>{t('menu.start')}</span>
+      <Icon name='house' size='2x' /> <span className='title'>{t('menu.start')}</span>
     </>
   );
 

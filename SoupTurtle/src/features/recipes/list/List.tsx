@@ -95,7 +95,7 @@ const List: React.FC = () => {
           {(removeState === 'completed' || saveState === 'completed') && <Feedback text={t('main.success')} level='success' />}
 
           <div className="filterContainer">
-          <Icon iconName='book' size='2x' /> <span className='title'>{t('recipes.title')}</span>
+          <Icon name='book' size='2x' /> <span className='title'>{t('recipes.title')}</span>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <TextField label="Filter" value={filter} onChange={handleFilterChange} />
             </FormControl>
@@ -131,7 +131,7 @@ const List: React.FC = () => {
       {content}
       <Tooltip title={t('recipes.new')}>
         <Fab color="primary" aria-label={t('recipes.new')} className="fab" component={Link} to="/recipes/list/new">
-          <Icon iconName='plus' size='lg' />
+          <Icon name='plus' size='lg' />
         </Fab>
       </Tooltip>
       <Outlet></Outlet>

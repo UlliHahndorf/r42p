@@ -27,7 +27,7 @@ const MenuItem: React.FC<Props> = ({ isSelected, isOpen, keyAttr, labelKey, targ
          selected={isSelected}
                 > 
                 <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: isOpen ? 3 : 'auto', }}>
-                    <Icon iconName={iconName} size='2x' isFixedWidth={true} />
+                    <Icon name={iconName} size='2x' isFixedWidth={true} />
                 </ListItemIcon>
                 <ListItemText primary={t(labelKey)} sx={{ opacity: isOpen ? 1 : 0 }} />
             </ListItemButton>
