@@ -4,20 +4,17 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import './shared/i18n';
-import NotFound from './shared/components/NotFound';
 import Menu from './shared/components/Menu';
-import Progress from './shared/components/Progress';
-import Feedback from './shared/components/Feedback';
+import * as Common from './shared/components/Common';
 
 import Welcome from './features/welcome/Welcome';
 import RecipeEdit from './features/recipes/edit/Edit';
 import RecipesList from './features/recipes/list/List';
 import RecipesGrid from './features/recipes/grid/Grid';
 import WeekPlan from './features/weekplan/WeekPlan';
+
 import './App.css';
-
 import './shared/fontawesome-all.min.css';
-
 import 'devextreme/dist/css/dx.light.css';
 import './shared/devextreme.css';
 
@@ -33,8 +30,8 @@ const App: React.FC = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Suspense fallback={<Progress />}>
-          <ErrorBoundary FallbackComponent={({ error }) => <Feedback text={error.message} level='error' />}>
+        <Suspense fallback={<Common.Progress />}>
+          <ErrorBoundary FallbackComponent={({ error }) => <Common.Feedback text={error.message} level='error' />}>
             <BrowserRouter>
             <Menu />
               <Routes>
@@ -45,7 +42,7 @@ const App: React.FC = () => {
                   <Route path="new" element={<RecipeEdit />} />
                 </Route>
                 <Route path="/weekplan" element={<WeekPlan />} />
-                <Route path="*" element={<NotFound />} />
+                <Route path="*" element={<Common.NotFound />} />
               </Routes>
             </BrowserRouter>
           </ErrorBoundary>

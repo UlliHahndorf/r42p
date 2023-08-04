@@ -1,13 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Icon from '../../shared/components/Icon';
+import * as Common from '../../shared/components/Common';
 
 const Welcome: React.FC = () => {
   const { t } = useTranslation();
 
   let content = (
     <>
-      <Icon name='house' size='2x' /> <span className='title'>{t('menu.start')}</span>
+      <Common.Icon name='house' size='2x' /> <span className='title'>{t('menu.start')}</span>
     </>
   );
 

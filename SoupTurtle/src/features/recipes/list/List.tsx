@@ -6,20 +6,15 @@ import { useSelector } from 'react-redux';
 
 import { load, remove, selectRecipes, selectLoadState, selectSaveState, selectRemoveState } from '../recipesSlice';
 import { useAppDispatch } from '../../../app/hooks';
-//import cl from '../../../shared/funcs'
 import { Recipe } from '../../../shared/types/Recipe';
 
-import Icon from '../../../shared/components/Icon';
-import Progress from '../../../shared/components/Progress';
-import Feedback from '../../../shared/components/Feedback';
+import * as Common from '../../../shared/components/Common';
 
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import useFilter from './useFilter';
 import useOrder from './useOrder';
 import './List.scss';
-
-import ConfirmDialog from '../../../shared/components/ConfirmDialog';
 
 const List: React.FC = () => {
   const { filter, handleFilterChange } = useFilter();
@@ -49,17 +44,17 @@ const List: React.FC = () => {
     setDeleteId(id);
   }
 
-  let content = <Feedback text={t('recipes.nohits')} level='info' />;
+  let content = <Common.Feedback text={t('recipes.nohits')} level='info' />;
 
   switch (loadState) {
     case 'pending':
-      return <Progress />;
+      return <Common.Progress />;
     case 'error':
-      return <Feedback text={t('main.any_error')} level='error' />
+      return <Common.Feedback text={t('main.any_error')} level='error' />
     case 'completed':
 
       if (!recipes || recipes.length === 0) {
-        return <Feedback text={t('recipes.nohits')} level='warning' />
+        return <Common.Feedback text={t('recipes.nohits')} level='warning' />
       }
 
       // Sort
@@ -90,12 +85,12 @@ const List: React.FC = () => {
 
       content = (
         <>
-          {(removeState === 'pending' || saveState === 'pending') && <Progress text={t('main.processing')} />}
-          {(removeState === 'error' || saveState === 'error') && <Feedback text={t('main.any_error')} level='error' />}
-          {(removeState === 'completed' || saveState === 'completed') && <Feedback text={t('main.success')} level='success' />}
+          {(removeState === 'pending' || saveState === 'pending') && <Common.Progress text={t('main.processing')} />}
+          {(removeState === 'error' || saveState === 'error') && <Common.Feedback text={t('main.any_error')} level='error' />}
+          {(removeState === 'completed' || saveState === 'completed') && <Common.Feedback text={t('main.success')} level='success' />}
 
           <div className="filterContainer">
-          <Icon name='book' size='2x' /> <span className='title'>{t('recipes.title')}</span>
+          <Common.Icon name='book' size='2x' /> <span className='title'>{t('recipes.title')}</span>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <TextField label="Filter" value={filter} onChange={handleFilterChange} />
             </FormControl>
@@ -131,17 +126,17 @@ const List: React.FC = () => {
       {content}
       <Tooltip title={t('recipes.new')}>
         <Fab color="primary" aria-label={t('recipes.new')} className="fab" component={Link} to="/recipes/list/new">
-          <Icon name='plus' size='lg' />
+          <Common.Icon name='plus' size='lg' />
         </Fab>
       </Tooltip>
       <Outlet></Outlet>
-      <ConfirmDialog 
+      <Common.ConfirmDialog 
         title={t('recipes.delete')}
         message={t('recipes.deleteQuery')}
         open={confirmOpen}
         setOpen={setConfirmOpen}
         onConfirm={handleDelete}
-      ></ConfirmDialog>
+      ></Common.ConfirmDialog>
 
     </div>
   );

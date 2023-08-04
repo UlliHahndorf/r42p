@@ -3,7 +3,7 @@ import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/mater
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import Icon from './Icon';
+import * as Common from './Common';
 
 type Props = {
     isSelected: boolean;
@@ -22,12 +22,12 @@ const MenuItem: React.FC<Props> = ({ isSelected, isOpen, keyAttr, labelKey, targ
         <ListItem key={keyAttr} component={Link} to={targetUrl} disablePadding sx={{ display: 'block' }} >
             <ListItemButton sx={{ minHeight: 48, justifyContent: isOpen ? 'initial' : 'center', px: 2.5, }} 
                      // Add onClick event to call the handleClick function
-         onClick={onSelect}
-         // Add the selected property based on the isSelected state
-         selected={isSelected}
+                     onClick={onSelect}
+                    // Add the selected property based on the isSelected state
+                    selected={isSelected}
                 > 
                 <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: isOpen ? 3 : 'auto', }}>
-                    <Icon name={iconName} size='2x' isFixedWidth={true} />
+                    <Common.Icon name={iconName} size='2x' isFixedWidth={true} />
                 </ListItemIcon>
                 <ListItemText primary={t(labelKey)} sx={{ opacity: isOpen ? 1 : 0 }} />
             </ListItemButton>

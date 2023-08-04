@@ -11,10 +11,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuItem from './MenuItem';
 
+import MenuItem from './MenuItem';
 import LanguageSwitch from './LanguageSwitch';
-import Icon from './Icon';
+import * as Common from './Common';
 
 const drawerWidth = 240;
 
@@ -132,10 +132,10 @@ export default function Menu() {
                 ...(open && { display: 'none' }),
               }}
             >
-              <Icon name='bars' />
+              <Common.Icon name='bars' />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              <Icon name='bowl-hot' />
+              <Common.Icon name='bowl-hot' />
               &nbsp;
               SoupTurtle
             </Typography>
@@ -145,7 +145,7 @@ export default function Menu() {
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
-              {theme.direction === 'rtl' ? <Icon name='chevron-right' /> : <Icon name='chevron-left' />}
+              {theme.direction === 'rtl' ? <Common.Icon name='chevron-right' /> : <Common.Icon name='chevron-left' />}
             </IconButton>
           </DrawerHeader>
           <Divider />
