@@ -50,11 +50,11 @@ const List: React.FC = () => {
     case 'pending':
       return <Common.Progress />;
     case 'error':
-      return <Common.Feedback text={t('main.any_error')} level='error' />
+      return <Common.Feedback text={t('main.any_error')} level='error' />;
     case 'completed':
 
       if (!recipes || recipes.length === 0) {
-        return <Common.Feedback text={t('recipes.nohits')} level='warning' />
+        return <Common.Feedback text={t('recipes.nohits')} level='warning' />;
       }
 
       // Sort

@@ -5635,13 +5635,13 @@
       "sourcePage": ""
     },
     {
-      "price": 5,
+      "price": 559,
       "title": "1001 Bohnensuppe",
       "id": 326,
       "ingredients": "mindesten 3 Verschiedene Sorten Bohnen",
       "numberServings": "",
       "quantities": "",
-      "instructions": "foo bar9",
+      "instructions": "foo bar",
       "dateCreated": "2006-03-30T00:00:00",
       "dateModified": "2022-08-17T00:00:00",
       "category": "Vegetarisch\nVegan\nAltdeutsch\nSuppen",
@@ -7976,7 +7976,7 @@
     },
     {
       "price": 5,
-      "title": "2002 bar",
+      "title": "2002 bar7",
       "id": 469,
       "ingredients": "super",
       "numberServings": "",
