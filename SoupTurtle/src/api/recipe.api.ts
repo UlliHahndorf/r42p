@@ -1,5 +1,6 @@
 import { Recipe, CreateRecipe } from '../shared/types/Recipe';
 
+// LOAD (GET)
 export async function loadRecipes(): Promise<Recipe[]> {
   const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/recipes/');
   if (!response.ok) {
@@ -8,6 +9,7 @@ export async function loadRecipes(): Promise<Recipe[]> {
   return response.json();
 }
 
+// DELETE (DELETE)
 export async function removeRecipe(id: number): Promise<void> {
   const response = await fetch(
     import.meta.env.VITE_BACKEND_URL + '/recipes/' + id,
@@ -19,6 +21,8 @@ export async function removeRecipe(id: number): Promise<void> {
   }
 }
 
+// CREATE (POST)
+// UPDATE (PUT)
 export async function saveRecipe(recipe: CreateRecipe): Promise<Recipe> {
   let url = `${import.meta.env.VITE_BACKEND_URL}/recipes`;
   let method = 'POST';

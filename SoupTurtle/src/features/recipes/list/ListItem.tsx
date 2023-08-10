@@ -20,7 +20,11 @@ const ListItem: React.FC<Props> = ({ recipe, onDelete }) => {
 
   return (
     <TableRow style={{ verticalAlign: 'top' }}>
-      <TableCell><b>{recipe.title}</b></TableCell>
+      <TableCell>
+        <Link to={`edit/${recipe.id}`} >
+        <b>{recipe.title}</b>
+        </Link>
+      </TableCell>
       <TableCell>{recipe.ingredients}</TableCell>
       <TableCell>{renderHTML(recipe.instructions.replace(/\n/g, "<br />"))}</TableCell>
       <TableCell>{recipe.numberServings}</TableCell>

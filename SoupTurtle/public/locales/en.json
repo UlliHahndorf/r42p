@@ -38,11 +38,15 @@
             "description": "Description",
             "price": "Price",
             "source": "Source",
-            "filterResults_one": "{{count}} Recipe found",
-            "filterResults_other": "{{count}} Recipes found"
+            "filterResults_one": "{{count}} Recipe",
+            "filterResults_other": "{{count}} Recipes"
         },
         "listItem": {
             "price": "{{price, currency(EUR)}}"
+        },
+        "validation": {
+            "title_is_mandatory": "Title is mandatory",
+            "only_numbers": "Please enter only numbers"
         }
     }
   }

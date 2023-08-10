@@ -14,10 +14,10 @@
 }
 
 /* Vertical Bordes only form headers */
-.borderlessGrid .dx-data-row > td {  
+/* .borderlessGrid .dx-data-row > td {  
 	border-right: 0;  
 	border-left: 0;  
-}  
+}   */
 
 /* Make group headers clickable */
 tr.dx-group-row {

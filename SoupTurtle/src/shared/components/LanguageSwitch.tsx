@@ -10,15 +10,18 @@ const LanguageSwitch: React.FC = () => {
         variant="contained"
         disabled={i18n.language === 'de'}
         onClick={() => i18n.changeLanguage('de')}
-      >
-        🇩🇪 DE
+        className="btnLangSwitch"
+        >
+        Deutsch
       </Button>
+
       <Button
         variant="contained"
         disabled={i18n.language === 'en'}
         onClick={() => i18n.changeLanguage('en')}
+        className="btnLangSwitch"
       >
-        🇬🇧 EN
+        English
       </Button>
     </div>
   );

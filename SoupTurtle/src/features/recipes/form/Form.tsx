@@ -14,15 +14,6 @@ import './Form.scss';
 
 const defaultValues: CreateRecipe = DefaultRecipe();
 
-// TODO Resources
-const schema = yup.object({
-    id: yup.number().optional(),
-    title: yup.string().required('Title ist ein Pflichtfeld'),
-    price: yup
-        .number()
-        .typeError('Bitte nur Zahlen eingeben')
-});
-
 type Props = {
     recipe?: Recipe | null;
 };
@@ -30,6 +21,17 @@ type Props = {
 const Form: React.FC<Props> = ({ recipe }) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const { t } = useTranslation();
+
+    const schema = yup.object({
+        id: yup.number().optional(),
+        title: yup.string().required(t('recipes.validation.title_is_mandatory')),
+        price: yup
+            .number()
+            .typeError(t('recipes.validation.only_numbers'))
+    });
+
     const {
         register,
         handleSubmit,
@@ -39,8 +41,6 @@ const Form: React.FC<Props> = ({ recipe }) => {
         defaultValues,
         resolver: yupResolver(schema) as any,
     });
-
-    const { t } = useTranslation();
 
     useEffect(() => {
         if (recipe) {

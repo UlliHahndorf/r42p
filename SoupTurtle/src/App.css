@@ -57,3 +57,12 @@
   color: #1976d2;
   cursor:pointer;
 }
+
+.btnLangSwitch {
+  margin-left:0.5rem !important;
+}
+
+.protRemarks {
+  color: #1976d2;
+  font-style: italic;
+}

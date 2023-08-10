@@ -103,6 +103,10 @@ const List: React.FC = () => {
               </Select>
             </FormControl>
           </div>
+          <div className="protRemarks">
+            Manuell gebaute Liste mit List/ListItem-Komponentenn aus der Material-UI-Bibliothek<br />
+            Die Daten kommen per REST von <b>{import.meta.env.VITE_BACKEND_URL}</b>
+          </div>
           <TableContainer>
             <Table sx={{ minWidth: 650 }} aria-label="simple recipes overview table" stickyHeader={true} >
               <ListHeader recipesCount={filteredRecipes.length} />

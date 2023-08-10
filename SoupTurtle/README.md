@@ -9,7 +9,8 @@
 - [x] Mehr Spalten
 - [x] FontAwesome
 - [x] DevExtreme
-  - [ ] localization übergeben
+  - [x] localization übergeben
+  - [ ] localization on the fly ändern
   - [x] Höhe/Scrollbar
   - [ ] fixed columns
   - [x] fixed header
@@ -45,7 +46,7 @@ VS-Code
 - [ ] Gitlens
 
 Fragen:
-+ [ ] Icons: Reflection
+- [x] Icons: Reflection
 - [ ] Frage aus Test-Session-Chat
 - [ ] Sachen wie cl() ganz oben nur 1x definieren
 
@@ -54,3 +55,7 @@ Anschauen:
 - [ ] von JUC: https://martinfowler.com/articles/modularizing-react-apps.html
 
 - [ ] Native-App mit ChatGPT
+
+Baustellen:
+
+- [ ] API-Authentification mittels "Access-Control-Allow-Origin: *"
