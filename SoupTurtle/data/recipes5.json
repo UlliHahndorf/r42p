@@ -1,9 +1,9 @@
 {
   "recipes": [
     {
+      "ingredients": "grüne Bohnen35",
       "id": 1,
       "title": "Grüne-Bohnen-Tomaten-Suppe (vegan,i)",
-      "ingredients": "grüne Bohnen",
       "numberServings": "20",
       "quantities": "2,5kg",
       "instructions": "",
@@ -39,7 +39,7 @@
     {
       "id": 3,
       "title": "Gazpacho Andaluz (vegan, h)",
-      "ingredients": "",
+      "ingredients": "nix",
       "numberServings": "20",
       "quantities": "",
       "instructions": "Das Weißbrot grob zerkleinern, mit Wasser beträufeln und mindestens 30 min durchziehen lassen. Tomaten, Gurken, Paprikaschote und Knobiin einen Mixer geben, dann das Brot und zuletzt das Öl zufügen und das ganze pürieren. So viel Wasser zugeben, bis die suppe die gewünschte Konsistenz erreicht hat.\nDann die Suppe evtl. durch ein Haarsieb streichen und mit Salz und Essig abschmecken.\nDen Gazpacho min. 1 Std im Kühlschrank ziehen lassen, sehr kalt servieren.\n\nGarnitur separat reichen",

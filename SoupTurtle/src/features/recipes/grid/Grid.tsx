@@ -1,17 +1,10 @@
 import React from 'react';
-
+//import { Link } from 'react-router-dom';
 import DataGrid, { Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Paging, Scrolling, Button, Editing, ColumnChooserSelection, Position } from 'devextreme-react/data-grid';
+import CustomStore from 'devextreme/data/custom_store';
 import { useTranslation } from 'react-i18next';
 
-const serviceUrl = import.meta.env.VITE_BACKEND_URL;
-
-// const remoteDataSource = createStore({
-//     key: 'ID',
-//     loadUrl: serviceUrl + '/recipes/load',
-//     insertUrl: serviceUrl + '/recipes/save',
-//     updateUrl: serviceUrl + '/recipes/save',
-//     deleteUrl: serviceUrl + '/recipes/remove'
-// });
+import { loadRecipe, loadRecipes, saveRecipe, removeRecipe } from '../../../api/recipe.api';
 
 import deMessages from 'devextreme/localization/messages/de.json';
 import enMessages from 'devextreme/localization/messages/en.json';
@@ -21,6 +14,33 @@ import * as Common from '../../../shared/components/Common';
 import './Grid.scss'
 
 const Grid: React.FC = () => {
+
+    var updatedObject: any;
+    function onRowUpdating(e: any) {
+        // Needed to pass all data for a update, otherwise only changed data is included in POST/PUT
+        e.newData = {...e.oldData, ...e.newData};
+        updatedObject = e;
+    }
+    
+    const customDataSource = new CustomStore({
+        key: 'id',
+        byKey: (key) => { 
+            return loadRecipe(key); 
+        },
+        load: () => { 
+            return loadRecipes(); 
+        },
+        insert: (values) => { 
+            return saveRecipe(values);
+        },
+        update: (_key, values) => { 
+            updatedObject = null;
+            return saveRecipe(values);
+        },
+        remove: (key) => {
+            return removeRecipe(key);
+        }
+    });
 
     loadMessages(deMessages);
     loadMessages(enMessages);
@@ -40,7 +60,10 @@ const Grid: React.FC = () => {
     function CellSource(cellData: any) {
         return cellData.row.data.source + (cellData.row.data.sourcePage !== "" ? " / " + cellData.row.data.sourcePage : "");
     }
-
+    // function CellTitle(cellData: any) {
+    //     return (<Link to={`edit/${cellData.row.data.id}`} ><b>{cellData.row.data.title}</b></Link>)
+    // }
+    
     let content = (
         <div id="gridOut" className="dx-viewport borderlessGrid">
             <Common.Icon name='books' size='2x' /> <span className='title'>{t('recipes.title')}</span>
@@ -50,7 +73,8 @@ const Grid: React.FC = () => {
             </div>
 
             <DataGrid id="dataGrid"
-                dataSource={serviceUrl + "/recipes"}
+                // dataSource={serviceUrl + "/recipes"}
+                dataSource={customDataSource}
                 allowColumnResizing={true}
                 allowColumnReordering={true}
                 columnResizingMode="widget"
@@ -59,7 +83,8 @@ const Grid: React.FC = () => {
                 showBorders={true}
                 showColumnLines={true}
                 showRowLines={true}
-            >
+                onRowUpdating={onRowUpdating} 
+                >
                 <FilterRow visible={true} />
                 <ColumnFixing enabled={false} />
                 <ColumnChooser enabled={true} mode="select">
@@ -105,3 +130,4 @@ const Grid: React.FC = () => {
 };
 
 export default Grid;
+

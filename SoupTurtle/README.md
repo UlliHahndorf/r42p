@@ -14,10 +14,15 @@
   - [x] Höhe/Scrollbar
   - [ ] fixed columns
   - [x] fixed header
+    - [ ] Darstellung verschoben
   - [ ] infinte scrolling
-  - [ ] Dateformats
-  - [ ] Api-Calls anders/Odata
+  - [x] Dateformats
+  - [ ] Api-Calls
+    - [ ] Rest komplett
+    - [ ] OData
+    - [ ] GraphQL
   - [ ] Edit-Forms / Inline
+    - [ ] Edit Popup also by click on title
   - [ ] CRUD-Functions
   - [x] Font-Awesome-Icons
 - [x] Menü nur 1x laden

@@ -13,20 +13,14 @@ type Props = {
 
 const ListItem: React.FC<Props> = ({ recipe, onDelete }) => {
   const { t } = useTranslation();
-
-  const renderHTML = (rawHTML: string) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
-
-//  const [confirmOpen, setConfirmOpen] = React.useState(false);
-
+  
   return (
     <TableRow style={{ verticalAlign: 'top' }}>
       <TableCell>
-        <Link to={`edit/${recipe.id}`} >
-        <b>{recipe.title}</b>
-        </Link>
+        <Link to={`edit/${recipe.id}`} ><b>{recipe.title}</b></Link>
       </TableCell>
       <TableCell>{recipe.ingredients}</TableCell>
-      <TableCell>{renderHTML(recipe.instructions.replace(/\n/g, "<br />"))}</TableCell>
+      <TableCell>{Common.ToHtml(recipe.instructions)}</TableCell>
       <TableCell>{recipe.numberServings}</TableCell>
       <TableCell>{recipe.quantities}</TableCell>
       <TableCell>{Common.DateFormatString(recipe.dateCreated.toString())}</TableCell>

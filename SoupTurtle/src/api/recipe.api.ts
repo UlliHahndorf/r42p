@@ -2,6 +2,15 @@ import { Recipe, CreateRecipe } from '../shared/types/Recipe';
 import { HttpHeaders } from '../shared/funcs';
 
 // LOAD (GET)
+export async function loadRecipe(id: number): Promise<Recipe> {
+  let url: string = import.meta.env.VITE_BACKEND_URL + '/recipes/' + id;
+  const response = await fetch(url, { method: 'GET', headers: HttpHeaders("GET") });
+  if (!response.ok) {
+    throw new Error('Unable to load');
+  }
+  return response.json();
+}
+// LIST (GET)
 export async function loadRecipes(): Promise<Recipe[]> {
   let url: string = import.meta.env.VITE_BACKEND_URL + '/recipes/';
   const response = await fetch(url, { method: 'GET', headers: HttpHeaders("GET") });
@@ -9,17 +18,6 @@ export async function loadRecipes(): Promise<Recipe[]> {
     throw new Error('Unable to load');
   }
   return response.json();
-}
-
-// DELETE (DELETE)
-export async function removeRecipe(id: number): Promise<void> {
-  let url: string = `${import.meta.env.VITE_BACKEND_URL}/recipes/`;
-  const response = await fetch(url + id, { method: 'DELETE', headers: HttpHeaders("DELETE") }
-  );
-
-  if (!response.ok) {
-    throw new Error('Unable to delete');
-  }
 }
 
 // CREATE (POST)
@@ -39,4 +37,15 @@ export async function saveRecipe(recipe: CreateRecipe): Promise<Recipe> {
 
   const data = await response.json();
   return data;
+}
+
+// DELETE (DELETE)
+export async function removeRecipe(id: number): Promise<void> {
+  let url: string = `${import.meta.env.VITE_BACKEND_URL}/recipes/`;
+  const response = await fetch(url + id, { method: 'DELETE', headers: HttpHeaders("DELETE") }
+  );
+
+  if (!response.ok) {
+    throw new Error('Unable to delete');
+  }
 }
