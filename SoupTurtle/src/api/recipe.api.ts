@@ -1,62 +1,37 @@
-import axios from 'axios';
-
 import { Recipe, CreateRecipe } from '../shared/types/Recipe';
-import { HttpConfig } from '../shared/funcs';
+import { HttpHeaders } from '../shared/funcs';
 
 // LOAD (GET)
-export async function loadRecipes(): Promise<Recipe[]>  {
-  let res = [] as Recipe[];
-  await axios.get(import.meta.env.VITE_BACKEND_URL + '/recipes/', HttpConfig)
-             .then(function(response) {
-               res = response.data;
-             })
-             .catch (function(error: any) {
-               console.error("loadRecipes: Response not OK",error);
-             })
-             .finally (function() {
-               // run anyways
-             })
-  
-  return res;
-};
-
-export async function loadRecipesOld(): Promise<Recipe[]> {
-  console.log("loadRecipes");
-  const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/recipes/');
+export async function loadRecipes(): Promise<Recipe[]> {
+  let url: string = import.meta.env.VITE_BACKEND_URL + '/recipes/';
+  const response = await fetch(url, { method: 'GET', headers: HttpHeaders("GET") });
   if (!response.ok) {
-    throw new Error('Response not OK');
+    throw new Error('Unable to load');
   }
   return response.json();
 }
 
 // DELETE (DELETE)
 export async function removeRecipe(id: number): Promise<void> {
-  const response = await fetch(
-    import.meta.env.VITE_BACKEND_URL + '/recipes/' + id,
-    { method: 'DELETE' }
+  let url: string = `${import.meta.env.VITE_BACKEND_URL}/recipes/`;
+  const response = await fetch(url + id, { method: 'DELETE', headers: HttpHeaders("DELETE") }
   );
 
   if (!response.ok) {
-    throw new Error('Response not OK');
+    throw new Error('Unable to delete');
   }
 }
 
 // CREATE (POST)
 // UPDATE (PUT)
 export async function saveRecipe(recipe: CreateRecipe): Promise<Recipe> {
-  let url = `${import.meta.env.VITE_BACKEND_URL}/recipes`;
-  let method = 'POST';
+  let url: string = `${import.meta.env.VITE_BACKEND_URL}/recipes`;
+  let verb: string = 'POST';
   if (recipe.id) {
     url += `/${recipe.id}`;
-    method = 'PUT';
+    verb = 'PUT';
   }
-  const response = await fetch(url, {
-    method,
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(recipe),
-  });
+  const response = await fetch(url, { method: verb, headers: HttpHeaders(verb), body: JSON.stringify(recipe) });
 
   if (!response.ok) {
     throw new Error('Unable to save');
