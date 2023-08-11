@@ -90,7 +90,7 @@ const List: React.FC = () => {
           {(removeState === 'completed' || saveState === 'completed') && <Common.Feedback text={t('main.success')} level='success' />}
 
           <div className="filterContainer">
-          <Common.Icon name='book' size='2x' /> <span className='title'>{t('recipes.title')}</span>
+          <Common.Icon name='book' size='2x' /> <span className='title'>{t('recipes.title_plural')}</span>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
               <TextField label="Filter" value={filter} onChange={handleFilterChange} />
             </FormControl>

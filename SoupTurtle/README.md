@@ -21,8 +21,9 @@
     - [ ] Rest komplett
     - [ ] OData
     - [ ] GraphQL
-  - [ ] Edit-Forms / Inline
+  - [x] Edit-Forms / Inline
     - [ ] Edit Popup also by click on title
+    - [ ] Popup Editor Fields continue
   - [ ] CRUD-Functions
   - [x] Font-Awesome-Icons
 - [x] Menü nur 1x laden

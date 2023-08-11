@@ -92,10 +92,11 @@ export default function Menu() {
   const [open, setOpen] = React.useState(false);
 
   const menuItems = [
-    { labelKey: 'menu.start'   , keyAttr: 'start'       , targetUrl: '/'             , iconName: 'house'          },
-    { labelKey: 'menu.recipes' , keyAttr: 'recipesList' , targetUrl: '/recipes/list' , iconName: 'book'           },
-    { labelKey: 'menu.recipes' , keyAttr: 'recipesGrid' , targetUrl: '/recipes/grid' , iconName: 'books'          },
-    { labelKey: 'menu.week'    , keyAttr: 'week'        , targetUrl: '/weekplan'     , iconName: 'plate-utensils' }
+    { labelKey: 'menu.start'   , keyAttr: 'start'        , targetUrl: '/'               , iconName: 'house'          },
+    { labelKey: 'menu.recipes' , keyAttr: 'recipesList'  , targetUrl: '/recipes/list'   , iconName: 'book'           },
+    { labelKey: 'menu.recipes' , keyAttr: 'recipesGrid'  , targetUrl: '/recipes/grid'   , iconName: 'books'          },
+    { labelKey: 'menu.recipes' , keyAttr: 'recipesGrido' , targetUrl: '/recipes/grido'  , iconName: 'book-open-cover'},
+    { labelKey: 'menu.week'    , keyAttr: 'week'         , targetUrl: '/weekplan'       , iconName: 'plate-utensils' }
 
   ];
 

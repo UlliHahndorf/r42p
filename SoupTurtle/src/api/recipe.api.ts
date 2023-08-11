@@ -1,9 +1,11 @@
 import { Recipe, CreateRecipe } from '../shared/types/Recipe';
 import { HttpHeaders } from '../shared/funcs';
 
+const baseUrl = import.meta.env.VITE_BACKEND_URL + '/recipes';
+
 // LOAD (GET)
 export async function loadRecipe(id: number): Promise<Recipe> {
-  let url: string = import.meta.env.VITE_BACKEND_URL + '/recipes/' + id;
+  let url: string = baseUrl + '/' + id;
   const response = await fetch(url, { method: 'GET', headers: HttpHeaders("GET") });
   if (!response.ok) {
     throw new Error('Unable to load');
@@ -12,7 +14,7 @@ export async function loadRecipe(id: number): Promise<Recipe> {
 }
 // LIST (GET)
 export async function loadRecipes(): Promise<Recipe[]> {
-  let url: string = import.meta.env.VITE_BACKEND_URL + '/recipes/';
+  let url: string = baseUrl + '/';
   const response = await fetch(url, { method: 'GET', headers: HttpHeaders("GET") });
   if (!response.ok) {
     throw new Error('Unable to load');
@@ -23,7 +25,7 @@ export async function loadRecipes(): Promise<Recipe[]> {
 // CREATE (POST)
 // UPDATE (PUT)
 export async function saveRecipe(recipe: CreateRecipe): Promise<Recipe> {
-  let url: string = `${import.meta.env.VITE_BACKEND_URL}/recipes`;
+  let url: string = baseUrl;
   let verb: string = 'POST';
   if (recipe.id) {
     url += `/${recipe.id}`;
@@ -41,7 +43,7 @@ export async function saveRecipe(recipe: CreateRecipe): Promise<Recipe> {
 
 // DELETE (DELETE)
 export async function removeRecipe(id: number): Promise<void> {
-  let url: string = `${import.meta.env.VITE_BACKEND_URL}/recipes/`;
+  let url: string = baseUrl + '/';
   const response = await fetch(url + id, { method: 'DELETE', headers: HttpHeaders("DELETE") }
   );
 

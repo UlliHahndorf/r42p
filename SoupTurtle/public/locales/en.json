@@ -15,7 +15,8 @@
     },
     "recipes": {
         "new": "New",
-        "title": "Recipes",
+        "title_singular": "Recipe",
+        "title_plural": "Recipes",
         "dialog_title_create": "Create recipe",
         "dialog_title_change": "Change recipe",
         "nohits": "none found",
@@ -24,6 +25,8 @@
         "cancel": "Cancel",
         "delete": "Delete",
         "deleteQuery": "Really delete?",
+        "base_data": "Base data",
+        "extended_data": "Extended data",
         "orderLabel": "Order by",
          "list": {
             "title": "Title",

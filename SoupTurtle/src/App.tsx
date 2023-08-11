@@ -36,7 +36,8 @@ const App: React.FC = () => {
             <Menu />
               <Routes>
                 <Route path="/" element={<Welcome />} />
-                <Route path="/recipes/grid" element={<RecipesGrid />} />
+                <Route path="/recipes/grid" element={<RecipesGrid dSource='REST' />} />
+                <Route path="/recipes/grido" element={<RecipesGrid dSource='ODATA' />} />
                 <Route path="/recipes/list" element={<RecipesList />}>
                   <Route path="edit/:id" element={<RecipeEdit />} />
                   <Route path="new" element={<RecipeEdit />} />
