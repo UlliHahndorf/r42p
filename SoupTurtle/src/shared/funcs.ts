@@ -1,3 +1,4 @@
+import React from "react";
 
 var cl = window.console.log.bind(window.console);
 export default cl;
@@ -10,3 +11,16 @@ export function DateFormatString(ds: string): string  {
     return DateFormat(dd);
 }
 
+export function ToHtml(text: string) : any  {
+    if (text === "") return "";
+    const renderHTML = (rawHTML: string) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
+    return renderHTML(text.replace(/\n/g, "<br />"));
+}
+
+export const HttpConfig = {
+    headers: {
+        "Access-Control-Request-Method": "any",     // value is void
+        "Origin": "any",                            // value is void
+        'X-Requested-With': 'XMLHttpRequest'
+    }
+}

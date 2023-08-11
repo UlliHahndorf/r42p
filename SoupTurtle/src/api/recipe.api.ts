@@ -1,7 +1,27 @@
+import axios from 'axios';
+
 import { Recipe, CreateRecipe } from '../shared/types/Recipe';
+import { HttpConfig } from '../shared/funcs';
 
 // LOAD (GET)
-export async function loadRecipes(): Promise<Recipe[]> {
+export async function loadRecipes(): Promise<Recipe[]>  {
+  let res = [] as Recipe[];
+  await axios.get(import.meta.env.VITE_BACKEND_URL + '/recipes/', HttpConfig)
+             .then(function(response) {
+               res = response.data;
+             })
+             .catch (function(error: any) {
+               console.error("loadRecipes: Response not OK",error);
+             })
+             .finally (function() {
+               // run anyways
+             })
+  
+  return res;
+};
+
+export async function loadRecipesOld(): Promise<Recipe[]> {
+  console.log("loadRecipes");
   const response = await fetch(import.meta.env.VITE_BACKEND_URL + '/recipes/');
   if (!response.ok) {
     throw new Error('Response not OK');

@@ -14,6 +14,7 @@
   - [x] Höhe/Scrollbar
   - [ ] fixed columns
   - [x] fixed header
+  - [ ] infinte scrolling
   - [ ] Dateformats
   - [ ] Api-Calls anders/Odata
   - [ ] Edit-Forms / Inline
@@ -23,7 +24,7 @@
 - [x] Feedback-Panel
 - [x] ConfirmDialog
   - [ ] Slow
-- [ ] Feedback automatisch verschwinden lassen
+- [x] Feedback automatisch verschwinden lassen
 - [ ] Menu aufgeklappt und link sollte wieder zuklappen
 
 - [ ] Tests ausprobieren
@@ -36,6 +37,7 @@ Patterns verinnerlichen:
 
 - [ ] Await/Async
 - [ ] Promise
+  - https://javascript.info/promise-basics
 - [ ] Generator-Funktionen
 - [ ] Reducer
 
@@ -59,3 +61,8 @@ Anschauen:
 Baustellen:
 
 - [ ] API-Authentification mittels "Access-Control-Allow-Origin: *"
+
+API-Probleme:
+
+- https://stackoverflow.com/questions/6147181/405-method-not-allowed-in-iis7-5-for-put-method
+- https://stackoverflow.com/questions/22495240/iis-hijacks-cors-preflight-options-request

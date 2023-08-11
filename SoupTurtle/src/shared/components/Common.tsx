@@ -1,5 +1,5 @@
 export { default as cl } from '../funcs.ts';
-export { DateFormat, DateFormatString } from '../funcs.ts';
+export { DateFormat, DateFormatString, ToHtml } from '../funcs.ts';
 export { default as i18n } from '../i18n';
 
 export { default as Icon } from './Icon';

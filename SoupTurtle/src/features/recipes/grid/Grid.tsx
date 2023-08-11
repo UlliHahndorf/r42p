@@ -27,10 +27,9 @@ const Grid: React.FC = () => {
     locale(Common.i18n.language);
     
     const { t } = useTranslation();
-    const renderHTML = (rawHTML: string) => React.createElement("div", { dangerouslySetInnerHTML: { __html: rawHTML } });
 
     function CellInstructions(cellData: any) {
-        return renderHTML(cellData.row.data.instructions.replace(/\n/g, "<br />"));
+        return Common.ToHtml(cellData.row.data.instructions);
     }    
     function CellCreated(cellData: any) {
         return Common.DateFormatString(cellData.row.data.dateCreated);
