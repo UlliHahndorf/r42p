@@ -5,6 +5,9 @@ import DataGrid, { Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, H
 import CustomStore from 'devextreme/data/custom_store';
 import ODataStore from 'devextreme/data/odata/store';
 import 'devextreme-react/text-area';
+import deMessages from 'devextreme/localization/messages/de.json';
+import enMessages from 'devextreme/localization/messages/en.json';
+import { locale, loadMessages } from "devextreme/localization";
 
 import { useTranslation } from 'react-i18next';
 import { loadRecipe, loadRecipes, saveRecipe, removeRecipe } from '../../../api/recipe.api';
@@ -19,9 +22,23 @@ const Grid: React.FC<Props> = ({ dSource }) => {
 
     var updatedObject: any;
     function onRowUpdating(e: any) {
+        if (IsOdata()) return;
         // Needed to pass all data for a update, otherwise only changed data is included in POST/PUT
         e.newData = { ...e.oldData, ...e.newData };
         updatedObject = e;
+    }
+
+    function GetDataSource() {
+        switch (dSource) {
+            case 'REST':
+                return restStore;
+            case 'ODATA':
+                return odataStore;
+        }
+    }
+
+    function IsOdata() {
+        return (dSource === 'ODATA');
     }
 
     // REST Store
@@ -45,25 +62,21 @@ const Grid: React.FC<Props> = ({ dSource }) => {
         }
     });
 
+    // ODATA Store
     const odataStore = new ODataStore({
-        url: import.meta.env.VITE_BACKEND_URL + '/recipes',
+        url: import.meta.env.VITE_BACKEND_URL + '/odata/recipes',
+        version: 4,
         key: 'id',
         keyType: 'Int32',
     });
 
-    function GetDataSource() {
-        switch (dSource) {
-            case 'REST':
-                return restStore;
-                break;
-            case 'ODATA':
-                return odataStore;
-                break;
-        }
-    }
-
     const { t } = useTranslation();
 
+    // DevExtreme
+    loadMessages(deMessages);
+    loadMessages(enMessages);
+    locale(Common.i18n.language);
+    
     function CellInstructions(cellData: any) {
         return Common.ToHtml(cellData.row.data.instructions);
     }
@@ -85,7 +98,7 @@ const Grid: React.FC<Props> = ({ dSource }) => {
             <Common.Icon name='books' size='2x' /> <span className='title'>{t('recipes.title_plural')}</span>
             <div className="protRemarks">
                 DevExtreme DataGrid<br />
-                Die Daten kommen per {dSource} von <b>{import.meta.env.VITE_BACKEND_URL}</b>
+                Die Daten kommen per <b>{dSource}</b> von <b>{import.meta.env.VITE_BACKEND_URL}</b>
             </div>
 
             <DataGrid id="dataGrid"
@@ -99,6 +112,7 @@ const Grid: React.FC<Props> = ({ dSource }) => {
                 showBorders={true}
                 showColumnLines={true}
                 showRowLines={true}
+                remoteOperations={false}
                 onRowUpdating={onRowUpdating}
             >
                 <FilterRow visible={true} />
@@ -111,7 +125,7 @@ const Grid: React.FC<Props> = ({ dSource }) => {
                 <HeaderFilter visible={true} />
                 <Paging enabled={false} />
                 <Scrolling mode="virtual" rowRenderingMode="virtual" />
-                <Editing mode='popup' allowAdding={true} allowUpdating={true} allowDeleting={true} confirmDelete={true} useIcons={false} >
+                <Editing mode='popup' allowAdding={!IsOdata()} allowUpdating={!IsOdata()} allowDeleting={!IsOdata()} confirmDelete={true} useIcons={false} >
                     <Popup title={t('recipes.title_singular')} showTitle={true} width={900} height={800} />
                     <Form>
                         {/* @ts-ignore */}
@@ -160,7 +174,7 @@ const Grid: React.FC<Props> = ({ dSource }) => {
                 <Column dataField="notes" caption={t('recipes.list.notes')} visible={false} />
                 <Column dataField="description" caption={t('recipes.list.description')} />
                 <Column dataField="price" caption={t('recipes.list.price')} format="#0.00 €" />
-                <Column type="buttons" width={110}>
+                <Column type="buttons" width={110} visible={!IsOdata()}>
                     <Button name="edit" cssClass="click-pri"><Common.Icon name='pen-to-square' size='lg' /></Button>
                     <Button name="delete" cssClass="click-pri"><Common.Icon name='trash-can' size='lg' /></Button>
                 </Column>

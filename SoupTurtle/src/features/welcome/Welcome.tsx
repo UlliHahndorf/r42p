@@ -19,7 +19,7 @@ const Welcome: React.FC = () => {
     <>
       <Common.Icon name='house' size='2x' /> <span className='title'>{t('menu.start')}</span>
       <div className="protRemarks">
-        Der Count kommt per REST von <b>{import.meta.env.VITE_BACKEND_URL}</b>
+        Der Count kommt per <b>REST</b> von <b>{import.meta.env.VITE_BACKEND_URL}</b>
       </div>
       <div>
         { recipes.length === 1

@@ -9,13 +9,14 @@ type Props = {
     isSelected: boolean;
     isOpen: boolean;
     keyAttr: React.Key;
+    suffix: string;
     labelKey: string
     targetUrl: string;
     iconName: string;
     onSelect: () => void;
 };
 
-const MenuItem: React.FC<Props> = ({ isSelected, isOpen, keyAttr, labelKey, targetUrl, iconName, onSelect }) => {
+const MenuItem: React.FC<Props> = ({ isSelected, isOpen, keyAttr, suffix, labelKey, targetUrl, iconName, onSelect }) => {
     const { t } = useTranslation();
 
      return (
@@ -29,7 +30,7 @@ const MenuItem: React.FC<Props> = ({ isSelected, isOpen, keyAttr, labelKey, targ
                 <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: isOpen ? 3 : 'auto', }}>
                     <Common.Icon name={iconName} size='2x' isFixedWidth={true} />
                 </ListItemIcon>
-                <ListItemText primary={t(labelKey)} sx={{ opacity: isOpen ? 1 : 0 }} />
+                <ListItemText primary={t(labelKey) + (suffix !== "" ? " " + suffix : "")} sx={{ opacity: isOpen ? 1 : 0 }} />
             </ListItemButton>
         </ListItem>
     );
