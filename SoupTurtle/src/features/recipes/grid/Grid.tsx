@@ -5,9 +5,6 @@ import DataGrid, { Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, H
 import CustomStore from 'devextreme/data/custom_store';
 import ODataStore from 'devextreme/data/odata/store';
 import 'devextreme-react/text-area';
-import deMessages from 'devextreme/localization/messages/de.json';
-import enMessages from 'devextreme/localization/messages/en.json';
-import { locale, loadMessages } from "devextreme/localization";
 
 import { useTranslation } from 'react-i18next';
 import { loadRecipe, loadRecipes, saveRecipe, removeRecipe } from '../../../api/recipe.api';
@@ -65,10 +62,6 @@ const Grid: React.FC<Props> = ({ dSource }) => {
         }
     }
 
-    loadMessages(deMessages);
-    loadMessages(enMessages);
-    locale(Common.i18n.language);
-
     const { t } = useTranslation();
 
     function CellInstructions(cellData: any) {
@@ -116,36 +109,40 @@ const Grid: React.FC<Props> = ({ dSource }) => {
                 </ColumnChooser>
                 <GroupPanel visible={true} />
                 <HeaderFilter visible={true} />
-                <Paging enabled={false} defaultPageSize={100} />
+                <Paging enabled={false} />
                 <Scrolling mode="virtual" rowRenderingMode="virtual" />
                 <Editing mode='popup' allowAdding={true} allowUpdating={true} allowDeleting={true} confirmDelete={true} useIcons={false} >
                     <Popup title={t('recipes.title_singular')} showTitle={true} width={900} height={800} />
                     <Form>
-                        <Item itemType="group" caption={t('recipes.base_data')} colCount={2} colSpan={2}>
+                        {/* @ts-ignore */}
+                        <Item itemType="group" colCount={2} colSpan={2} caption={t('recipes.base_data')}>
+                            {/* @ts-ignore */}
                             <Item dataField="title" colSpan={2} />
+                            {/* @ts-ignore */}
                             <Item dataField="ingredients" colSpan={2} />
+                            {/* @ts-ignore */}
                             <Item dataField="numberServings" />
+                            {/* @ts-ignore */}
                             <Item dataField="quantities" />
+                            {/* @ts-ignore */}
                             <Item dataField="category" />
+                            {/* @ts-ignore */}
                             <Item dataField="price" />
                         </Item>
-                        <Item itemType="group" caption={t('recipes.extended_data')} colCount={2} colSpan={2}>
-                            <Item
-                                dataField="instructions"
-                                editorType="dxTextArea"
-                                colSpan={2}
-                                editorOptions={{ height: 100 }} 
-                                />
-                            <Item dataField="dateCreated" />
-                            <Item dataField="dateModified" />
-                            <Item
-                                dataField="notes"
-                                editorType="dxTextArea"
-                                colSpan={2}
-                                editorOptions={{ height: 100 }} 
-                                />
+                        {/* @ts-ignore */}
+                        <Item itemType="group" colCount={2} colSpan={2} caption={t('recipes.extended_data')}>
+                            {/* @ts-ignore */}
+                            <Item dataField="instructions" editorType="dxTextArea" colSpan={2} editorOptions={{ height: 100 }} />
+                            {/* @ts-ignore */}
+                            <Item dataField="dateCreated" editorOptions={{ dataType: "date" }} />
+                            {/* @ts-ignore */}
+                            <Item dataField="dateModified" editorOptions={{ dataType: "date" }} />
+                            {/* @ts-ignore */}
+                            <Item dataField="notes" editorType="dxTextArea" colSpan={2} editorOptions={{ height: 100 }} />
+                            {/* @ts-ignore */}
                             <Item dataField="source" />
-                            <Item dataField="sourcePage" label="foo"  />
+                            {/* @ts-ignore */}
+                            <Item dataField="sourcePage" />
                         </Item>
                     </Form>
                 </Editing>
@@ -157,8 +154,8 @@ const Grid: React.FC<Props> = ({ dSource }) => {
                 <Column dataField="numberServings" caption={t('recipes.list.numberServings')} />
                 <Column dataField="quantities" caption={t('recipes.list.quantities')} />
                 <Column dataField="category" caption={t('recipes.list.category')} />
-                <Column dataField="dateCreated" caption={t('recipes.list.dateCreated')} cellRender={CellCreated} />
-                <Column dataField="dateModified" caption={t('recipes.list.dateModified')} cellRender={CellModified} />
+                <Column dataField="dateCreated" caption={t('recipes.list.dateCreated')} cellRender={CellCreated} dataType="date" editorOptions={{ dataType: "date" }} />
+                <Column dataField="dateModified" caption={t('recipes.list.dateModified')} cellRender={CellModified} dataType="date" editorOptions={{ dataType: "date" }} />
                 <Column dataField="source" caption={t('recipes.list.source')} cellRender={CellSource} />
                 <Column dataField="notes" caption={t('recipes.list.notes')} visible={false} />
                 <Column dataField="description" caption={t('recipes.list.description')} />

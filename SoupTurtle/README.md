@@ -8,7 +8,9 @@
   - [ ] Reload Liste nach Create funktioniert nicht
 - [x] Mehr Spalten
 - [x] FontAwesome
-- [x] DevExtreme
+- [x] List / MUI
+  - [ ] Datepicker-Problem
+- [x] Grid / DevExtreme
   - [x] localization übergeben
   - [ ] localization on the fly ändern
   - [x] Höhe/Scrollbar
@@ -18,7 +20,7 @@
   - [ ] infinte scrolling
   - [x] Dateformats
   - [ ] Api-Calls
-    - [ ] Rest komplett
+    - [x] Rest CRUD
     - [ ] OData
     - [ ] GraphQL
   - [x] Edit-Forms / Inline
@@ -49,6 +51,7 @@ Patterns verinnerlichen:
 
 Typescript
 - [+] Pattern mit "..."
+  - [ ] fix @ts-ignore occurences
 
 VS-Code
 - [ ] Gitlens
