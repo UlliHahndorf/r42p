@@ -27,7 +27,7 @@
         "deleteQuery": "Really delete?",
         "base_data": "Base data",
         "extended_data": "Extended data",
-        "orderLabel": "Order by",
+        "order_label": "Order by",
          "list": {
             "title": "Title",
             "ingredients": "Ingredients",
@@ -41,6 +41,7 @@
             "description": "Description",
             "price": "Price",
             "source": "Source",
+            "source_page": "Page",
             "filterResults_one": "{{count}} Recipe",
             "filterResults_other": "{{count}} Recipes"
         },

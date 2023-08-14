@@ -95,7 +95,7 @@ const List: React.FC = () => {
               <TextField label="Filter" value={filter} onChange={handleFilterChange} />
             </FormControl>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="orderSelectLabel" sx={{ bgcolor: "#fff" }}>{t('recipes.orderLabel')}</InputLabel>
+              <InputLabel id="orderSelectLabel" sx={{ bgcolor: "#fff" }}>{t('recipes.order_label')}</InputLabel>
               <Select labelId="orderSelectLabel" value={orderField} defaultValue={'Title'} onChange={handleOrderChange} >
                 <MenuItem value='Title'>{t('recipes.list.title')}</MenuItem>
                 <MenuItem value='Price'>{t('recipes.list.price')}</MenuItem>

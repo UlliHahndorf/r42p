@@ -1,7 +1,7 @@
 {
   "name": "soupturtle",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 192.168.1.111",
@@ -12,8 +12,6 @@
     "backend5": "json-server --host 192.168.1.111 -p 3001 -w data/recipes5.json"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.3",
     "@fortawesome/fontawesome-pro": "^6.4.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",

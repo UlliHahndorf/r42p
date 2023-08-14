@@ -27,7 +27,7 @@
         "deleteQuery": "Wirklich löschen?",
         "base_data": "Basisdaten",
         "extended_data": "Erweiterte Daten",
-        "orderLabel": "Sortierung",
+        "order_label": "Sortierung",
         "list": {
             "title": "Titel",
             "ingredients": "Zutaten",
@@ -41,6 +41,7 @@
             "description": "Beschreibung",
             "price": "Preis",
             "source": "Quelle",
+            "source_page": "Seite",
             "filterResults_one": "{{count}} Rezept",
             "filterResults_other": "{{count}} Rezepte"
         },
