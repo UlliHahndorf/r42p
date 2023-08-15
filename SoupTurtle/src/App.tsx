@@ -18,6 +18,9 @@ import './shared/styles/fontawesome-all.min.css';
 import 'devextreme/dist/css/dx.light.css';
 import './shared/styles/devextreme.css';
 
+// option: lazy import
+//const RecipesList = React.lazy(() => import('./features/recipes/list/List'));
+
 const App: React.FC = () => {
 
   const theme = createTheme({

@@ -11,6 +11,7 @@
 - [x] ConfirmDialog
   - [ ] Faster!
 - [x] Feedback automatisch verschwinden lassen
+- [ ] Lazy Loading / Chunks
 
 ## List / Material-UI
 - [x] Liste sortiert
