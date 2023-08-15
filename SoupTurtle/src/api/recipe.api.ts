@@ -1,5 +1,5 @@
 import { Recipe, CreateRecipe } from '../shared/types/Recipe';
-import { HttpHeaders } from '../shared/funcs';
+import { HttpHeaders } from '../shared/libs/httpLib';
 
 const baseUrl = import.meta.env.VITE_BACKEND_URL + '/recipes';
 

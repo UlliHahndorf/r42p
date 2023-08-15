@@ -4,6 +4,7 @@ import * as Common from '../../shared/components/Common';
 import { useAppDispatch } from '../../app/hooks';
 import { load, selectRecipes } from '../recipes/recipesSlice';
 import { useSelector } from 'react-redux';
+import { DateFormat } from '../../shared/libs/dateLib.js'
 
 const Welcome: React.FC = () => {
   const { t } = useTranslation();
@@ -26,6 +27,8 @@ const Welcome: React.FC = () => {
             ? t('recipes.list.filterResults_one', {count: recipes.length})
             : t('recipes.list.filterResults_other', {count: recipes.length})
         }
+        &nbsp;
+        ({ DateFormat(new Date()) })
       </div>
     </>
   );

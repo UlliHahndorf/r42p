@@ -1,7 +1,8 @@
 import i18n  from '../i18n';
 
-export { default as cl } from '../funcs.ts';
-export { DateFormat, DateFormatString, ToHtml } from '../funcs.ts';
+export { default as cl } from '../libs/debugLib.ts';
+export { DateFormat, DateFormatString } from '../libs/dateLib.ts';
+export { StringToHtml } from '../libs/stringLib.ts';
 export { default as i18n } from '../i18n';
 
 export { default as Icon } from './Icon';

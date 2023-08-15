@@ -20,7 +20,7 @@ const ListItem: React.FC<Props> = ({ recipe, onDelete }) => {
         <Link to={`edit/${recipe.id}`} ><b>{recipe.title}</b></Link>
       </TableCell>
       <TableCell>{recipe.ingredients}</TableCell>
-      <TableCell>{Common.ToHtml(recipe.instructions)}</TableCell>
+      <TableCell>{Common.StringToHtml(recipe.instructions)}</TableCell>
       <TableCell>{recipe.numberServings}</TableCell>
       <TableCell>{recipe.quantities}</TableCell>
       <TableCell>{Common.DateFormatString(recipe.dateCreated.toString())}</TableCell>

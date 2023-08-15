@@ -21,11 +21,12 @@ const MenuItem: React.FC<Props> = ({ isSelected, isOpen, keyAttr, suffix, labelK
 
      return (
         <ListItem key={keyAttr} component={Link} to={targetUrl} disablePadding sx={{ display: 'block' }} >
-            <ListItemButton sx={{ minHeight: 48, justifyContent: isOpen ? 'initial' : 'center', px: 2.5, }} 
-                     // Add onClick event to call the handleClick function
-                     onClick={onSelect}
-                    // Add the selected property based on the isSelected state
-                    selected={isSelected}
+            <ListItemButton 
+                sx={{ minHeight: 48, justifyContent: isOpen ? 'initial' : 'center', px: 2.5, }} 
+                // Add onClick event to call the handleClick function
+                onClick={onSelect}
+                // Add the selected property based on the isSelected state
+                selected={isSelected}
                 > 
                 <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: isOpen ? 3 : 'auto', }}>
                     <Common.Icon name={iconName} size='2x' isFixedWidth={true} />

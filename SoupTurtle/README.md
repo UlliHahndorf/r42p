@@ -1,8 +1,9 @@
 # ToDos SoupTurtle
 
+## Uncategorized Stuff
 - [x] Menu mit Links
   - [x] Menü nur 1x laden
-  - [ ] Menu aufgeklappt und link sollte wieder zuklappen
+  - [x] Menu aufgeklappt und link sollte wieder zuklappen
 - [x] QueryClient und ungenutzte Files raus?
 - [x] Mehr Spalten
 - [x] FontAwesome
@@ -11,11 +12,11 @@
   - [ ] Faster!
 - [x] Feedback automatisch verschwinden lassen
 
-## List / MUI
+## List / Material-UI
 - [x] Liste sortiert
 - [x] CRUD
   - [ ] Komplettes Form im Editor
-  - [ ] Datepicker-Problem
+  - [ ] Datepicker-Vorbelegungs mit Locale funktioniert nicht
   - [x] Add auch in Form-Layer
   - [ ] Reload Liste nach Create funktioniert nicht
   - [X] API-Authentification mittels "Access-Control-Allow-Origin: *"
@@ -34,13 +35,14 @@
 - [ ] Api-Calls
   - [x] Rest CRUD
   - [x] OData
+    - [ ] CRUD-Functions
   - [ ] GraphQL => 
     - https://supportcenter.devexpress.com/ticket/details/t721074/devextreme-grid-graphql-support
     - https://supportcenter.devexpress.com/ticket/details/t640477/store-for-graphql
-- [x] Edit-Forms / Inline
+- [x] Edit-Forms
   - [ ] Edit Popup also by click on title
   - [ ] Popup Editor Fields continue
-- [ ] CRUD-Functions
+  - [x] Lookups
 - [x] Font-Awesome-Icons
 
 ## Other stuff
@@ -89,3 +91,15 @@
   - Axios
 - Validation
   - Yup
+
+### What should a frontend framework cover apart of building the UI
+
+- router,
+- local storage
+- cache at different levels
+- network requests
+- 3rd-party integrations
+- 3rd-party login
+- security
+- logging
+- performance tuning

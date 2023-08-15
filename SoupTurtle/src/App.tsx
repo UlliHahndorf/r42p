@@ -14,9 +14,9 @@ import RecipesGrid from './features/recipes/grid/Grid';
 import WeekPlan from './features/weekplan/WeekPlan';
 
 import './App.css';
-import './shared/fontawesome-all.min.css';
+import './shared/styles/fontawesome-all.min.css';
 import 'devextreme/dist/css/dx.light.css';
-import './shared/devextreme.css';
+import './shared/styles/devextreme.css';
 
 const App: React.FC = () => {
 

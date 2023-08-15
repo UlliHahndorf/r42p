@@ -92,11 +92,11 @@ export default function Menu() {
   const [open, setOpen] = React.useState(false);
 
   const menuItems = [
-    { labelKey: 'menu.start'   , keyAttr: 'start'        , suffix: '',         targetUrl: '/'               , iconName: 'house'          },
-    { labelKey: 'menu.recipes' , keyAttr: 'recipesList'  , suffix: 'MUI/REST', targetUrl: '/recipes/list'   , iconName: 'book'           },
-    { labelKey: 'menu.recipes' , keyAttr: 'recipesGrid'  , suffix: 'DX/REST',  targetUrl: '/recipes/grid'   , iconName: 'books'          },
-    { labelKey: 'menu.recipes' , keyAttr: 'recipesGrido' , suffix: 'DX/ODATA', targetUrl: '/recipes/grido'  , iconName: 'book-open-cover'},
-    { labelKey: 'menu.week'    , keyAttr: 'week'         , suffix: '',         targetUrl: '/weekplan'       , iconName: 'plate-utensils' }
+    { labelKey: 'menu.start',   keyAttr: 'start',           suffix: '',           targetUrl: '/',               iconName: 'house',            hasDividerAfter: true   },
+    { labelKey: 'menu.recipes', keyAttr: 'recipesList',     suffix: 'MUI/REST',   targetUrl: '/recipes/list',   iconName: 'book',             hasDividerAfter: false  },
+    { labelKey: 'menu.recipes', keyAttr: 'recipesGrid',     suffix: 'DX/REST',    targetUrl: '/recipes/grid',   iconName: 'books',            hasDividerAfter: false  },
+    { labelKey: 'menu.recipes', keyAttr: 'recipesGrido',    suffix: 'DX/ODATA',   targetUrl: '/recipes/grido',  iconName: 'book-open-cover',  hasDividerAfter: true   },
+    { labelKey: 'menu.week',    keyAttr: 'week',            suffix: '',           targetUrl: '/weekplan',       iconName: 'plate-utensils',   hasDividerAfter: false  }
   ];
 
   const [selectedItem, setSelectedItem] = React.useState('');
@@ -104,6 +104,7 @@ export default function Menu() {
   // Callback function to handle the selection
   const handleMenuItemClick = (keyAttr: React.SetStateAction<string>) => {
     setSelectedItem(keyAttr);
+    setOpen(false);
   };
 
   const handleDrawerOpen = () => {
@@ -150,15 +151,20 @@ export default function Menu() {
           </DrawerHeader>
           <Divider />
           <List>
-            { menuItems.map((menuItem) => (
-              <MenuItem
-                key={menuItem.keyAttr}
-                isSelected={selectedItem === menuItem.keyAttr}
-                onSelect={() => handleMenuItemClick(menuItem.keyAttr)}
-                isOpen={open}
-                {...menuItem}
-              />
-            ))}
+            {menuItems.map((menuItem) =>
+            (
+              <div key={menuItem.keyAttr + 'Sect'}>
+                <MenuItem
+                  key={menuItem.keyAttr}
+                  isSelected={selectedItem === menuItem.keyAttr}
+                  onSelect={() => handleMenuItemClick(menuItem.keyAttr)}
+                  isOpen={open}
+                  {...menuItem}
+                />
+                {menuItem.hasDividerAfter ? <Divider key={menuItem.keyAttr + 'Divder'} /> : ""}
+              </div>
+            )
+            )}
           </List>
           <Divider />
         </Drawer>

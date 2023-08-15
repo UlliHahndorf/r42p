@@ -124,7 +124,6 @@ const Form: React.FC<Props> = ({ recipe }) => {
                         defaultValue={valueCreated}
                         label={t('recipes.list.dateCreated')}
                         {...register('dateCreated')}
-                        format="DD.MM.YYYY"
                         onChange={(newValue) => setValueCreated(newValue)}
                         localeText={localePlaceholder}
                     />
@@ -133,7 +132,6 @@ const Form: React.FC<Props> = ({ recipe }) => {
                         value={valueModified}
                         label={t('recipes.list.dateModified')}
                         {...register('dateModified')}
-                        format="DD.MM.YYYY"
                         onChange={(newValue) => setValueModified(newValue)}
                         localeText={localePlaceholder}
                     />

@@ -1,7 +1,7 @@
 import React from 'react';
 //import { Link } from 'react-router-dom';
 
-import DataGrid, { Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Paging, Scrolling, Button, Editing, ColumnChooserSelection, Position, Popup, FormItem } from 'devextreme-react/data-grid';
+import DataGrid, { Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Paging, Scrolling, Button, Editing, ColumnChooserSelection, Position, Popup, FormItem, Lookup } from 'devextreme-react/data-grid';
 import CustomStore from 'devextreme/data/custom_store';
 import ODataStore from 'devextreme/data/odata/store';
 import 'devextreme-react/text-area';
@@ -12,6 +12,7 @@ import { locale, loadMessages } from "devextreme/localization";
 import { useTranslation } from 'react-i18next';
 import { loadRecipe, loadRecipes, saveRecipe, removeRecipe } from '../../../api/recipe.api';
 import * as Common from '../../../shared/components/Common';
+import { sources } from '../sources';
 import './Grid.scss'
 
 type Props = {
@@ -77,7 +78,7 @@ const Grid: React.FC<Props> = ({ dSource }) => {
     locale(Common.i18n.language);
 
     function CellInstructions(cellData: any) {
-        return Common.ToHtml(cellData.row.data.instructions);
+        return Common.StringToHtml(cellData.row.data.instructions);
     }
     function CellCreated(cellData: any) {
         return Common.DateFormatString(cellData.row.data.dateCreated);
@@ -89,21 +90,21 @@ const Grid: React.FC<Props> = ({ dSource }) => {
         return cellData.row.data.source + (cellData.row.data.sourcePage !== "" ? " / " + cellData.row.data.sourcePage : "");
     }
     // function CellTitle(cellData: any) {
-    //     return (<Link to={`edit/${cellData.row.data.id}`} ><b>{cellData.row.data.title}</b></Link>)
     // }
+
+    const sourcesDataSource = sources;
 
     // #endregion
 
     let content = (
         <div id="gridOut" className="dx-viewport borderlessGrid">
-            <Common.Icon name='books' size='2x' /> <span className='title'>{t('recipes.title_plural')}</span>
+            <Common.Icon name={IsOdata() ? "book-open-cover" : "books"} size='2x' /> <span className='title'>{t('recipes.title_plural')}</span>
             <div className="protRemarks">
                 DevExtreme DataGrid<br />
                 Die Daten kommen per <b>{dSource}</b> von <b>{import.meta.env.VITE_BACKEND_URL}</b>
             </div>
 
             <DataGrid id="dataGrid"
-                // dataSource={serviceUrl + "/recipes"}
                 dataSource={GetDataSource()}
                 allowColumnResizing={true}
                 allowColumnReordering={true}
@@ -131,6 +132,7 @@ const Grid: React.FC<Props> = ({ dSource }) => {
                     <Popup title={t('recipes.title_singular')} showTitle={true} width={900} height={800} />
                 </Editing>
 
+                {/* Columns */}
                 <Column dataField="title" caption={t('recipes.list.title')} allowHiding={false}>
                     <FormItem colSpan={2} />
                 </Column>
@@ -144,7 +146,6 @@ const Grid: React.FC<Props> = ({ dSource }) => {
                 <Column dataField="instructions" caption={t('recipes.list.instructions')} cellRender={CellInstructions} encodeHtml={false} visible={false}>
                     <FormItem colSpan={2} editorType="dxTextArea" editorOptions={{ height: 50 }} />
                 </Column>
-
                 <Column dataField="numberServings" caption={t('recipes.list.numberServings')} />
                 <Column dataField="quantities" caption={t('recipes.list.quantities')} />
                 <Column dataField="dateCreated" caption={t('recipes.list.dateCreated')} cellRender={CellCreated} dataType="date" editorOptions={{ dataType: "date" }} />
@@ -155,12 +156,14 @@ const Grid: React.FC<Props> = ({ dSource }) => {
                 <Column dataField="notes" caption={t('recipes.list.notes')} visible={false}>
                     <FormItem editorType="dxTextArea" editorOptions={{ height: 200 }} />
                 </Column>
-                <Column dataField="source" caption={t('recipes.list.source')} cellRender={CellSource} />
+                <Column dataField="source" caption={t('recipes.list.source')} cellRender={CellSource}>
+                    <Lookup dataSource={sourcesDataSource} displayExpr="name" valueExpr="name" />
+                </Column>
                 <Column dataField="sourcePage" caption={t('recipes.list.source_page')} />
                 <Column dataField="price" caption={t('recipes.list.price')} format="#0.00 €" dataType="number">
                     <FormItem editorOptions={{format: {type:'currency',currency:'EUR', precision: 2}}} />
                 </Column>
-                <Column type="buttons" width={110} visible={!IsOdata()}>
+                <Column type="buttons" visible={!IsOdata()} >
                     <Button name="edit" cssClass="click-pri"><Common.Icon name='pen-to-square' size='lg' /></Button>
                     <Button name="delete" cssClass="click-pri"><Common.Icon name='trash-can' size='lg' /></Button>
                 </Column>
