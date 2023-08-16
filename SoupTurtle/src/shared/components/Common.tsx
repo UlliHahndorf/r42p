@@ -1,9 +1,9 @@
-import i18n  from '../i18n';
+import i18n  from '../libs/i18nLib.ts';
 
 export { default as cl } from '../libs/debugLib.ts';
 export { DateFormat, DateFormatString } from '../libs/dateLib.ts';
 export { StringToHtml } from '../libs/stringLib.ts';
-export { default as i18n } from '../i18n';
+export { default as i18n, SetLanguage } from '../libs/i18nLib.ts';
 
 export { default as Icon } from './Icon';
 export { default as Progress } from './Progress';

@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import './shared/i18n';
 import Menu from './shared/components/Menu';
 import * as Common from './shared/components/Common';
 
@@ -13,6 +12,7 @@ import RecipesList from './features/recipes/list/List';
 import RecipesGrid from './features/recipes/grid/Grid';
 import WeekPlan from './features/weekplan/WeekPlan';
 
+// Styles
 import './App.css';
 import './shared/styles/fontawesome-all.min.css';
 import 'devextreme/dist/css/dx.light.css';
@@ -29,6 +29,9 @@ const App: React.FC = () => {
       secondary: { main: '#42a5f5' },
     },
   });
+
+  // Set default langauge
+  Common.SetLanguage('de');
 
   return (
     <>

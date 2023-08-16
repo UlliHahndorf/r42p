@@ -1,25 +1,14 @@
 import { Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { TFunction } from 'i18next';
-
-import dayjs from 'dayjs';
-import 'dayjs/locale/de'
-import 'dayjs/locale/en'
-
-import deMessages from 'devextreme/localization/messages/de.json';
-import enMessages from 'devextreme/localization/messages/en.json';
-import { locale, loadMessages } from "devextreme/localization";
+import { SetLanguage } from '../libs/i18nLib';
 
 const LanguageSwitch: React.FC = () => {
   const { i18n } = useTranslation();
 
   function postChangeLanguage(_error: any, _t: TFunction<'translation', undefined>): void {
-    // DayJS
-    dayjs.locale(i18n.language);
-    // DevExtreme
-    loadMessages(deMessages);
-    loadMessages(enMessages);
-    locale(i18n.language);
+    console.log(i18n.language);
+    SetLanguage(i18n.language);
   }
 
   return (
