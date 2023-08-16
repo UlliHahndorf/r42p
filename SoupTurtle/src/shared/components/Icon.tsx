@@ -10,6 +10,7 @@ library.add(fas);
 
 type Props = {
     name: string;
+    title?: string;
     size?: string;
     style?: string
     className?: string
@@ -21,6 +22,7 @@ type Props = {
 
 const Icon: React.FC<Props> = ({ 
         name, 
+        title = '', 
         style = 'fal', 
         size = '1x', 
         className = '', 
@@ -34,6 +36,7 @@ const Icon: React.FC<Props> = ({
     let styleType: IconPrefix = (style.toLowerCase()) as IconPrefix;
     let content = <FontAwesomeIcon 
                     icon={[ styleType, iconNameType ]} 
+                    title={title}
                     size={sizePropType}                    
                     spin={isAnimSpin} 
                     fade={isAnimFade} 

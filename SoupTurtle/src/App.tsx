@@ -42,12 +42,13 @@ const App: React.FC = () => {
             <Menu />
               <Routes>
                 <Route path="/" element={<Welcome />} />
-                <Route path="/recipes/grid" element={<RecipesGrid dSource='REST' />} />
-                <Route path="/recipes/grido" element={<RecipesGrid dSource='ODATA' />} />
-                <Route path="/recipes/list" element={<RecipesList />}>
+                <Route path="/recipes/list" element={<RecipesList />} >
                   <Route path="edit/:id" element={<RecipeEdit />} />
                   <Route path="new" element={<RecipeEdit />} />
                 </Route>
+                <Route path="/recipes/grid" element={<RecipesGrid dSource='REST' />} />
+                <Route path="/recipes/grido" element={<RecipesGrid dSource='ODATA' />} />
+                <Route path="/recipes/gridg" element={<RecipesGrid dSource='GRAPHQL' />} />
                 <Route path="/weekplan" element={<WeekPlan />} />
                 <Route path="*" element={<Common.NotFound />} />
               </Routes>

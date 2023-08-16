@@ -52,6 +52,7 @@
 - [ ] Authentification
 - [ ] VS statt VS-Code, alles erstmal unter win
 - [x] VS-Code-Extension Gitlens
+- [ ] 
 ### Dive into
 - [ ] Await/Async
 - [ ] Built-in React-Hooks
@@ -75,11 +76,14 @@
 - UI-Elements
   - Material-UI
   - DevExtreme
+    - [ ] ReactSuite
   - Date-Lib
     - DayJs
 - Routing
+  - React-Router-Dom
 - State Management
   - Redux
+  - [ ] Zustand
   - Flux Standard Action
 - i18n
   - i18next

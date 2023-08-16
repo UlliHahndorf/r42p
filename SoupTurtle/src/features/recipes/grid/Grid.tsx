@@ -15,6 +15,8 @@ import * as Common from '../../../shared/components/Common';
 import { sources } from '../sources';
 import './Grid.scss'
 
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
 type Props = {
     dSource: 'REST' | 'ODATA' | 'GRAPHQL';
 };
@@ -24,22 +26,13 @@ const Grid: React.FC<Props> = ({ dSource }) => {
     // #region local functions
 
     function onRowUpdating(e: any) {
-        if (IsOdata()) return;
+        if (HasCrud()) return;
         // Needed to pass all data for a update, otherwise only changed data is included in POST/PUT
         e.newData = { ...e.oldData, ...e.newData };
     }
 
-    function GetDataSource() {
-        switch (dSource) {
-            case 'REST':
-                return restStore;
-            case 'ODATA':
-                return odataStore;
-        }
-    }
-
-    function IsOdata() {
-        return (dSource === 'ODATA');
+    function HasCrud() {
+        return (dSource === 'REST');
     }
 
     // REST Store
@@ -70,6 +63,52 @@ const Grid: React.FC<Props> = ({ dSource }) => {
         keyType: 'Int32',
     });
 
+    // GraphQL Store
+    const graphQlStore = new CustomStore({
+        key: 'id',
+        load: () => {
+            return [];
+            //adGraphQl();
+        },
+    });
+
+    const gqlClient = new ApolloClient({
+        uri: import.meta.env.VITE_BACKEND_URL + '/graphql',
+        cache: new InMemoryCache(),
+    });
+
+    let iconName: string = '';
+    let url: string = '';
+
+    function FillSourceDependencies() {
+        switch (dSource) {
+            case 'REST':
+                iconName = 'books';
+                url = import.meta.env.VITE_BACKEND_URL + '/recipes';
+                break;
+            case 'ODATA':
+                iconName = 'book-open-cover';
+                url = import.meta.env.VITE_BACKEND_URL + '/odata/recipes';
+                break;
+            case 'GRAPHQL':
+                iconName = 'book-sparkles';
+                url = import.meta.env.VITE_BACKEND_URL + '/graphql';
+                break;
+        }
+    }
+    FillSourceDependencies();
+
+    function GetDataSource() {
+        switch (dSource) {
+            case 'REST':
+                return restStore;
+            case 'ODATA':
+                return odataStore;
+            case 'GRAPHQL':
+                return graphQlStore;
+        }
+    }
+
     const { t } = useTranslation();
 
     // DevExtreme
@@ -97,11 +136,12 @@ const Grid: React.FC<Props> = ({ dSource }) => {
     // #endregion
 
     let content = (
+        <ApolloProvider client={gqlClient}>
         <div id="gridOut" className="dx-viewport borderlessGrid">
-            <Common.Icon name={IsOdata() ? "book-open-cover" : "books"} size='2x' /> <span className='title'>{t('recipes.title_plural')}</span>
+            <Common.Icon name={iconName} size='2x' /> <span className='title'>{t('recipes.title_plural')}</span>
             <div className="protRemarks">
                 DevExtreme DataGrid<br />
-                Die Daten kommen per <b>{dSource}</b> von <b>{import.meta.env.VITE_BACKEND_URL}</b>
+                Die Daten kommen per <b>{dSource}</b> von <b><a href={url} target='blank'>{url}</a></b>
             </div>
 
             <DataGrid id="dataGrid"
@@ -128,7 +168,7 @@ const Grid: React.FC<Props> = ({ dSource }) => {
                 <HeaderFilter visible={true} />
                 <Paging enabled={false} />
                 <Scrolling mode="virtual" rowRenderingMode="virtual" />
-                <Editing mode='popup' allowAdding={!IsOdata()} allowUpdating={!IsOdata()} allowDeleting={!IsOdata()} confirmDelete={true} useIcons={false} >
+                <Editing mode='popup' allowAdding={HasCrud()} allowUpdating={HasCrud()} allowDeleting={HasCrud()} confirmDelete={true} useIcons={false} >
                     <Popup title={t('recipes.title_singular')} showTitle={true} width={900} height={800} />
                 </Editing>
 
@@ -161,18 +201,18 @@ const Grid: React.FC<Props> = ({ dSource }) => {
                 </Column>
                 <Column dataField="sourcePage" caption={t('recipes.list.source_page')} />
                 <Column dataField="price" caption={t('recipes.list.price')} format="#0.00 €" dataType="number">
-                    <FormItem editorOptions={{format: {type:'currency',currency:'EUR', precision: 2}}} />
+                    <FormItem editorOptions={{ format: { type: 'currency', currency: 'EUR', precision: 2 } }} />
                 </Column>
-                <Column type="buttons" visible={!IsOdata()} >
+                <Column type="buttons" visible={HasCrud()} >
                     <Button name="edit" cssClass="click-pri"><Common.Icon name='pen-to-square' size='lg' /></Button>
                     <Button name="delete" cssClass="click-pri"><Common.Icon name='trash-can' size='lg' /></Button>
                 </Column>
             </DataGrid>
-        </div >
+            </div >
+        </ApolloProvider>
     );
 
     return content
 };
 
 export default Grid;
-

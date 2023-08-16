@@ -19,7 +19,9 @@ type Props = {
 const MenuItem: React.FC<Props> = ({ isSelected, isOpen, keyAttr, suffix, labelKey, targetUrl, iconName, onSelect }) => {
     const { t } = useTranslation();
 
-     return (
+    const iconTitle = t(labelKey) + (suffix !== "" ? " " + suffix : "");
+
+    return (
         <ListItem key={keyAttr} component={Link} to={targetUrl} disablePadding sx={{ display: 'block' }} >
             <ListItemButton 
                 sx={{ minHeight: 48, justifyContent: isOpen ? 'initial' : 'center', px: 2.5, }} 
@@ -29,9 +31,9 @@ const MenuItem: React.FC<Props> = ({ isSelected, isOpen, keyAttr, suffix, labelK
                 selected={isSelected}
                 > 
                 <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: isOpen ? 3 : 'auto', }}>
-                    <Common.Icon name={iconName} size='2x' isFixedWidth={true} />
+                    <Common.Icon name={iconName} size='2x' isFixedWidth={true} title={iconTitle} />
                 </ListItemIcon>
-                <ListItemText primary={t(labelKey) + (suffix !== "" ? " " + suffix : "")} sx={{ opacity: isOpen ? 1 : 0 }} />
+                <ListItemText primary={iconTitle} sx={{ opacity: isOpen ? 1 : 0 }} />
             </ListItemButton>
         </ListItem>
     );

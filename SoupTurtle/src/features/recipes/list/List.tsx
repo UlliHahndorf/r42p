@@ -34,7 +34,7 @@ const List: React.FC = () => {
   useEffect(() => {
     dispatch(load());
   }, []);
-
+ 
   async function handleDelete(): Promise<void> {
     dispatch(remove(deleteId));
   }
@@ -73,6 +73,8 @@ const List: React.FC = () => {
           break;
       }
 
+      const url = import.meta.env.VITE_BACKEND_URL;
+
       // Filter
       const filteredRecipes = sortedRecipes
         .filter((recipe) =>
@@ -105,7 +107,7 @@ const List: React.FC = () => {
           </div>
           <div className="protRemarks">
             Manuell gebaute Liste mit List/ListItem-Komponentenn aus der Material-UI-Bibliothek<br />
-            Die Daten kommen per REST von <b>{import.meta.env.VITE_BACKEND_URL}</b>
+            Die Daten kommen per <b>REST</b> von <b><a href={url} target='blank'>{url}</a></b>
           </div>
           <TableContainer id='recipesTable'>
             <Table sx={{ minWidth: 650 }} aria-label="simple recipes overview table" stickyHeader={true} >
@@ -147,3 +149,4 @@ const List: React.FC = () => {
 };
 
 export default List;
+

@@ -16,7 +16,9 @@ import MenuItem from './MenuItem';
 import LanguageSwitch from './LanguageSwitch';
 import * as Common from './Common';
 
-const drawerWidth = 240;
+// #region DrawerFunctions
+
+const drawerWidth = 280;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -87,16 +89,19 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+// #endregion
+
 export default function Menu() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const menuItems = [
-    { labelKey: 'menu.start',   keyAttr: 'start',           suffix: '',           targetUrl: '/',               iconName: 'house',            hasDividerAfter: true   },
-    { labelKey: 'menu.recipes', keyAttr: 'recipesList',     suffix: 'MUI/REST',   targetUrl: '/recipes/list',   iconName: 'book',             hasDividerAfter: false  },
-    { labelKey: 'menu.recipes', keyAttr: 'recipesGrid',     suffix: 'DX/REST',    targetUrl: '/recipes/grid',   iconName: 'books',            hasDividerAfter: false  },
-    { labelKey: 'menu.recipes', keyAttr: 'recipesGrido',    suffix: 'DX/ODATA',   targetUrl: '/recipes/grido',  iconName: 'book-open-cover',  hasDividerAfter: true   },
-    { labelKey: 'menu.week',    keyAttr: 'week',            suffix: '',           targetUrl: '/weekplan',       iconName: 'plate-utensils',   hasDividerAfter: false  }
+    { labelKey: 'menu.start',   keyAttr: 'start',           suffix: '',             targetUrl: '/',               iconName: 'house',            hasDividerAfter: true   },
+    { labelKey: 'menu.recipes', keyAttr: 'recipesList',     suffix: 'MUI/REST',     targetUrl: '/recipes/list',   iconName: 'book',             hasDividerAfter: true   },
+    { labelKey: 'menu.recipes', keyAttr: 'recipesGrid',     suffix: 'DX/REST',      targetUrl: '/recipes/grid',   iconName: 'books',            hasDividerAfter: false  },
+    { labelKey: 'menu.recipes', keyAttr: 'recipesGrido',    suffix: 'DX/ODATA',     targetUrl: '/recipes/grido',  iconName: 'book-open-cover',  hasDividerAfter: false  },
+    { labelKey: 'menu.recipes', keyAttr: 'recipesGridg',    suffix: 'DX/GRAPHQL',   targetUrl: '/recipes/gridg',  iconName: 'book-sparkles',    hasDividerAfter: true   },
+    { labelKey: 'menu.week',    keyAttr: 'week',            suffix: '',             targetUrl: '/weekplan',       iconName: 'plate-utensils',   hasDividerAfter: false  }
   ];
 
   const [selectedItem, setSelectedItem] = React.useState('');
