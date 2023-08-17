@@ -5,7 +5,7 @@ import * as Common from '../../shared/components/Common';
 const WeekPlan: React.FC = () => {
   const { t } = useTranslation();
 
-  let content = (
+  const content = (
     <>
       <Common.Icon name='plate-utensils' size='2x' /> <span className='title'>{t('menu.week')}</span>
       <div className='jumbo'>

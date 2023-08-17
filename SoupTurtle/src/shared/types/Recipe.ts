@@ -36,7 +36,6 @@ export function DefaultRecipe(): Recipe {
     source: '',
     sourcePage: '',
   }
-};
+}
 
 export type CreateRecipe = Omit<Recipe, 'id'> & { id?: number };
-

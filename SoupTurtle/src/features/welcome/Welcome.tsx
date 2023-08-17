@@ -14,9 +14,9 @@ const Welcome: React.FC = () => {
 
   useEffect(() => {
     dispatch(load());
-  }, []);
+  }, [dispatch]);
 
-  let content = (
+  const content = (
     <>
       <Common.Icon name='house' size='2x' /> <span className='title'>{t('menu.start')}</span>
       <div className="protRemarks">

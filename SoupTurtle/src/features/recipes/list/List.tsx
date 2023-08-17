@@ -33,7 +33,7 @@ const List: React.FC = () => {
 
   useEffect(() => {
     dispatch(load());
-  }, []);
+  }, [dispatch]);
  
   async function handleDelete(): Promise<void> {
     dispatch(remove(deleteId));
@@ -47,84 +47,87 @@ const List: React.FC = () => {
   let content = <Common.Feedback text={t('recipes.nohits')} level='info' />;
 
   switch (loadState) {
-    case 'pending':
-      return <Common.Progress />;
-    case 'error':
-      return <Common.Feedback text={t('main.any_error')} level='error' />;
-    case 'completed':
-
-      if (!recipes || recipes.length === 0) {
-        return <Common.Feedback text={t('recipes.nohits')} level='warning' />;
+      case 'pending': {
+          return <Common.Progress />;
       }
-
-      // Sort
-      var orderField = 'Title';
-      if (orderValue !== "") orderField = orderValue;
-      var sortedRecipes = [...recipes];
-      switch (orderField) {
-        case 'Title':
-          sortedRecipes.sort((a: Recipe, b: Recipe) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
-          break;
-        case 'Price':
-          sortedRecipes.sort((a: Recipe, b: Recipe) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
-          break;
-        case 'LastMod':
-          sortedRecipes.sort((a: Recipe, b: Recipe) => (a.dateModified > b.dateModified) ? 1 : ((b.dateModified > a.dateModified) ? -1 : 0));
-          break;
+      case 'error': {
+          return <Common.Feedback text={t('main.any_error')} level='error' />;
       }
+      case 'completed': {
 
-      const url = import.meta.env.VITE_BACKEND_URL;
+          if (!recipes || recipes.length === 0) {
+              return <Common.Feedback text={t('recipes.nohits')} level='warning' />;
+          }
 
-      // Filter
-      const filteredRecipes = sortedRecipes
-        .filter((recipe) =>
-          recipe.title.toLowerCase().includes(filter.toLowerCase()) ||
-          recipe.ingredients.toLowerCase().includes(filter.toLowerCase())
-        )
-        .map((recipe) => (
-          <ListItem key={recipe.id} recipe={recipe} onDelete={confirmDelete} />
-        ));
+          // Sort
+          let orderField = 'Title';
+          if (orderValue !== "") orderField = orderValue;
+          const sortedRecipes = [...recipes];
+          switch (orderField) {
+              case 'Title':
+                  sortedRecipes.sort((a: Recipe, b: Recipe) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+                  break;
+              case 'Price':
+                  sortedRecipes.sort((a: Recipe, b: Recipe) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
+                  break;
+              case 'LastMod':
+                  sortedRecipes.sort((a: Recipe, b: Recipe) => (a.dateModified > b.dateModified) ? 1 : ((b.dateModified > a.dateModified) ? -1 : 0));
+                  break;
+          }
 
-      content = (
-        <>
-          {(removeState === 'pending' || saveState === 'pending') && <Common.Progress text={t('main.processing')} />}
-          {(removeState === 'error' || saveState === 'error') && <Common.Feedback text={t('main.any_error')} level='error' />}
-          {(removeState === 'completed' || saveState === 'completed') && <Common.Feedback text={t('main.success')} level='success' />}
+          const url = import.meta.env.VITE_BACKEND_URL;
 
-          <div className="filterContainer">
-          <Common.Icon name='book' size='2x' /> <span className='title'>{t('recipes.title_plural')}</span>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <TextField label="Filter" value={filter} onChange={handleFilterChange} />
-            </FormControl>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="orderSelectLabel" sx={{ bgcolor: "#fff" }}>{t('recipes.order_label')}</InputLabel>
-              <Select labelId="orderSelectLabel" value={orderField} defaultValue={'Title'} onChange={handleOrderChange} >
-                <MenuItem value='Title'>{t('recipes.list.title')}</MenuItem>
-                <MenuItem value='Price'>{t('recipes.list.price')}</MenuItem>
-                <MenuItem value='LastMod'>{t('recipes.list.dateModified')}</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div className="protRemarks">
-            Manuell gebaute Liste mit List/ListItem-Komponentenn aus der Material-UI-Bibliothek<br />
-            Die Daten kommen per <b>REST</b> von <b><a href={url} target='blank'>{url}</a></b>
-          </div>
-          <TableContainer id='recipesTable'>
-            <Table sx={{ minWidth: 650 }} aria-label="simple recipes overview table" stickyHeader={true} >
-              <ListHeader recipesCount={filteredRecipes.length} />
-              <TableBody>
-                {filteredRecipes.length > 0 ? (
-                  filteredRecipes
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={4}>{t('recipes.nohits')}</TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </>
-      );
+          // Filter
+          const filteredRecipes = sortedRecipes
+              .filter((recipe) =>
+                  recipe.title.toLowerCase().includes(filter.toLowerCase()) ||
+                  recipe.ingredients.toLowerCase().includes(filter.toLowerCase())
+              )
+              .map((recipe) => (
+                  <ListItem key={recipe.id} recipe={recipe} onDelete={confirmDelete} />
+              ));
+
+          content = (
+              <>
+                  {(removeState === 'pending' || saveState === 'pending') && <Common.Progress text={t('main.processing')} />}
+                  {(removeState === 'error' || saveState === 'error') && <Common.Feedback text={t('main.any_error')} level='error' />}
+                  {(removeState === 'completed' || saveState === 'completed') && <Common.Feedback text={t('main.success')} level='success' />}
+
+                  <div className="filterContainer">
+                      <Common.Icon name='book' size='2x' /> <span className='title'>{t('recipes.title_plural')}</span>
+                      <FormControl sx={{ m: 1, minWidth: 120 }}>
+                          <TextField label="Filter" value={filter} onChange={handleFilterChange} />
+                      </FormControl>
+                      <FormControl sx={{ m: 1, minWidth: 120 }}>
+                          <InputLabel id="orderSelectLabel" sx={{ bgcolor: "#fff" }}>{t('recipes.order_label')}</InputLabel>
+                          <Select labelId="orderSelectLabel" value={orderField} defaultValue={'Title'} onChange={handleOrderChange} >
+                              <MenuItem value='Title'>{t('recipes.list.title')}</MenuItem>
+                              <MenuItem value='Price'>{t('recipes.list.price')}</MenuItem>
+                              <MenuItem value='LastMod'>{t('recipes.list.dateModified')}</MenuItem>
+                          </Select>
+                      </FormControl>
+                  </div>
+                  <div className="protRemarks">
+                      Manuell gebaute Liste mit List/ListItem-Komponentenn aus der Material-UI-Bibliothek<br />
+                      Die Daten kommen per <b>REST</b> von <b><a href={url} target='blank'>{url}</a></b>
+                  </div>
+                  <TableContainer id='recipesTable'>
+                      <Table sx={{ minWidth: 650 }} aria-label="simple recipes overview table" stickyHeader={true} >
+                          <ListHeader recipesCount={filteredRecipes.length} />
+                          <TableBody>
+                              {filteredRecipes.length > 0 ? (
+                                  filteredRecipes
+                              ) : (
+                                  <TableRow>
+                                      <TableCell colSpan={4}>{t('recipes.nohits')}</TableCell>
+                                  </TableRow>
+                              )}
+                          </TableBody>
+                      </Table>
+                  </TableContainer>
+              </>
+          );
+      }
   } // switch
 
   return (
@@ -149,4 +152,3 @@ const List: React.FC = () => {
 };
 
 export default List;
-

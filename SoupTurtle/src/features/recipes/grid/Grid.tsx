@@ -4,10 +4,11 @@ import React from 'react';
 import DataGrid, { Column, ColumnChooser, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Paging, Scrolling, Button, Editing, ColumnChooserSelection, Position, Popup, FormItem, Lookup } from 'devextreme-react/data-grid';
 import CustomStore from 'devextreme/data/custom_store';
 import ODataStore from 'devextreme/data/odata/store';
-import 'devextreme-react/text-area';
+import { ColumnCellTemplateData } from "devextreme/ui/data_grid"
 import deMessages from 'devextreme/localization/messages/de.json';
 import enMessages from 'devextreme/localization/messages/en.json';
 import { locale, loadMessages } from "devextreme/localization";
+import 'devextreme-react/text-area';
 
 import { useTranslation } from 'react-i18next';
 import { loadRecipe, loadRecipes, saveRecipe, removeRecipe } from '../../../api/recipe.api';
@@ -25,6 +26,7 @@ const Grid: React.FC<Props> = ({ dSource }) => {
 
     // #region local functions
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function onRowUpdating(e: any) {
         if (HasCrud()) return;
         // Needed to pass all data for a update, otherwise only changed data is included in POST/PUT
@@ -77,8 +79,8 @@ const Grid: React.FC<Props> = ({ dSource }) => {
         cache: new InMemoryCache(),
     });
 
-    let iconName: string = '';
-    let url: string = '';
+    let iconName = '';
+    let url = '';
 
     function FillSourceDependencies() {
         switch (dSource) {
@@ -116,26 +118,26 @@ const Grid: React.FC<Props> = ({ dSource }) => {
     loadMessages(enMessages);
     locale(Common.i18n.language);
 
-    function CellInstructions(cellData: any) {
+    function CellInstructions(cellData: ColumnCellTemplateData) {
         return Common.StringToHtml(cellData.row.data.instructions);
     }
-    function CellCreated(cellData: any) {
+    function CellCreated(cellData: ColumnCellTemplateData) {
         return Common.DateFormatString(cellData.row.data.dateCreated);
     }
-    function CellModified(cellData: any) {
+    function CellModified(cellData: ColumnCellTemplateData) {
         return Common.DateFormatString(cellData.row.data.dateModified);
     }
-    function CellSource(cellData: any) {
+    function CellSource(cellData: ColumnCellTemplateData) {
         return cellData.row.data.source + (cellData.row.data.sourcePage !== "" ? " / " + cellData.row.data.sourcePage : "");
     }
-    // function CellTitle(cellData: any) {
+    // function CellTitle(cellData: ColumnCellTemplateData) {
     // }
 
     const sourcesDataSource = sources;
 
     // #endregion
 
-    let content = (
+    const content = (
         <ApolloProvider client={gqlClient}>
         <div id="gridOut" className="dx-viewport borderlessGrid">
             <Common.Icon name={iconName} size='2x' /> <span className='title'>{t('recipes.title_plural')}</span>

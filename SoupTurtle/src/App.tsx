@@ -13,7 +13,7 @@ import RecipesGrid from './features/recipes/grid/Grid';
 import WeekPlan from './features/weekplan/WeekPlan';
 
 // Styles
-import './App.css';
+import './App.scss';
 import './shared/styles/fontawesome-all.min.css';
 import 'devextreme/dist/css/dx.light.css';
 import './shared/styles/devextreme.css';

@@ -8,16 +8,18 @@ export function HttpHeaders(httpMethod: string): any {
 
     switch (httpMethod.toUpperCase()) {
         case 'GET':
-        case 'DELETE':
+        case 'DELETE': {
             httpHeaders = defaultHttpHeaders;
             break;
+        }
         case 'PUT':
-        case 'POST':
+        case 'POST': {
             const extraHeaders = {
                 'Content-Type': 'application/json'
             }
             Object.assign(httpHeaders, defaultHttpHeaders, extraHeaders);
             break;
+        }
     }
     return httpHeaders;
 }

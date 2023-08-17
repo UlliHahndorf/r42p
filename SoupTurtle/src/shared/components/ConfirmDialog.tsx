@@ -8,9 +8,11 @@ import { useTranslation } from "react-i18next";
 
 type Props = {
     title: string;
-    message: any;
+    message: string;
     open: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setOpen: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onConfirm: any;
 };
 

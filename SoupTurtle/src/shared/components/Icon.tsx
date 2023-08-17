@@ -31,10 +31,10 @@ const Icon: React.FC<Props> = ({
         isAnimFade = false, 
         isAnimShake = false }) => {
 
-    let iconNameType: IconName = (name.toLowerCase()) as IconName;
-    let sizePropType: SizeProp = (size.toLowerCase()) as SizeProp;
-    let styleType: IconPrefix = (style.toLowerCase()) as IconPrefix;
-    let content = <FontAwesomeIcon 
+    const iconNameType: IconName = (name.toLowerCase()) as IconName;
+    const sizePropType: SizeProp = (size.toLowerCase()) as SizeProp;
+    const styleType: IconPrefix = (style.toLowerCase()) as IconPrefix;
+    const content = <FontAwesomeIcon 
                     icon={[ styleType, iconNameType ]} 
                     title={title}
                     size={sizePropType}                    

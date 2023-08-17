@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Resolver, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Button, InputAdornment, TextField } from '@mui/material';
@@ -48,7 +48,7 @@ const Form: React.FC<Props> = ({ recipe }) => {
         formState: { errors },
     } = useForm<CreateRecipe>({
         defaultValues,
-        resolver: yupResolver(schema) as any,
+        resolver: yupResolver(schema) as Resolver<CreateRecipe | Recipe>,
     });
 
     const localePlaceholder = (Common.HasEnglishUi() ? enUS.components.MuiLocalizationProvider.defaultProps.localeText : deDE.components.MuiLocalizationProvider.defaultProps.localeText);
@@ -60,7 +60,7 @@ const Form: React.FC<Props> = ({ recipe }) => {
         if (recipe) {
             reset(recipe);
         }
-    }, [recipe]);
+    }, [recipe, reset]);
 
     async function onSubmit(recipe: CreateRecipe): Promise<void> {
         dispatch(save(recipe));

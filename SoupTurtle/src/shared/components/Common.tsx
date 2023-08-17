@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import i18n  from '../libs/i18nLib.ts';
 
 export { default as cl } from '../libs/debugLib.ts';
@@ -14,4 +15,3 @@ export { default as ConfirmDialog } from './ConfirmDialog';
 export function HasEnglishUi() : boolean  {
     return (i18n.language === 'en')
 }
-

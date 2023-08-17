@@ -50,11 +50,12 @@
 - [ ] Tests ausprobieren
 - [ ] Debugging ausprobieren
 - [ ] Authentification
-- [ ] VS statt VS-Code, alles erstmal unter win
+- [x] VS statt VS-Code, alles erstmal unter win
 - [x] VS-Code-Extension Gitlens
 - [ ] 
 ### Dive into
 - [ ] Await/Async
+- [ ] SASS/SCSS
 - [ ] Built-in React-Hooks
 - [ ] Promise
   - https://javascript.info/promise-basics

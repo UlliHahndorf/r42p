@@ -6,8 +6,9 @@ import { SetLanguage } from '../libs/i18nLib';
 const LanguageSwitch: React.FC = () => {
   const { i18n } = useTranslation();
 
-  function postChangeLanguage(_error: any, _t: TFunction<'translation', undefined>): void {
-    console.log(i18n.language);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function postChangeLanguage(_error: unknown, _t: TFunction<'translation', undefined>): void {
+    //console.log(i18n.language);
     SetLanguage(i18n.language);
   }
 

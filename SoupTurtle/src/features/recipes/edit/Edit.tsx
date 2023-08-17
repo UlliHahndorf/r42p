@@ -22,9 +22,9 @@ const Edit: React.FC = () => {
     if (id) {
       setRecipe(getRecipe(parseInt(id, 10)) as Recipe);
     }
-  }, [id]);
+  }, [getRecipe, id]);
 
-  var title = (recipe === null ? t('recipes.dialog_title_create') : t('recipes.dialog_title_change'));
+  const title = (recipe === null ? t('recipes.dialog_title_create') : t('recipes.dialog_title_change'));
 
   return (
     <Dialog open={true} onClose={() => navigate('/recipes/list')} fullWidth maxWidth="sm">

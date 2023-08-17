@@ -5,7 +5,7 @@ const baseUrl = import.meta.env.VITE_BACKEND_URL + '/recipes';
 
 // LOAD (GET)
 export async function loadRecipe(id: number): Promise<Recipe> {
-  let url: string = baseUrl + '/' + id;
+  const url: string = baseUrl + '/' + id;
   const response = await fetch(url, { method: 'GET', headers: HttpHeaders("GET") });
   if (!response.ok) {
     throw new Error('Unable to load');
@@ -14,7 +14,7 @@ export async function loadRecipe(id: number): Promise<Recipe> {
 }
 // LIST (GET)
 export async function loadRecipes(): Promise<Recipe[]> {
-  let url: string = baseUrl + '/';
+  const url: string = baseUrl + '/';
   const response = await fetch(url, { method: 'GET', headers: HttpHeaders("GET") });
   if (!response.ok) {
     throw new Error('Unable to load');
@@ -26,7 +26,7 @@ export async function loadRecipes(): Promise<Recipe[]> {
 // UPDATE (PUT)
 export async function saveRecipe(recipe: CreateRecipe): Promise<Recipe> {
   let url: string = baseUrl;
-  let verb: string = 'POST';
+  let verb = 'POST';
   if (recipe.id) {
     url += `/${recipe.id}`;
     verb = 'PUT';
@@ -43,7 +43,7 @@ export async function saveRecipe(recipe: CreateRecipe): Promise<Recipe> {
 
 // DELETE (DELETE)
 export async function removeRecipe(id: number): Promise<void> {
-  let url: string = baseUrl + '/';
+  const url: string = baseUrl + '/';
   const response = await fetch(url + id, { method: 'DELETE', headers: HttpHeaders("DELETE") }
   );
 
